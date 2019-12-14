@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "708099110430",
+    "firebase_url": "https://petapp-50a43.firebaseio.com",
+    "project_id": "petapp-50a43",
+    "storage_bucket": "petapp-50a43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708099110430:android:f68faac74b3599b95ce00f",
+        "android_client_info": {
+          "package_name": "com.petapplication.pet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708099110430-oe7ohu9pegfhehn9n96inimgr4bqj3dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFGz9AV9bllHJoYyihuLNRPITs_plYLFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708099110430-oe7ohu9pegfhehn9n96inimgr4bqj3dj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "708099110430-fb0i2u3jse2bmsg47uk0bhsolumt4udn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.petapplication.pet-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
