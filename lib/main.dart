@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/login/LoginPage.dart';
-import 'package:pet_app/register/RegisterPage.dart';
+import 'package:pet_app/screens/login/LoginPage.dart';
+import 'package:pet_app/screens/register/RegisterPage.dart';
+import 'package:pet_app/services/Services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  initServices();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Pet App',
       initialRoute: '/register',
       routes: {
-        '/': (context) => LoginPage(),
+        '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
       },
     );
