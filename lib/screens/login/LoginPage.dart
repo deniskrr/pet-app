@@ -15,10 +15,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: LoginForm(
-          loginHandler: (email, password) async {
-            _authService.signIn(email, password);
-          }
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            LoginForm(
+                loginHandler: (email, password) async {
+                  _authService.signIn(email, password);
+                }
+            ),
+            GestureDetector(
+              onTap: () => Navigator.of(context).pushReplacementNamed("/register"),
+              child: Text("Already have an account?"),
+            )
+          ],
         ),
       ),
     );

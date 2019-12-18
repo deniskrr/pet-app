@@ -32,7 +32,6 @@ class _RegisterFormState extends State<RegisterForm> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextFormField(
               controller: emailController,

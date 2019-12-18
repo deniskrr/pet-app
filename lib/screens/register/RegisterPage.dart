@@ -9,16 +9,25 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final AuthService _authService= services.get<AuthService>();
+  final AuthService _authService = services.get<AuthService>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RegisterForm(
-          registerHandler: (email, password) async {
-            _authService.signUp(email, password);
-          }
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            RegisterForm(
+              registerHandler: (email, password) async {
+                _authService.signUp(email, password);
+              },
+            ),
+            GestureDetector(
+              onTap: () => Navigator.of(context).pushReplacementNamed("/login"),
+              child: Text("Don't have an account?"),
+            )
+          ],
         ),
       ),
     );
