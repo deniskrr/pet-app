@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             GestureDetector(
               onTap: () => Navigator.of(context).pushReplacementNamed("/register"),
-              child: Text("Already have an account?"),
+              child: Text("Don't have an account?"),
             )
           ],
         ),
