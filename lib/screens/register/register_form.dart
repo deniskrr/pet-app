@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RegisterForm extends StatefulWidget {
-  final Function(String, String) registerHandler;
+  final Function(String, String, String) registerHandler;
 
   const RegisterForm({Key key, this.registerHandler}) : super(key: key);
 
@@ -14,6 +14,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
@@ -38,7 +39,15 @@ class _RegisterFormState extends State<RegisterForm> {
               decoration: InputDecoration(
                 hintText: "E-mail",
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              ),
+            ),
+            TextFormField(
+              controller: usernameController,
+              decoration: InputDecoration(
+                hintText: "Username",
+                contentPadding:
+                EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               ),
             ),
             TextFormField(
@@ -64,8 +73,8 @@ class _RegisterFormState extends State<RegisterForm> {
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    widget.registerHandler(
-                        emailController.text, passwordController.text);
+                    widget.registerHandler(emailController.text,
+                        usernameController.text, passwordController.text);
                   }
                 },
                 child: Text('Register'),
