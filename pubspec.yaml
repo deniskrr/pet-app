@@ -27,6 +27,7 @@ dependencies:
   get_it: ^3.0.3
   toggle_switch: ^0.1.4
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

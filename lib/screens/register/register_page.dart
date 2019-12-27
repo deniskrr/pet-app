@@ -24,12 +24,13 @@ class _RegisterPageState extends State<RegisterPage> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             RegisterForm(
-              registerHandler: (email, password) async {
+              registerHandler: (email, username, password) async {
                 _authService.signUp(email, password).then((value) =>
-                    _userService.createUser(email, value.user.uid).then(
-                            (value) =>
-                            Navigator.of(context)
-                                .pushReplacementNamed(HomePage.routeName)));
+                    _userService
+                        .createUser(email, username, value.user.uid)
+                        .then((value) =>
+                        Navigator.of(context)
+                            .pushReplacementNamed(HomePage.routeName)));
               },
             ),
             GestureDetector(
