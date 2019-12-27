@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/login/login_page.dart';
 import 'package:pet_app/screens/register/register_page.dart';
 import 'package:pet_app/services/services.dart';
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pet App',
-      initialRoute: '/login',
+      initialRoute: LoginPage.routeName,
       routes: {
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegisterPage(),
+        LoginPage.routeName: (context) => LoginPage(),
+        RegisterPage.routeName: (context) => RegisterPage(),
+        HomePage.routeName: (context) => HomePage()
       },
     );
   }
