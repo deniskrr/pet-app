@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pet_app/model/User.dart';
-import 'package:pet_app/services/auth/AuthService.dart';
+import 'package:pet_app/services/auth/auth_service.dart';
 
 class FirebaseAuthService extends AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,7 +11,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> signOut() {
-    return null;
+    return _auth.signOut();
   }
 
   @override

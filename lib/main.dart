@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/screens/login/LoginPage.dart';
-import 'package:pet_app/screens/register/RegisterPage.dart';
-import 'package:pet_app/services/Services.dart';
+import 'package:pet_app/screens/login/login_page.dart';
+import 'package:pet_app/screens/register/register_page.dart';
+import 'package:pet_app/services/services.dart';
 
 void main() {
   initServices();

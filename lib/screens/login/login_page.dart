@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/screens/login/LoginForm.dart';
-import 'package:pet_app/services/Services.dart';
-import 'package:pet_app/services/auth/AuthService.dart';
+import 'package:pet_app/screens/login/login_form.dart';
+import 'package:pet_app/services/auth/auth_service.dart';
+import 'package:pet_app/services/services.dart';
 
 class LoginPage extends StatefulWidget {
   @override

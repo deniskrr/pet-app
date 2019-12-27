@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/screens/register/RegisterForm.dart';
-import 'package:pet_app/services/Services.dart';
-import 'package:pet_app/services/auth/AuthService.dart';
+import 'package:pet_app/screens/register/register_form.dart';
+import 'package:pet_app/services/auth/auth_service.dart';
+import 'package:pet_app/services/services.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
