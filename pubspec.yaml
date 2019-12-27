@@ -25,6 +25,7 @@ dependencies:
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+5
   get_it: ^3.0.3
+  toggle_switch: ^0.1.4
 
 dev_dependencies:
   flutter_test:

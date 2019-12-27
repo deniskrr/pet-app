@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/screens/home/chat/chat_page.dart';
 import 'package:pet_app/screens/home/profile/profile_page.dart';
-import 'package:pet_app/screens/home/search/search_page.dart';
+import 'package:pet_app/screens/home/search/pet_search_page.dart';
+import 'package:pet_app/screens/home/search/pet_sitter_search_page.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class HomePage extends StatefulWidget {
   static final routeName = '/home';
@@ -10,34 +12,68 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
+  int searchIndex = 0;
+
+  @override
+  void initState() {
+    _tabController = new TabController(vsync: this, length: 3);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.account_circle),
+    return Scaffold(
+      appBar: AppBar(
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.account_circle),
+            ),
+            Tab(
+              child: ToggleSwitch(
+                minWidth: 50,
+                activeBgColor: Colors.transparent,
+                activeTextColor: Colors.white,
+                inactiveBgColor: Colors.transparent,
+                inactiveTextColor: Colors.white,
+                initialLabelIndex: searchIndex,
+                labels: ['', ''],
+                onToggle: (index) {
+                  _tabController.animateTo(1);
+                  setState(() {
+                    searchIndex = index;
+                  });
+                },
+                activeColors: [Colors.green, Colors.amberAccent],
+                icons: [
+                  Icons.pets,
+                  Icons.accessibility,
+                ],
               ),
-              Tab(
-                icon: Icon(Icons.search),
-              ),
-              Tab(
-                icon: Icon(Icons.chat),
-              )
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            ProfilePage(),
-            SearchPage(),
-            ChatPage(),
+            ),
+            Tab(
+              icon: Icon(Icons.chat),
+            )
           ],
         ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          ProfilePage(),
+          searchIndex == 0 ? PetSearchPage() : PetSitterSearchPage(),
+          ChatPage(),
+        ],
       ),
     );
   }
