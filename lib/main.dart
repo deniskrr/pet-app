@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
 import 'package:pet_app/screens/login/login_page.dart';
+import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
 import 'package:pet_app/screens/register/register_page.dart';
 import 'package:pet_app/services/services.dart';
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
         HomePage.routeName: (context) => HomePage(),
-        EditProfilePage.routeName: (context) => EditProfilePage()
+        EditProfilePage.routeName: (context) => EditProfilePage(),
+        AddPetPage.routeName: (context) => AddPetPage()
       },
     );
   }
