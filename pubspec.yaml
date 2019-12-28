@@ -28,6 +28,8 @@ dependencies:
   toggle_switch: ^0.1.4
   image_picker: ^0.6.2+3
   permission_handler: ^4.0.0
+  firebase_storage: ^3.1.0
+  uuid: 2.0.4
 
 dev_dependencies:
   flutter_test:
