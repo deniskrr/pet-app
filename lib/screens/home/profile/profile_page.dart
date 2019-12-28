@@ -40,12 +40,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 20,
                   ),
                   FlatButton(
-                    child: Text("Edit info"),
+                      child: Text("Edit info"),
                       onPressed: () =>
                           Navigator.of(context).pushNamed(
-                              EditProfilePage.routeName, arguments: currentUser)
-                      ;
-                  ),
+                              EditProfilePage.routeName,
+                              arguments: currentUser)),
                   SizedBox(
                     height: 20,
                   ),
