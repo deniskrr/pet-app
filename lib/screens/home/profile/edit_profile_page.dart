@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/services/services.dart';
+import 'package:pet_app/services/storage/storage_service.dart';
+import 'package:pet_app/services/user/user_service.dart';
 
 class EditProfilePage extends StatefulWidget {
   static final routeName = '/edit-profile';
@@ -13,6 +16,9 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   File _image;
+  final StorageService _storageService = services.get<StorageService>();
+  final UserService _userService = services.get<UserService>();
+  final bioController = TextEditingController();
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -20,6 +26,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
     setState(() {
       _image = image;
     });
+  }
+
+  void updateInfo(User user, File picture, String bio) {
+    user.bio = bio;
+    if (_image != null) {
+      _storageService.uploadPhoto(_image).then((pictureUrl) {
+        user.pictureUrl = pictureUrl;
+        _userService
+            .updateUser(user)
+            .whenComplete(() => Navigator.of(context).pop());
+      });
+    } else {
+      _userService
+          .updateUser(user)
+          .whenComplete(() => Navigator.of(context).pop());
+    }
   }
 
   @override
@@ -55,6 +77,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 height: 20,
               ),
               TextField(
+                controller: bioController,
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
               ),
@@ -77,7 +100,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               FlatButton(
                 child: Text("Save"),
-                onPressed: () {},
+                onPressed: () {
+                  updateInfo(currentUser, _image, bioController.text);
+                },
               ),
             ],
           ),

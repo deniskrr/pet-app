@@ -11,6 +11,6 @@ final services = GetIt.instance;
 void initServices() {
   services.registerLazySingleton<UserService>(() => FirebaseUserService());
   services.registerLazySingleton<AuthService>(() => FirebaseAuthService());
-  services.registerLazySingleton<StorageService>(() =>
-      FirebaseStorageService());
+  services
+      .registerLazySingleton<StorageService>(() => FirebaseStorageService());
 }
