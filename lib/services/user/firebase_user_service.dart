@@ -24,4 +24,13 @@ class FirebaseUserService extends UserService {
     }
     return null;
   }
+
+  @override
+  Future<User> updateUser(User updatedUser) async {
+    await _firestore
+        .collection("users")
+        .document(updatedUser.uid)
+        .setData(updatedUser.toJson());
+    return updatedUser;
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
@@ -26,8 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://store.playstation.com/store/api/chihiro/00_09_000/container/RO/en/999/EP0149-CUSA09988_00-AV00000000000002/1553528383000/image?w=240&h=240&bg_color=000000&opacity=100&_version=00_09_000"),
+                    backgroundImage: currentUser.pictureUrl.isEmpty
+                        ? AssetImage("assets/blank_profile.png")
+                        : NetworkImage(currentUser.pictureUrl),
                   ),
                   SizedBox(
                     height: 20,
@@ -39,9 +41,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 20,
                   ),
                   FlatButton(
-                    child: Text("Edit info"),
-                    onPressed: () {},
-                  ),
+                      child: Text("Edit info"),
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(
+                              EditProfilePage.routeName,
+                              arguments: currentUser)),
                   SizedBox(
                     height: 20,
                   ),
