@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nice_button/NiceButton.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
@@ -35,46 +34,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Text(
                     currentUser.username,
-                    style: Theme
-                        .of(context)
-                        .primaryTextTheme
-                        .title
-                        .copyWith(color: Colors.black),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  NiceButton(
-                    radius: 40,
-                    fontSize: Theme
-                        .of(context)
-                        .primaryTextTheme
-                        .title
-                        .fontSize,
-                    padding: const EdgeInsets.all(15),
-                    text: "Edit info",
-                    icon: Icons.edit,
-                    background: Theme
-                        .of(context)
-                        .primaryColor,
+                  FlatButton(
+                    child: Text("Edit info"),
                     onPressed: () {},
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  NiceButton(
-                    radius: 40,
-                    fontSize: Theme
-                        .of(context)
-                        .primaryTextTheme
-                        .title
-                        .fontSize,
-                    padding: const EdgeInsets.all(15),
-                    text: "Add pet",
-                    icon: Icons.add,
-                    background: Theme
-                        .of(context)
-                        .primaryColor,
+                  FlatButton(
+                    child: Text("Add pet"),
                     onPressed: () {},
                   )
                 ],
