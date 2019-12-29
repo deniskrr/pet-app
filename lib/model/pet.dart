@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Pet {
-  String uid;
+  String id;
   String ownerId;
   String name;
   String type;
@@ -11,17 +11,17 @@ class Pet {
   bool forPetSitting;
   bool forPetMating;
 
-  Pet(this.uid, this.ownerId, this.name, this.type, this.age)
+  Pet(this.id, this.ownerId, this.name, this.type, this.age)
       : biography = "",
         pictureUrl = "",
         forPetSitting = false,
         forPetMating = false;
 
-  Pet.complete(this.uid, this.ownerId, this.name, this.type, this.biography,
+  Pet.complete(this.id, this.ownerId, this.name, this.type, this.biography,
       this.pictureUrl, this.age, this.forPetMating, this.forPetSitting);
 
   Pet.keyVal(
-      {@required this.uid,
+      {@required this.id,
       @required this.ownerId,
       @required this.name,
       @required this.type,
@@ -32,7 +32,7 @@ class Pet {
         forPetMating = false;
 
   Pet.keyValComplete(
-      {@required this.uid,
+      {@required this.id,
       @required this.ownerId,
       @required this.name,
       @required this.type,
@@ -43,7 +43,7 @@ class Pet {
       @required this.forPetMating});
 
   Pet.empty()
-      : uid = "",
+      : id = "",
         ownerId = "",
         name = "",
         type = "",
@@ -54,7 +54,6 @@ class Pet {
         forPetMating = false;
 
   Map<String, dynamic> toJson() => {
-        'uid': uid,
         'ownerId': ownerId,
         'name': name,
         'type': type,
@@ -66,8 +65,7 @@ class Pet {
       };
 
   Pet.fromJson(Map<String, dynamic> json)
-      : uid = json['uid'],
-        ownerId = json['ownerId'],
+      : ownerId = json['ownerId'],
         name = json['name'],
         type = json['type'],
         age = int.parse(json['age']),

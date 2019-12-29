@@ -17,7 +17,7 @@ class FirebasePetsService extends PetsService{
   Future<Pet> updatePet(Pet editedPet) async {
     await _firestore
         .collection("pets")
-        .document(editedPet.uid)
+        .document(editedPet.id)
         .updateData(editedPet.toJson());
     return editedPet;
   }

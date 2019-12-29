@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
+import 'package:pet_app/helpers/app_reusable_widgets.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
@@ -32,9 +33,9 @@ class _AddPetFormState extends State<AddPetForm> {
   Future getImage() async {
     final imageSource = await AppDialogs.chooseImageSource(context);
 
-    if(imageSource != null) {
+    if (imageSource != null) {
       final file = await ImagePicker.pickImage(source: imageSource);
-      if(file != null) {
+      if (file != null) {
         setState(() => _image = file);
       }
     }
@@ -60,31 +61,8 @@ class _AddPetFormState extends State<AddPetForm> {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: <Widget>[
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: GestureDetector(
-                    child: CircleAvatar(
-                      minRadius: 70,
-                      backgroundImage: _image == null
-                          ? (petObject.pictureUrl.isEmpty
-                          ? AssetImage(
-                        "assets/blank_pet_profile.png",
-                      )
-                          : NetworkImage(
-                        petObject.pictureUrl,
-                      ))
-                          : FileImage(
-                        _image,
-                      ),
-                    ),
-                    onTap: () => getImage(),
-                  ),
-                ),
-              ),
-            ]),
+            AppReusableWidgets.profilePicture(_image, petObject.pictureUrl,
+                "assets/blank_pet_profile.png", getImage),
             TextFormField(
               controller: nameController,
               decoration: InputDecoration(

@@ -28,9 +28,9 @@ class _AddPetPageState extends State<AddPetPage> {
           children: <Widget>[
             AddPetForm(
               addPetHandler: (Pet newPet) async {
-                _petsService.addPet(newPet).then((value) =>
-                    Navigator.of(context)
-                        .pushReplacementNamed(HomePage.routeName));
+                _petsService
+                    .addPet(newPet)
+                    .then((value) => Navigator.of(context).pop());
               },
             ),
             GestureDetector(
