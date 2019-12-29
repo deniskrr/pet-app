@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
+import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
@@ -51,7 +53,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   FlatButton(
                     child: Text("Add pet"),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                              AddPetPage.routeName,
+                              arguments: Pet.empty()
+                          );
+                    },
                   )
                 ],
               ),
