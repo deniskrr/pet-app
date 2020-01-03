@@ -31,4 +31,16 @@ class FirebasePetsService extends PetsService {
         .map((document) => Pet.fromDocumentSnapshot(document))
         .toList();
   }
+
+  @override
+  Future<List<Pet>> getMatingCompanionsForType(String type) async {
+    final querySnapshot = await _firestore
+        .collection("pets")
+        .where("type", isEqualTo: type)
+        .getDocuments();
+
+    return querySnapshot.documents
+        .map((document) => Pet.fromDocumentSnapshot(document))
+        .toList();
+  }
 }
