@@ -6,6 +6,7 @@ import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
+import 'package:pet_app/widgets/ProfilePicture.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -28,21 +29,23 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: currentUser.pictureUrl.isEmpty
-                        ? AssetImage("assets/blank_profile.png")
-                        : NetworkImage(currentUser.pictureUrl),
+                  ProfilePicture(
+                    image: null,
+                    pictureUrl: currentUser.pictureUrl,
+                    placeholderImageUri: "assets/blank_profile.png",
+                    imageGetter: null,
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
                     currentUser.username,
+                    style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  FlatButton(
+                  RaisedButton(
                       child: Text("Edit info"),
                       onPressed: () =>
                           Navigator.of(context).pushNamed(
@@ -51,13 +54,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 20,
                   ),
-                  FlatButton(
+                  RaisedButton(
                     child: Text("Add pet"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(
-                              AddPetPage.routeName,
-                              arguments: Pet.empty()
-                          );
+                      Navigator.of(context).pushNamed(AddPetPage.routeName,
+                          arguments: Pet.empty());
                     },
                   )
                 ],
