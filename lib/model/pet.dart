@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-class Pet {
+class Pet extends Equatable {
   String id;
   String ownerId;
   String name;
@@ -83,4 +84,7 @@ class Pet {
         biography = snapshot.data['biography'],
         forPetSitting = snapshot.data['pet_sitting'],
         forPetMating = snapshot.data['pet_mating'];
+
+  @override
+  List<Object> get props => [id];
 }
