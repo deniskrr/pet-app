@@ -2,14 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 
-class FirebasePetsService extends PetsService{
+class FirebasePetsService extends PetsService {
   final Firestore _firestore = Firestore.instance;
 
   @override
   Future<Pet> addPet(Pet newPet) async {
-    await _firestore
-        .collection("pets")
-        .add(newPet.toJson());
+    await _firestore.collection("pets").add(newPet.toJson());
     return newPet;
   }
 
@@ -20,5 +18,17 @@ class FirebasePetsService extends PetsService{
         .document(editedPet.id)
         .updateData(editedPet.toJson());
     return editedPet;
+  }
+
+  @override
+  Future<List<Pet>> getPetsForOwnerId(String ownerId) async {
+    final querySnapshot = await _firestore
+        .collection("pets")
+        .where("ownerId", isEqualTo: ownerId)
+        .getDocuments();
+
+    return querySnapshot.documents
+        .map((document) => Pet.fromDocumentSnapshot(document))
+        .toList();
   }
 }
