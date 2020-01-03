@@ -3,7 +3,7 @@ import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
-import 'package:pet_app/widgets/PetTile.dart';
+import 'package:pet_app/widgets/pet_list_view.dart';
 
 class MyPetsPage extends StatelessWidget {
   static final routeName = '/my-pets';
@@ -19,17 +19,8 @@ class MyPetsPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Pet> pets = snapshot.data;
-            return ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.black12,
-              ),
-              itemCount: pets.length,
-              itemBuilder: (context, index) {
-                Pet currentPet = pets[index];
-                return PetTile(
-                  pet: currentPet,
-                );
-              },
+            return PetListView(
+              petList: pets,
             );
           }
           return Center(
