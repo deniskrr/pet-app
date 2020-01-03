@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
-import 'package:pet_app/helpers/app_reusable_widgets.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
+import 'package:pet_app/widgets/InputField.dart';
+import 'package:pet_app/widgets/LabeledCheckbox.dart';
+import 'package:pet_app/widgets/ProfilePicture.dart';
 
 class AddPetForm extends StatefulWidget {
   final Function(Pet) addPetHandler;
@@ -27,7 +29,6 @@ class _AddPetFormState extends State<AddPetForm> {
   final nameController = TextEditingController();
   final typeController = TextEditingController();
   final biographyController = TextEditingController();
-  final pictureUrlController = TextEditingController();
   final ageController = TextEditingController();
 
   Future getImage() async {
@@ -46,14 +47,16 @@ class _AddPetFormState extends State<AddPetForm> {
     nameController.dispose();
     typeController.dispose();
     biographyController.dispose();
-    pictureUrlController.dispose();
     ageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Pet petObject = ModalRoute.of(context).settings.arguments;
+    Pet pet = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
 
     return Form(
       key: _formKey,
@@ -61,60 +64,51 @@ class _AddPetFormState extends State<AddPetForm> {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: <Widget>[
-            AppReusableWidgets.profilePicture(_image, petObject.pictureUrl,
-                "assets/blank_pet_profile.png", getImage),
-            TextFormField(
+            ProfilePicture(
+                image: _image,
+                pictureUrl: pet.pictureUrl,
+                placeholderImageUri: "assets/blank_pet_profile.png",
+                imageGetter: getImage),
+            InputField(
               controller: nameController,
-              decoration: InputDecoration(
-                hintText: "Name",
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              ),
+              hintText: "Name",
             ),
-            TextFormField(
+            InputField(
               controller: typeController,
-              decoration: InputDecoration(
-                hintText: "Type e.g. 'Dog'",
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              ),
+              hintText: "Type e.g. 'Dog'",
             ),
-            TextFormField(
+            InputField(
               controller: biographyController,
-              decoration: InputDecoration(
-                  hintText: "Biography",
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  hintMaxLines: 4),
+              hintText: "Biography",
             ),
-            TextFormField(
+            InputField(
               controller: ageController,
-              decoration: InputDecoration(
-                  hintText: "Age",
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  hintMaxLines: 4),
+              hintText: "Age",
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              Text("Visible for pet sitters", style: TextStyle(fontSize: 16)),
-              Checkbox(
-                  value: petObject.forPetSitting,
-                  onChanged: (bool val) =>
-                      setState(() => petObject.forPetSitting = val)),
-            ]),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              Text("Available for pet mating", style: TextStyle(fontSize: 16)),
-              Checkbox(
-                  value: petObject.forPetMating,
-                  onChanged: (bool val) =>
-                      setState(() => petObject.forPetMating = val)),
-            ]),
+            LabeledCheckbox(
+              label: "Visible for pet sitters",
+              value: pet.forPetSitting,
+              valueHandler: (newValue) {
+                setState(() {
+                  pet.forPetSitting = newValue;
+                });
+              },
+            ),
+            LabeledCheckbox(
+              label: "Available for pet mating",
+              value: pet.forPetMating,
+              valueHandler: (newValue) {
+                setState(() {
+                  pet.forPetMating = newValue;
+                });
+              },
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    addPet(petObject);
+                    addPet(pet);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please, make sure that the inputs are in the correct format!");

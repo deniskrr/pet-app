@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
-import 'package:pet_app/screens/home/home_page.dart';
-import 'package:pet_app/screens/home/search/pet_search_page.dart';
-import 'package:pet_app/screens/login/login_form.dart';
 import 'package:pet_app/screens/pets/add-pet/add_pet_form.dart';
-import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 
@@ -33,8 +29,8 @@ class _AddPetPageState extends State<AddPetPage> {
                     .then((value) => Navigator.of(context).pop());
               },
             ),
-            GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
+            FlatButton(
+              onPressed: () => Navigator.of(context).pop(),
               child: Text("Cancel"),
             )
           ],
