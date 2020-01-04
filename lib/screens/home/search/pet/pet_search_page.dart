@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
-import 'package:pet_app/screens/home/search/mating_search_results.dart';
+import 'package:pet_app/screens/home/search/pet/mating_search_results.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/screens/home/chat/chat_page.dart';
 import 'package:pet_app/screens/home/profile/profile_page.dart';
-import 'package:pet_app/screens/home/search/pet_search_page.dart';
-import 'package:pet_app/screens/home/search/pet_sitter_search_page.dart';
+import 'package:pet_app/screens/home/search/pet/pet_search_page.dart';
+import 'package:pet_app/screens/home/search/pet_sitter/pet_sitter_search_page.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class HomePage extends StatefulWidget {
