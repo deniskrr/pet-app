@@ -12,6 +12,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Edit info"),
+      ),
       resizeToAvoidBottomPadding: false,
       body: Center(
         child: Column(

@@ -17,6 +17,9 @@ class _AddPetPageState extends State<AddPetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Add Pet"),
+      ),
       resizeToAvoidBottomPadding: false,
       body: Center(
         child: Column(

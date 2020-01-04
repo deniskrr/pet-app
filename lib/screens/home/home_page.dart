@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Pet App"),
         bottom: TabBar(
           onTap: (index) {
             setState(() {
