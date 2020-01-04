@@ -8,9 +8,9 @@ import 'package:pet_app/model/user.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
 import 'package:pet_app/services/user/user_service.dart';
-import 'package:pet_app/widgets/InputField.dart';
-import 'package:pet_app/widgets/LabeledCheckbox.dart';
-import 'package:pet_app/widgets/ProfilePicture.dart';
+import 'package:pet_app/widgets/input_field.dart';
+import 'package:pet_app/widgets/labeled_checkbox.dart';
+import 'package:pet_app/widgets/profile_picture.dart';
 
 class EditProfileForm extends StatefulWidget {
   @override

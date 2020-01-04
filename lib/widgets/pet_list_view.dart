@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
-import 'package:pet_app/widgets/PetTile.dart';
+import 'package:pet_app/widgets/pet_tile.dart';
 
 class PetListView extends StatelessWidget {
   final List<Pet> petList;

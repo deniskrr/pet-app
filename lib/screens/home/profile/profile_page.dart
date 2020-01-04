@@ -7,7 +7,7 @@ import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
-import 'package:pet_app/widgets/ProfilePicture.dart';
+import 'package:pet_app/widgets/profile_picture.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
