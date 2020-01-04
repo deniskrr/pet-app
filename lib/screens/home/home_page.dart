@@ -66,9 +66,7 @@ class _HomePageState extends State<HomePage>
                   Icons.accessibility,
                 ],
               )
-                  : searchIndex == 0
-                  ? Icon(Icons.pets)
-                  : Icon(Icons.accessibility),
+                  : Icon(Icons.search),
             ),
             Tab(
               icon: Icon(Icons.chat),
