@@ -33,4 +33,16 @@ class FirebaseUserService extends UserService {
         .setData(updatedUser.toJson());
     return updatedUser;
   }
+
+  @override
+  Future<List<User>> getPetSitters() async {
+    final querySnapshot = await _firestore
+        .collection("users")
+        .where("pet_sitter", isEqualTo: true)
+        .getDocuments();
+
+    return querySnapshot.documents
+        .map((document) => User.fromJson(document.data))
+        .toList();
+  }
 }
