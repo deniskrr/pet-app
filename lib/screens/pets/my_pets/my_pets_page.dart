@@ -19,8 +19,13 @@ class MyPetsPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Pet> pets = snapshot.data;
-            return PetListView(
-              petList: pets,
+            return Flex(
+              direction: Axis.vertical,
+              children: [
+                PetListView(
+                  petList: pets,
+                ),
+              ],
             );
           }
           return Center(
