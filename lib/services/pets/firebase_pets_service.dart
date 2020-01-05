@@ -51,4 +51,30 @@ class FirebasePetsService extends PetsService {
         .where((pet) => pet.ownerId != currentUserId)
         .toList();
   }
+
+  @override
+  Future<List<Pet>> getMatingPetsForOwnerId(String ownerId) async {
+    final querySnapshot = await _firestore
+        .collection("pets")
+        .where("ownerId", isEqualTo: ownerId)
+        .where("pet_mating", isEqualTo: true)
+        .getDocuments();
+
+    return querySnapshot.documents
+        .map((document) => Pet.fromDocumentSnapshot(document))
+        .toList();
+  }
+
+  @override
+  Future<List<Pet>> getPetSittablePetsForOwnerId(String ownerId) async {
+    final querySnapshot = await _firestore
+        .collection("pets")
+        .where("ownerId", isEqualTo: ownerId)
+        .where("pet_sitting", isEqualTo: true)
+        .getDocuments();
+
+    return querySnapshot.documents
+        .map((document) => Pet.fromDocumentSnapshot(document))
+        .toList();
+  }
 }
