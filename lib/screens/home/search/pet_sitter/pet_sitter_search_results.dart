@@ -21,8 +21,6 @@ class PetSitterSearchResults extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<User> petSitters = snapshot.data;
-          petSitters
-              .removeWhere((user) => user.uid == _authService.currentUserUid);
           return PetSitterListView(
             petSitters: petSitters,
           );

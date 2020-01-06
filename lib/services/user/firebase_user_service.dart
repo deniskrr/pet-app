@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/services/auth/auth_service.dart';
+import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
 
 class FirebaseUserService extends UserService {
@@ -41,8 +43,13 @@ class FirebaseUserService extends UserService {
         .where("pet_sitter", isEqualTo: true)
         .getDocuments();
 
+    final currentUserId = services
+        .get<AuthService>()
+        .currentUserUid;
+
     return querySnapshot.documents
         .map((document) => User.fromJson(document.data))
+        .where((user) => user.uid != currentUserId)
         .toList();
   }
 }

@@ -18,7 +18,8 @@ class _PetSitterSearchPageState extends State<PetSitterSearchPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _petsService.getPetsForOwnerId(_authService.currentUserUid),
+      future: _petsService
+          .getPetSittablePetsForOwnerId(_authService.currentUserUid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Pet> pets = snapshot.data;
