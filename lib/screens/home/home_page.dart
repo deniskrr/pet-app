@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text("Pet App"),
         bottom: TabBar(
@@ -48,25 +49,25 @@ class _HomePageState extends State<HomePage>
             Tab(
               child: _tabController.index == 1
                   ? ToggleSwitch(
-                minWidth: 50,
-                activeBgColor: Colors.transparent,
-                activeTextColor: Colors.white,
-                inactiveBgColor: Colors.transparent,
-                inactiveTextColor: Colors.white,
-                initialLabelIndex: searchIndex,
-                labels: ['', ''],
-                onToggle: (index) {
-                  _tabController.animateTo(1);
-                  setState(() {
-                    searchIndex = index;
-                  });
-                },
-                activeColors: [Colors.green, Colors.amberAccent],
-                icons: [
-                  Icons.pets,
-                  Icons.accessibility,
-                ],
-              )
+                      minWidth: 50,
+                      activeBgColor: Colors.transparent,
+                      activeTextColor: Colors.white,
+                      inactiveBgColor: Colors.transparent,
+                      inactiveTextColor: Colors.white,
+                      initialLabelIndex: searchIndex,
+                      labels: ['', ''],
+                      onToggle: (index) {
+                        _tabController.animateTo(1);
+                        setState(() {
+                          searchIndex = index;
+                        });
+                      },
+                      activeColors: [Colors.green, Colors.amberAccent],
+                      icons: [
+                        Icons.pets,
+                        Icons.accessibility,
+                      ],
+                    )
                   : Icon(Icons.search),
             ),
             Tab(

@@ -9,27 +9,36 @@ import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
-import 'package:pet_app/widgets/labeled_checkbox.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
-class AddPetForm extends StatefulWidget {
-  final Function(Pet) addPetHandler;
+class AddEditPetForm extends StatefulWidget {
+  final Function(Pet) petActionHandler;
 
-  const AddPetForm({Key key, this.addPetHandler}) : super(key: key);
+  const AddEditPetForm({Key key, this.petActionHandler}) : super(key: key);
 
   @override
-  _AddPetFormState createState() => _AddPetFormState();
+  _AddEditPetFormState createState() => _AddEditPetFormState();
 }
 
-class _AddPetFormState extends State<AddPetForm> {
+class _AddEditPetFormState extends State<AddEditPetForm> {
+  Pet petObject;
+
   final StorageService _storageService = services.get<StorageService>();
   final AuthService _authService = services.get<AuthService>();
+
   File _image;
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final typeController = TextEditingController();
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
+
+  void initFormFields() {
+    this.nameController.text = petObject.name;
+    this.typeController.text = petObject.type;
+    this.biographyController.text = petObject.biography;
+    this.ageController.text = petObject.age.toString();
+  }
 
   Future getImage() async {
     final imageSource = await AppDialogs.chooseImageSource(context);
@@ -53,10 +62,8 @@ class _AddPetFormState extends State<AddPetForm> {
 
   @override
   Widget build(BuildContext context) {
-    Pet pet = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    petObject = ModalRoute.of(context).settings.arguments;
+    initFormFields();
 
     return Form(
       key: _formKey,
@@ -66,7 +73,7 @@ class _AddPetFormState extends State<AddPetForm> {
           children: <Widget>[
             ProfilePicture(
                 image: _image,
-                pictureUrl: pet.pictureUrl,
+                pictureUrl: petObject.pictureUrl,
                 placeholderImageUri: "assets/blank_pet_profile.png",
                 imageGetter: getImage),
             InputField(
@@ -85,35 +92,50 @@ class _AddPetFormState extends State<AddPetForm> {
               controller: ageController,
               hintText: "Age",
             ),
-            LabeledCheckbox(
-              label: "Visible for pet sitters",
-              value: pet.forPetSitting,
-              valueHandler: (newValue) {
-                setState(() {
-                  pet.forPetSitting = newValue;
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Needs to be pet-sitted'),
+                Checkbox(
+                  value: petObject.forPetSitting,
+                  onChanged: (newVal) {
+                    setState(() {
+                      petObject.forPetSitting = newVal; // entire form is influenced on this. I don't know why ?!
+                    });
+                  },
+                )
+              ],
             ),
-            LabeledCheckbox(
-              label: "Available for pet mating",
-              value: pet.forPetMating,
-              valueHandler: (newValue) {
-                setState(() {
-                  pet.forPetMating = newValue;
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Available for pet mating'),
+                Checkbox(
+                  value: petObject.forPetMating,
+                  onChanged: (newVal) {
+                    setState(() {
+                      petObject.forPetMating = newVal; // entire form is influenced on this. I don't know why ?!
+                    });
+                  },
+                )
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    addPet(pet);
+                    if (petObject.id.compareTo("") == 0) {
+                      addPet(petObject);
+                    } else {
+                      updatePet(petObject);
+                    }
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please, make sure that the inputs are in the correct format!");
                 },
-                child: Text('Add Pet'),
+                child:
+                    petObject.id == "" ? Text('Add Pet') : Text('Upgrade Pet'),
               ),
             ),
           ],
@@ -132,6 +154,21 @@ class _AddPetFormState extends State<AddPetForm> {
       petObject.pictureUrl = pictureUrl;
       //widget.addPetHandler(petObject);
     });
-    widget.addPetHandler(petObject);
+    widget.petActionHandler(petObject);
+  }
+
+  void updatePet(Pet petObject) {
+    petObject.name = nameController.text;
+    petObject.type = typeController.text;
+    petObject.biography = biographyController.text;
+    petObject.age = int.parse(ageController.text);
+
+    // should we delete the previous image?..
+
+    _storageService.uploadPhoto(_image).then((pictureUrl) {
+      petObject.pictureUrl = pictureUrl;
+      //widget.addPetHandler(petObject);
+    });
+    widget.petActionHandler(petObject);
   }
 }

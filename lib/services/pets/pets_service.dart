@@ -5,6 +5,8 @@ abstract class PetsService {
 
   Future<Pet> updatePet(Pet editedPet);
 
+  Future<String> deletePet(String petId);
+
   Future<List<Pet>> getPetsForOwnerId(String ownerId);
 
   Future<List<Pet>> getMatingCompanionsForType(String type);
