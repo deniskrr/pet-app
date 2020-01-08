@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
+import 'package:pet_app/screens/home/splash_page.dart';
 import 'package:pet_app/screens/login/login_page.dart';
 import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
@@ -16,8 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pet App',
-      initialRoute: LoginPage.routeName,
+      title: 'Pet Apps',
+      initialRoute: ImageSplashScreen.routeName,
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         EditProfilePage.routeName: (context) => EditProfilePage(),
         AddPetPage.routeName: (context) => AddPetPage(),
         MyPetsPage.routeName: (context) => MyPetsPage(),
+        ImageSplashScreen.routeName: (context) => ImageSplashScreen()
       },
     );
   }

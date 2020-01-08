@@ -9,6 +9,8 @@ import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
+import '../../login/login_page.dart';
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -71,7 +73,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.of(context).pushNamed(AddPetPage.routeName,
                           arguments: Pet.empty());
                     },
-                  )
+                  ),
+                    RaisedButton(
+                      child: Text("Log out"),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(LoginPage.routeName);
+                        _authService.currentUserUid = null;
+                      },
+                    )
+
                 ],
               ),
             );
