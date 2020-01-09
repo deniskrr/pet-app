@@ -74,14 +74,17 @@ class _ProfilePageState extends State<ProfilePage> {
                           arguments: Pet.empty());
                     },
                   ),
-                    RaisedButton(
-                      child: Text("Log out"),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(LoginPage.routeName);
-                        _authService.currentUserUid = null;
-                      },
-                    )
-
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RaisedButton(
+                    child: Text("Log out"),
+                    onPressed: () {
+                      _authService.signOut();
+                      Navigator.of(context).pushReplacementNamed(
+                          LoginPage.routeName);
+                    },
+                  )
                 ],
               ),
             );

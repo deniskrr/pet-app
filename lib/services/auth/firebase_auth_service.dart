@@ -15,6 +15,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> signOut() {
+    currentUserUid = null;
     return _auth.signOut();
   }
 
@@ -30,6 +31,7 @@ class FirebaseAuthService extends AuthService {
   @override
   Future<bool> isUserLoggedIn() async {
     final currentUser = await _auth.currentUser();
+    currentUserUid = currentUser?.uid; // update the field used in-app
     return currentUser != null;
   }
 }
