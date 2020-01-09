@@ -26,4 +26,10 @@ class FirebaseAuthService extends AuthService {
     currentUserUid = result.user.uid;
     return result;
   }
+
+  @override
+  Future<bool> isUserLoggedIn() async {
+    final currentUser = await _auth.currentUser();
+    return currentUser != null;
+  }
 }

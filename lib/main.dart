@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pet Apps',
-      initialRoute: ImageSplashScreen.routeName,
+      title: 'Pet App',
+      initialRoute: SplashPage.routeName,
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         EditProfilePage.routeName: (context) => EditProfilePage(),
         AddPetPage.routeName: (context) => AddPetPage(),
         MyPetsPage.routeName: (context) => MyPetsPage(),
-        ImageSplashScreen.routeName: (context) => ImageSplashScreen()
+        SplashPage.routeName: (context) => SplashPage()
       },
     );
   }

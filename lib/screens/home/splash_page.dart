@@ -1,39 +1,28 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/login/login_page.dart';
+import 'package:pet_app/services/auth/auth_service.dart';
+import 'package:pet_app/services/services.dart';
 
-class ImageSplashScreen extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   static final routeName = '/splash';
+  final AuthService _authService = services.get<AuthService>();
 
-  @override
-  _SplashScreenState createState() => new _SplashScreenState();
-}
-
-class _SplashScreenState extends State<ImageSplashScreen> {
-  startTime() async {
-    var _duration = new Duration(seconds: 4);
-    return new Timer(_duration, navigationPage);
-  }
-
-  void navigationPage() {
-    Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    startTime();
+  void navigateToPage(BuildContext context) async {
+    final isCurrentUserLoggedIn = await _authService.isUserLoggedIn();
+    if (isCurrentUserLoggedIn) {
+      Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+    } else {
+      Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Stack(
-        fit: StackFit.expand,
-        children: <Widget>[new Image.asset('assets/dog_care.jpg')],
-      ),
+    navigateToPage(context);
+    return Scaffold(
+      body: Container(),
     );
   }
 }
