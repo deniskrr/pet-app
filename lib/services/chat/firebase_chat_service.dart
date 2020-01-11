@@ -12,7 +12,7 @@ class FirebaseChatService extends ChatService {
   void sendMessage(String toUid, String message) async {
     ChatMessage chatMessage = ChatMessage(
       message: message,
-      sentByMe: false,
+      sentByMe: true,
     );
 
     await _firestore
@@ -20,5 +20,15 @@ class FirebaseChatService extends ChatService {
         .document(_authService.currentUserUid)
         .collection(toUid)
         .add(chatMessage.toJson());
+  }
+
+  @override
+  Stream<QuerySnapshot> getChatStream(String uid) {
+    return _firestore
+        .collection("chats")
+        .document(_authService.currentUserUid)
+        .collection(uid)
+        .orderBy("date_sent", descending: true)
+        .snapshots();
   }
 }

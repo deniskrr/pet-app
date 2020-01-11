@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/widgets/input_field.dart';
 
 class ChatMessageInputField extends StatefulWidget {
-  final String myUid;
   final String recipientUid;
+  final void Function(String, String) sendMessageFunction;
 
-  const ChatMessageInputField({Key key, this.myUid, this.recipientUid})
+  const ChatMessageInputField(
+      {Key key, this.recipientUid, this.sendMessageFunction})
       : super(key: key);
 
   @override
@@ -29,7 +30,15 @@ class _ChatMessageInputFieldState extends State<ChatMessageInputField> {
             ),
           ),
         ),
-        Icon(Icons.send)
+        IconButton(
+          icon: Icon(Icons.send),
+          onPressed: () {
+            final message = messageController.text;
+            if (message.isNotEmpty) {
+              widget.sendMessageFunction(widget.recipientUid, message);
+            }
+          },
+        ),
       ],
     );
   }

@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage>
           children: <Widget>[
             ProfilePage(),
             searchIndex == 0 ? PetSearchPage() : PetSitterSearchPage(),
-            ChatPage(),
+            ChatPage(recipientUid: "TESTING"),
           ],
         ),
       ),
