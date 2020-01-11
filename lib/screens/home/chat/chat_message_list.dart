@@ -10,10 +10,14 @@ class ChatMessageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+        mainAxisSize: MainAxisSize.max,
         children: messages
-            .map((message) => ChatMessageWidget(
-                  chatMessage: message,
-                ))
+            .map(
+              (message) =>
+              ChatMessageWidget(
+                chatMessage: message,
+              ),
+        )
             .toList());
   }
 }

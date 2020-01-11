@@ -75,13 +75,15 @@ class _HomePageState extends State<HomePage>
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          ProfilePage(),
-          searchIndex == 0 ? PetSearchPage() : PetSitterSearchPage(),
-          ChatPage(),
-        ],
+      body: SafeArea(
+        child: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            ProfilePage(),
+            searchIndex == 0 ? PetSearchPage() : PetSitterSearchPage(),
+            ChatPage(),
+          ],
+        ),
       ),
     );
   }
