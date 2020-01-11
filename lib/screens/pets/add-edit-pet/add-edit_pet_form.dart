@@ -163,7 +163,6 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     petObject.biography = biographyController.text;
     petObject.age = int.parse(ageController.text);
 
-    // should we delete the previous image?..
 
     _storageService.uploadPhoto(_image).then((pictureUrl) {
       petObject.pictureUrl = pictureUrl;
