@@ -32,7 +32,7 @@ class _AddEditPetPageState extends State<AddEditPetPage> {
               children: <Widget>[
                 AddEditPetForm(
                   petActionHandler: (Pet petObject) async {
-                    if (petObject.id.compareTo("") == 0) {
+                    if (petObject.id.isEmpty) {
                       await _petsService.addPet(petObject).then((_) =>
 
                           // needs to be changed. Routing doesn't work fine
