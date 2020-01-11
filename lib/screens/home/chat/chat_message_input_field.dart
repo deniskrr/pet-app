@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/widgets/input_field.dart';
 
 class ChatMessageInputField extends StatefulWidget {
+  final String myUid;
+  final String recipientUid;
+
+  const ChatMessageInputField({Key key, this.myUid, this.recipientUid})
+      : super(key: key);
+
   @override
   _ChatMessageInputFieldState createState() => _ChatMessageInputFieldState();
 }
