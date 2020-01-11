@@ -125,7 +125,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    if (petObject.id.compareTo("") == 0) {
+                    if (petObject.id.isEmpty) {
                       addPet(petObject);
                     } else {
                       updatePet(petObject);
