@@ -8,14 +8,18 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final messageList = [
-    ChatMessage(message: "Lmao", sentByMe: true),
-    ChatMessage(message: "Lmao2", sentByMe: true),
-    ChatMessage(message: "Lmao3", sentByMe: true),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final messageList = [
+      ChatMessage(message: "Lmao", sentByMe: true),
+      ChatMessage(
+          message: "Lmadsadsadsadsadsadsadsadasdsadsadsadasdsadsadasdsadsadasdasdo2",
+          sentByMe: true),
+      ChatMessage(
+          message: "Lmadsadsadsadsadsadsadsadasdsadsadsadasdsadsadasdsadsadasdasdo2",
+          sentByMe: false),
+    ];
     return Column(
       children: <Widget>[
         ChatMessageList(
