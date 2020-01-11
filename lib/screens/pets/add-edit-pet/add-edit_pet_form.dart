@@ -135,7 +135,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                         "Please, make sure that the inputs are in the correct format!");
                 },
                 child:
-                    petObject.id == "" ? Text('Add Pet') : Text('Upgrade Pet'),
+                    petObject.id.isEmpty ? Text('Add Pet') : Text('Update Pet'),
               ),
             ),
           ],
