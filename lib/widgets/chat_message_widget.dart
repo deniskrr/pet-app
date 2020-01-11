@@ -8,17 +8,26 @@ class ChatMessageWidget extends StatelessWidget {
   const ChatMessageWidget({
     Key key,
     this.chatMessage,
-    this.senderImage = null,
+    this.senderImage,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.centerRight,
+      alignment:
+      chatMessage.sentByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(chatMessage.message),
+          if (chatMessage.sentByMe == false) senderImage,
+          Container(
+            margin: EdgeInsets.only(top: 10, right: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+                color: Colors.green, borderRadius: BorderRadius.circular(15)),
+            child: Text(
+              chatMessage.message, style: TextStyle(color: Colors.white),),
+          ),
         ],
       ),
     );
