@@ -21,8 +21,10 @@ class ChatMessageList extends StatelessWidget {
         query: messageStream,
         itemBuilder: (context, snapshot, animation, index) {
           if (snapshot.data != null) {
-            _scrollController.jumpTo(
-                _scrollController.position.minScrollExtent);
+            if (index != 0) {
+              _scrollController.jumpTo(
+                  _scrollController.position.minScrollExtent);
+            }
             final chatMessage = ChatMessage.fromJson(snapshot.data);
             return ScaleTransition(
               alignment: chatMessage.sentByMe
