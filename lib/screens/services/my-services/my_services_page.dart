@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
+import 'package:pet_app/screens/services/add-edit-service/add-edit_service_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/services/services.dart';
@@ -35,6 +36,13 @@ class MyServicesPage extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: new FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context)
+                .pushNamed(AddEditServicePage.routeName, arguments: Service.empty());
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

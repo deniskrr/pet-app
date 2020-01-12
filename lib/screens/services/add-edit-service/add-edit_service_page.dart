@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
-import 'package:pet_app/screens/services/add-service/add_service_form.dart';
+import 'package:pet_app/screens/services/add-edit-service/add-edit_service_form.dart';
 import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/services/services.dart';
 
-class AddServicePage extends StatefulWidget {
+class AddEditServicePage extends StatefulWidget {
   static final routeName = '/add-Service';
 
   @override
-  _AddServicePageState createState() => _AddServicePageState();
+  _AddEditServicePageState createState() => _AddEditServicePageState();
 }
 
-class _AddServicePageState extends State<AddServicePage> {
+class _AddEditServicePageState extends State<AddEditServicePage> {
   final ServicesService _servicesService = services.get<ServicesService>();
 
   @override
@@ -25,7 +25,7 @@ class _AddServicePageState extends State<AddServicePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            AddServiceForm(
+            AddEditServiceForm(
               addServiceHandler: (Service newService) async {
                 _servicesService
                     .addService(newService)

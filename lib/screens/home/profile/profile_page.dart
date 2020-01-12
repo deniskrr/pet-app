@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
+import 'package:pet_app/screens/home/profile/service_provider_profile_widget.dart';
 import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
@@ -63,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   RaisedButton(
                     child: Text("Add Pet"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AddPetPage.routeName,
+                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
                           arguments: Pet.empty());
                     },
                   ),
@@ -73,8 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   RaisedButton(
                     child: Text("My Pets"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
-                          arguments: Pet.empty());
+                      Navigator.of(context).pushNamed(MyPetsPage.routeName);
                     },
                   ),
                   if (currentUser.isServiceProvider)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
+import 'package:pet_app/screens/services/service-profile/service_profile.dart';
 
 class ServiceTile extends StatelessWidget {
   final Service service;
@@ -18,6 +19,10 @@ class ServiceTile extends StatelessWidget {
       ),
       title: Text(service.name),
       subtitle: Text(service.category),
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(ServiceProfile.routeName, arguments: service);
+      },
     );
   }
 }

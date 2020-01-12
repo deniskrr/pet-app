@@ -23,6 +23,15 @@ class FirebaseServicesService extends ServicesService {
   }
 
   @override
+  Future<String> deleteService(String serviceId) async {
+    await _firestore
+        .collection("pets")
+        .document(serviceId)
+        .delete();
+    return serviceId;
+  }
+
+  @override
   Future<List<Service>> getServicesForOwnerId(String ownerId) async {
     final querySnapshot = await _firestore
         .collection("services")

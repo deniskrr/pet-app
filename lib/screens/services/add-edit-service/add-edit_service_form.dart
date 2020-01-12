@@ -12,20 +12,21 @@ import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
-class AddServiceForm extends StatefulWidget {
+class AddEditServiceForm extends StatefulWidget {
   final Function(Service) addServiceHandler;
 
-  const AddServiceForm({Key key, this.addServiceHandler}) : super(key: key);
+  const AddEditServiceForm({Key key, this.addServiceHandler}) : super(key: key);
 
   @override
   _AddServiceFormState createState() => _AddServiceFormState();
 }
 
-class _AddServiceFormState extends State<AddServiceForm> {
+class _AddServiceFormState extends State<AddEditServiceForm> {
   final StorageService _storageService = services.get<StorageService>();
-  final ServicesService _serviceService = services.get<ServicesService>();
   final AuthService _authService = services.get<AuthService>();
+
   File _image;
+
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final categoryController = TextEditingController();

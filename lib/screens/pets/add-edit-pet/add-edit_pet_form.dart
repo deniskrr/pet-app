@@ -146,16 +146,18 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     );
   }
 
-  void addOrEditPet(Pet petObject) {
+  void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
     petObject.type = typeController.text;
     petObject.biography = biographyController.text;
     petObject.age = int.parse(ageController.text);
-    _storageService.uploadPhoto(_image).then((pictureUrl) {
-      petObject.pictureUrl = pictureUrl;
-      //widget.petActionHandler(petObject);
-    });
+
+    if (_image != null)
+      await _storageService.uploadPhoto(_image).then((pictureUrl) {
+        petObject.pictureUrl = pictureUrl;
+      });
+
     widget.petActionHandler(petObject);
   }
 }
