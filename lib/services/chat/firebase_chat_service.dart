@@ -10,16 +10,27 @@ class FirebaseChatService extends ChatService {
 
   @override
   void sendMessage(String toUid, String message) async {
-    ChatMessage chatMessage = ChatMessage(
+    ChatMessage myChatMessage = ChatMessage(
       message: message,
       sentByMe: true,
+    );
+
+    ChatMessage recipientChatMessage = ChatMessage(
+      message: message,
+      sentByMe: false,
     );
 
     await _firestore
         .collection("chats")
         .document(_authService.currentUserUid)
         .collection(toUid)
-        .add(chatMessage.toJson());
+        .add(myChatMessage.toJson());
+
+    await _firestore
+        .collection("chats")
+        .document(toUid)
+        .collection(_authService.currentUserUid)
+        .add(recipientChatMessage.toJson());
   }
 
   @override
