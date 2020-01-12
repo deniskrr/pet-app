@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/model/service.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
 import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
+import 'package:pet_app/screens/services/add-service/add_service_page.dart';
+import 'package:pet_app/screens/services/my-services/my_services_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
@@ -39,24 +42,34 @@ class _ProfilePageState extends State<ProfilePage> {
                     imageGetter: null,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
                     currentUser.username,
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   RaisedButton(
-                    child: Text("Edit info"),
+                    child: Text("Edit Info"),
                     onPressed: () =>
                         Navigator.of(context).pushNamed(
                             EditProfilePage.routeName,
                             arguments: currentUser),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    child: Text("Add Pet"),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AddPetPage.routeName,
+                          arguments: Pet.empty());
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   RaisedButton(
                     child: Text("My Pets"),
@@ -65,17 +78,26 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                   SizedBox(
-                    height: 20,
+                    height: (currentUser.isServiceProvider == true)? 10: 0,
                   ),
-                  RaisedButton(
-                    child: Text("Add pet"),
+                  (currentUser.isServiceProvider == true)? RaisedButton(
+                    child: Text("Add Service"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AddPetPage.routeName,
-                          arguments: Pet.empty());
+                      Navigator.of(context).pushNamed(AddServicePage.routeName,
+                          arguments: Service.empty());
                     },
-                  ),
+                  ): SizedBox(),
                   SizedBox(
-                    height: 20,
+                    height: (currentUser.isServiceProvider == true)? 10: 0,
+                  ),
+                  (currentUser.isServiceProvider == true)? RaisedButton(
+                    child: Text("My Services"),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(MyServicesPage.routeName);
+                    },
+                  ): SizedBox(),
+                  SizedBox(
+                    height: 10,
                   ),
                   RaisedButton(
                     child: Text("Log out"),
@@ -97,3 +119,5 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
+

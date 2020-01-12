@@ -4,8 +4,10 @@ import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
 import 'package:pet_app/screens/home/splash_page.dart';
 import 'package:pet_app/screens/login/login_page.dart';
 import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
+import 'package:pet_app/screens/services/add-service/add_service_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/screens/register/register_page.dart';
+import 'package:pet_app/screens/services/my-services/my_services_page.dart';
 import 'package:pet_app/services/services.dart';
 
 void main() {
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
         EditProfilePage.routeName: (context) => EditProfilePage(),
         AddPetPage.routeName: (context) => AddPetPage(),
         MyPetsPage.routeName: (context) => MyPetsPage(),
+        AddServicePage.routeName: (context) => AddServicePage(),
+        MyServicesPage.routeName: (context) => MyServicesPage(),
         SplashPage.routeName: (context) => SplashPage()
       },
     );

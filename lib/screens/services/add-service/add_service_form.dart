@@ -4,34 +4,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
-import 'package:pet_app/model/pet.dart';
+import 'package:pet_app/model/service.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
-import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
+import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
-import 'package:pet_app/widgets/labeled_checkbox.dart';
+//import 'package:pet_app/widgets/labeled_checkbox.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
-class AddPetForm extends StatefulWidget {
-  final Function(Pet) addPetHandler;
+class AddServiceForm extends StatefulWidget {
+  final Function(Service) addServiceHandler;
 
-  const AddPetForm({Key key, this.addPetHandler}) : super(key: key);
+  const AddServiceForm({Key key, this.addServiceHandler}) : super(key: key);
 
   @override
-  _AddPetFormState createState() => _AddPetFormState();
+  _AddServiceFormState createState() => _AddServiceFormState();
 }
 
-class _AddPetFormState extends State<AddPetForm> {
+class _AddServiceFormState extends State<AddServiceForm> {
   final StorageService _storageService = services.get<StorageService>();
-  final PetsService _petsService = services.get<PetsService>();
+  final ServicesService _serviceService = services.get<ServicesService>();
   final AuthService _authService = services.get<AuthService>();
   File _image;
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final typeController = TextEditingController();
-  final biographyController = TextEditingController();
-  final ageController = TextEditingController();
+  final categoryController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final addressController = TextEditingController();
+  final petTypeController = TextEditingController();
 
   Future getImage() async {
     final imageSource = await AppDialogs.chooseImageSource(context);
@@ -47,15 +48,16 @@ class _AddPetFormState extends State<AddPetForm> {
   @override
   void dispose() {
     nameController.dispose();
-    typeController.dispose();
-    biographyController.dispose();
-    ageController.dispose();
+    categoryController.dispose();
+    descriptionController.dispose();
+    addressController.dispose();
+    petTypeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Pet pet = ModalRoute
+    Service service = ModalRoute
         .of(context)
         .settings
         .arguments;
@@ -68,54 +70,40 @@ class _AddPetFormState extends State<AddPetForm> {
           children: <Widget>[
             ProfilePicture(
                 image: _image,
-                pictureUrl: pet.pictureUrl,
-                placeholderImageUri: "assets/blank_pet_profile.png",
+                pictureUrl: service.pictureUrl,
+                placeholderImageUri: "assets/blank_profile.png",
                 imageGetter: getImage),
             InputField(
               controller: nameController,
               hintText: "Name",
             ),
             InputField(
-              controller: typeController,
-              hintText: "Type e.g. 'Dog'",
+              controller: categoryController,
+              hintText: "Category e.g. 'Saloon', 'Clinic'",
             ),
             InputField(
-              controller: biographyController,
-              hintText: "Biography",
+              controller: descriptionController,
+              hintText: "Description",
             ),
             InputField(
-              controller: ageController,
-              hintText: "Age",
+              controller: addressController,
+              hintText: "Address",
             ),
-            LabeledCheckbox(
-              label: "Visible for pet sitters",
-              value: pet.forPetSitting,
-              valueHandler: (newValue) {
-                setState(() {
-                  pet.forPetSitting = newValue;
-                });
-              },
-            ),
-            LabeledCheckbox(
-              label: "Available for pet mating",
-              value: pet.forPetMating,
-              valueHandler: (newValue) {
-                setState(() {
-                  pet.forPetMating = newValue;
-                });
-              },
+            InputField(
+              controller: petTypeController,
+              hintText: "Animal Type e.g. 'Dog'",
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    addPet(pet);
+                    addService(service);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please, make sure that the inputs are in the correct format!");
                 },
-                child: Text('Add Pet'),
+                child: Text('Add Service'),
               ),
             ),
           ],
@@ -124,21 +112,22 @@ class _AddPetFormState extends State<AddPetForm> {
     );
   }
 
-  void addPet(Pet petObject) {
-    petObject.ownerId = _authService.currentUserUid;
-    petObject.name = nameController.text;
-    petObject.type = typeController.text;
-    petObject.biography = biographyController.text;
-    petObject.age = int.parse(ageController.text);
+  void addService(Service serviceObject) {
+    serviceObject.ownerId = _authService.currentUserUid;
+    serviceObject.name = nameController.text;
+    serviceObject.category = categoryController.text;
+    serviceObject.description = descriptionController.text;
+    serviceObject.address = addressController.text;
+    serviceObject.petType = petTypeController.text;
 
-    widget.addPetHandler(petObject);
+    widget.addServiceHandler(serviceObject);
 
     if (_image != null) {
       _storageService.uploadPhoto(_image).then((pictureUrl) {
-        petObject.pictureUrl = pictureUrl;
+        serviceObject.pictureUrl = pictureUrl;
 
-        _petsService
-            .updatePet(petObject);
+        _serviceService
+            .updateService(serviceObject);
       });
     }
   }

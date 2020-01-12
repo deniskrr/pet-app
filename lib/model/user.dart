@@ -5,11 +5,13 @@ class User {
   String pictureUrl;
   String bio;
   bool isPetSitter;
+  bool isServiceProvider;
 
   User(this.email, this.username, this.uid)
       : pictureUrl = "",
         bio = "",
-        isPetSitter = false;
+        isPetSitter = false,
+        isServiceProvider = false;
 
   Map<String, dynamic> toJson() =>
       {
@@ -18,7 +20,8 @@ class User {
         'uid': uid,
         'picture_url': pictureUrl,
         'bio': bio,
-        'pet_sitter': isPetSitter
+        'pet_sitter': isPetSitter,
+        'service_provider': isServiceProvider
       };
 
   User.fromJson(Map<String, dynamic> json)
@@ -27,5 +30,6 @@ class User {
         email = json['email'],
         pictureUrl = json['picture_url'],
         bio = json['bio'],
-        isPetSitter = json['pet_sitter'];
+        isPetSitter = json['pet_sitter'],
+        isServiceProvider = json['service_provider'];
 }
