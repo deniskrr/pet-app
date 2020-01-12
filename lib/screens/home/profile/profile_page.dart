@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
-import 'package:pet_app/screens/home/profile/service_provider_profile_widget.dart';
-import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
+import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
@@ -13,6 +12,8 @@ import 'package:pet_app/widgets/profile_picture.dart';
 import '../../login/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
+  static final routeName = '/user-profile';
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -72,7 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   RaisedButton(
                     child: Text("My Pets"),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(MyPetsPage.routeName);
+                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
+                          arguments: Pet.empty());
                     },
                   ),
                   if (currentUser.isServiceProvider)
@@ -100,5 +102,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-

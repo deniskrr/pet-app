@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
+import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
@@ -35,6 +36,13 @@ class MyPetsPage extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: new FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context)
+                .pushNamed(AddEditPetPage.routeName, arguments: Pet.empty());
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
