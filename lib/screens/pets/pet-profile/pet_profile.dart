@@ -39,17 +39,7 @@ class PetProfile extends StatelessWidget {
                 children: <Widget>[
                   Stack(
                     children: <Widget>[
-                      FadeInImage(
-                          image: displayedPet.pictureUrl.isEmpty
-                              ? AssetImage("assets/blank_pet_profile.png")
-                              : NetworkImage(displayedPet.pictureUrl),
-                          height: 300,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          placeholder: AssetImage(
-                              'assets/blank_pet_profile.jpg')),
+                      displayPetPicture(context),
                       backgroundAlignForImage(Colors.brown, Alignment.topCenter,
                           Alignment.bottomCenter, 100, 1),
                       backgroundAlignForImage(
@@ -110,54 +100,9 @@ class PetProfile extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                           ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Biography: ' + displayedPet.biography,
-                                style: TextStyle(
-                                    color: Colors.brown, fontSize: 18),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Pet-sitting status: " +
-                                    (displayedPet.forPetSitting
-                                        ? "I'm looking for a pet sitter!"
-                                        : "I have a pet-sitter for now."),
-                                style: TextStyle(
-                                    color: (displayedPet.forPetSitting
-                                        ? Colors.amberAccent
-                                        : Colors.white),
-                                    fontSize: 18),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Mating status: " +
-                                    (displayedPet.forPetMating
-                                        ? "I'm looking for a mating partner!"
-                                        : "I'm fine now."),
-                                style: TextStyle(
-                                    color: (displayedPet.forPetMating
-                                        ? Colors.green
-                                        : Colors.white),
-                                    fontSize: 18),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                          ),
+                          displayPetBiography(),
+                          displayPetSittingStatus(),
+                          displayPetMatingStatus(),
                           currentUserId != displayedPet.ownerId
                               ? buttonsForVisitor()
                               : buttonsForOwner(context)
@@ -168,33 +113,6 @@ class PetProfile extends StatelessWidget {
                 ],
               ),
             )));
-  }
-
-  deletePet(BuildContext context, String petId) async {
-    final PetsService petsService = services.get<PetsService>();
-    await petsService.deletePet(petId);
-    Navigator.pushNamedAndRemoveUntil(
-        context, MyPetsPage.routeName, ModalRoute.withName(HomePage.routeName));
-  }
-
-  AlertDialog confirmDeleteDialog(BuildContext context) {
-    return AlertDialog(
-      content: Text(
-        'Are you sure you want to get it out?',
-      ),
-      actions: <Widget>[
-        FlatButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('No')),
-        FlatButton(
-            onPressed: () {
-              deletePet(context, displayedPet.id);
-            },
-            child: Text('Yes')),
-      ],
-    );
   }
 
   actionsForVisitor() {
@@ -215,30 +133,6 @@ class PetProfile extends StatelessWidget {
           child: Container(
               alignment: Alignment.center, child: petOwnerProfilePicture()))
     ];
-  }
-
-  petOwnerProfilePicture() {
-    return FutureBuilder<User>(
-        future: services.get<UserService>().getUser(displayedPet.ownerId),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final User owner = snapshot.data;
-            return GestureDetector(
-                child: CircleAvatar(
-                    minRadius: 20,
-                    backgroundImage: owner.pictureUrl.isNotEmpty
-                        ? NetworkImage(owner.pictureUrl)
-                        : AssetImage('assets/blank_profile.png')),
-                onTap: () {
-                  Navigator.pushNamed(context, HomePage
-                      .routeName); // must be changed in order to redirect to the owner's profile
-                }
-            );
-          }
-          return CircleAvatar(
-              minRadius: 20,
-              backgroundImage: AssetImage('assets/blank_profile.png'));
-        });
   }
 
   actionsForOwner(BuildContext context) {
@@ -355,6 +249,128 @@ class PetProfile extends StatelessWidget {
           ),
           child: Padding(
               padding: EdgeInsets.only(top: topPadding), child: Container())),
+    );
+  }
+
+  Align displayPetBiography() {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          'Biography: ' + displayedPet.biography,
+          style: TextStyle(
+              color: Colors.brown, fontSize: 18),
+          textAlign: TextAlign.start,
+        ),
+      ),
+    );
+  }
+
+  Align displayPetSittingStatus() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Pet-sitting status: " +
+              (displayedPet.forPetSitting
+                  ? "I'm looking for a pet sitter!"
+                  : "I have a pet-sitter for now."),
+          style: TextStyle(
+              color: (displayedPet.forPetSitting
+                  ? Colors.amberAccent
+                  : Colors.white),
+              fontSize: 18),
+          textAlign: TextAlign.start,
+        ),
+      ),
+    );
+  }
+
+  Align displayPetMatingStatus() {
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Mating status: " +
+              (displayedPet.forPetMating
+                  ? "I'm looking for a mating partner!"
+                  : "I'm fine now."),
+          style: TextStyle(
+              color: (displayedPet.forPetMating
+                  ? Colors.green
+                  : Colors.white),
+              fontSize: 18),
+          textAlign: TextAlign.start,
+        ),
+      ),
+    );
+  }
+
+  FadeInImage displayPetPicture(BuildContext context) {
+    return FadeInImage(
+        image: displayedPet.pictureUrl.isEmpty
+            ? AssetImage("assets/blank_pet_profile.png")
+            : NetworkImage(displayedPet.pictureUrl),
+        height: 300,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
+        placeholder: AssetImage(
+            'assets/blank_pet_profile.jpg'));
+  }
+
+  petOwnerProfilePicture() {
+    return FutureBuilder<User>(
+        future: services.get<UserService>().getUser(displayedPet.ownerId),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final User owner = snapshot.data;
+            return GestureDetector(
+                child: CircleAvatar(
+                    minRadius: 20,
+                    backgroundImage: owner.pictureUrl.isNotEmpty
+                        ? NetworkImage(owner.pictureUrl)
+                        : AssetImage('assets/blank_profile.png')),
+                onTap: () {
+                  Navigator.pushNamed(context, HomePage
+                      .routeName); // must be changed in order to redirect to the owner's profile
+                }
+            );
+          }
+          return CircleAvatar(
+              minRadius: 20,
+              backgroundImage: AssetImage('assets/blank_profile.png'));
+        });
+  }
+
+  deletePet(BuildContext context, String petId) async {
+    final PetsService petsService = services.get<PetsService>();
+    await petsService.deletePet(petId);
+    Navigator.pushNamedAndRemoveUntil(
+        context, MyPetsPage.routeName, ModalRoute.withName(HomePage.routeName));
+  }
+
+  AlertDialog confirmDeleteDialog(BuildContext context) {
+    return AlertDialog(
+      content: Text(
+        'Are you sure you want to get it out?',
+      ),
+      actions: <Widget>[
+        FlatButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('No')),
+        FlatButton(
+            onPressed: () {
+              deletePet(context, displayedPet.id);
+            },
+            child: Text('Yes')),
+      ],
     );
   }
 }
