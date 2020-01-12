@@ -20,17 +20,21 @@ class ChatMessageList extends StatelessWidget {
         reverse: true,
         query: messageStream,
         itemBuilder: (context, snapshot, animation, index) {
-          _scrollController.jumpTo(_scrollController.position.minScrollExtent);
-          final chatMessage = ChatMessage.fromJson(snapshot.data);
-          return ScaleTransition(
-            alignment: chatMessage.sentByMe
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            scale: animation,
-            child: ChatMessageWidget(
-              chatMessage: chatMessage,
-            ),
-          );
+          if (snapshot.data != null) {
+            _scrollController.jumpTo(
+                _scrollController.position.minScrollExtent);
+            final chatMessage = ChatMessage.fromJson(snapshot.data);
+            return ScaleTransition(
+              alignment: chatMessage.sentByMe
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              scale: animation,
+              child: ChatMessageWidget(
+                chatMessage: chatMessage,
+              ),
+            );
+          }
+          return CircularProgressIndicator();
         },
       ),
     );
