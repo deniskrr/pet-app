@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/helpers/app_dialogs.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/login/login_form.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginPage extends StatefulWidget {
   static final routeName = '/login';
@@ -25,8 +27,12 @@ class _LoginPageState extends State<LoginPage> {
               loginHandler: (email, password) async {
                 _authService.signIn(email, password).then((value) =>
                     Navigator.of(context)
-                        .pushReplacementNamed(HomePage.routeName));
-              },
+                        .pushReplacementNamed(HomePage.routeName))
+                    .catchError((error, stackTrace) {
+                      AppDialogs.showAlertDialog(context, "Login failed",
+                        "Incorrect email or password!");
+                });
+              }
             ),
             GestureDetector(
               onTap: () =>
