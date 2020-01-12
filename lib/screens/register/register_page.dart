@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/helpers/app_dialogs.dart';
+import 'package:pet_app/helpers/error_messages.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/intro/intro_page.dart';
 import 'package:pet_app/screens/register/register_form.dart';
@@ -31,7 +33,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         .createUser(email, username, value.user.uid)
                         .then((value) =>
                         Navigator.of(context)
-                            .pushReplacementNamed(IntroPage.routeName)));
+                            .pushReplacementNamed(IntroPage.routeName)))
+                    .catchError((error, stackTrace) {
+                  AppDialogs.showAlertDialog(context, "Register failed",
+                      ErrorMessages.getErrorMessage(error));
+                });
               },
             ),
             GestureDetector(

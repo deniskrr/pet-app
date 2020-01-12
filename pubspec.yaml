@@ -33,6 +33,7 @@ dependencies:
   uuid: 2.0.4
   firestore_ui: ^1.7.2
   intro_slider: ^2.2.8
+  rflutter_alert: ^1.0.3
 
 dev_dependencies:
   flutter_test:
