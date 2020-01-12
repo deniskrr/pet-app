@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
+import 'package:pet_app/screens/pets/pet-profile/pet_profile.dart';
 
 class PetTile extends StatelessWidget {
   final Pet pet;
@@ -25,6 +26,10 @@ class PetTile extends StatelessWidget {
           if (pet.forPetMating) Icon(Icons.pets),
         ],
       ),
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(PetProfile.routeName, arguments: pet);
+      },
     );
   }
 }
