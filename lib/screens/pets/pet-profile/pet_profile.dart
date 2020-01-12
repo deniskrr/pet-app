@@ -12,17 +12,13 @@ import 'package:pet_app/services/user/user_service.dart';
 
 class PetProfile extends StatelessWidget {
   static final String routeName = '/pet-profile';
-  final Pet displayedPet;
-
-  const PetProfile({Key key, @required this.displayedPet})
-      : assert(displayedPet != null),
-        super(key: key);
+  Pet displayedPet;
 
   @override
   Widget build(BuildContext context) {
-    final currentUserId = services
-        .get<AuthService>()
-        .currentUserUid;
+    displayedPet = ModalRoute.of(context).settings.arguments;
+
+    final currentUserId = services.get<AuthService>().currentUserUid;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -34,85 +30,76 @@ class PetProfile extends StatelessWidget {
         ),
         body: SafeArea(
             child: Container(
-              color: Colors.black.withOpacity(0.9),
-              child: Column(
+          color: Colors.black.withOpacity(0.9),
+          child: Column(
+            children: <Widget>[
+              Stack(
                 children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      displayPetPicture(context),
-                      backgroundAlignForImage(Colors.brown, Alignment.topCenter,
-                          Alignment.bottomCenter, 100, 1),
-                      backgroundAlignForImage(
-                          Colors.brown, Alignment.bottomCenter,
-                          Alignment.topCenter, 300, 8),
-                      Positioned(
-                          bottom: 0,
-                          child: Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      20, 0, 0, 10),
-                                  child: Text(
-                                    displayedPet.type,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 22),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      0, 0, 20, 10),
-                                  child: Text(
-                                    displayedPet.age.toString() + ' years',
-                                    textAlign: TextAlign.end,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
+                  displayPetPicture(context),
+                  backgroundAlignForImage(Colors.brown, Alignment.topCenter,
+                      Alignment.bottomCenter, 100, 1),
+                  backgroundAlignForImage(Colors.brown, Alignment.bottomCenter,
+                      Alignment.topCenter, 300, 8),
+                  Positioned(
+                      bottom: 0,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
+                              child: Text(
+                                displayedPet.type,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 22),
+                              ),
                             ),
-                          )),
-                    ],
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(2, 5),
-                        )
-                      ]),
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                          ),
-                          displayPetBiography(),
-                          displayPetSittingStatus(),
-                          displayPetMatingStatus(),
-                          currentUserId != displayedPet.ownerId
-                              ? buttonsForVisitor()
-                              : buttonsForOwner(context)
-                        ],
-                      ),
-                    ),
-                  )
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 20, 10),
+                              child: Text(
+                                displayedPet.age.toString() + ' years',
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
                 ],
               ),
-            )));
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(2, 5),
+                    )
+                  ]),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                      ),
+                      displayPetBiography(),
+                      displayPetSittingStatus(),
+                      displayPetMatingStatus(),
+                      currentUserId != displayedPet.ownerId
+                          ? buttonsForVisitor()
+                          : buttonsForOwner(context)
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        )));
   }
 
   actionsForVisitor() {
@@ -191,8 +178,7 @@ class PetProfile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         FlatButton(
-          onPressed: () =>
-          {
+          onPressed: () => {
             Navigator.of(context)
                 .pushNamed(AddEditPetPage.routeName, arguments: displayedPet)
           },
@@ -204,8 +190,7 @@ class PetProfile extends StatelessWidget {
           ),
         ),
         FlatButton(
-          onPressed: () =>
-          {
+          onPressed: () => {
             showDialog(
                 context: context,
                 builder: (context) {
@@ -259,8 +244,7 @@ class PetProfile extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           'Biography: ' + displayedPet.biography,
-          style: TextStyle(
-              color: Colors.brown, fontSize: 18),
+          style: TextStyle(color: Colors.brown, fontSize: 18),
           textAlign: TextAlign.start,
         ),
       ),
@@ -299,9 +283,7 @@ class PetProfile extends StatelessWidget {
                   ? "I'm looking for a mating partner!"
                   : "I'm fine now."),
           style: TextStyle(
-              color: (displayedPet.forPetMating
-                  ? Colors.green
-                  : Colors.white),
+              color: (displayedPet.forPetMating ? Colors.green : Colors.white),
               fontSize: 18),
           textAlign: TextAlign.start,
         ),
@@ -315,12 +297,8 @@ class PetProfile extends StatelessWidget {
             ? AssetImage("assets/blank_pet_profile.png")
             : NetworkImage(displayedPet.pictureUrl),
         height: 300,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        placeholder: AssetImage(
-            'assets/blank_pet_profile.jpg'));
+        width: MediaQuery.of(context).size.width,
+        placeholder: AssetImage('assets/blank_pet_profile.jpg'));
   }
 
   petOwnerProfilePicture() {
@@ -336,10 +314,11 @@ class PetProfile extends StatelessWidget {
                         ? NetworkImage(owner.pictureUrl)
                         : AssetImage('assets/blank_profile.png')),
                 onTap: () {
-                  Navigator.pushNamed(context, HomePage
-                      .routeName); // must be changed in order to redirect to the owner's profile
-                }
-            );
+                  Navigator.pushNamed(
+                      context,
+                      HomePage
+                          .routeName); // must be changed in order to redirect to the owner's profile
+                });
           }
           return CircleAvatar(
               minRadius: 20,

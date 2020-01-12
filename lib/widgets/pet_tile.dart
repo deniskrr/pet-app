@@ -27,8 +27,8 @@ class PetTile extends StatelessWidget {
         ],
       ),
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (_) => PetProfile(displayedPet: pet)));
+        Navigator.of(context)
+            .pushNamed(PetProfile.routeName, arguments: pet);
       },
     );
   }
