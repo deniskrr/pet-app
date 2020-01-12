@@ -29,7 +29,7 @@ class _PetSearchPageState extends State<PetSearchPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButton<Pet>(
-                  hint: Text("Mating companion for:"),
+                  hint: Text("Mating partner for:"),
                   items: pets
                       .map(
                         (Pet pet) =>

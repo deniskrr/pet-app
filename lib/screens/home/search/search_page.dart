@@ -31,9 +31,11 @@ class _SearchPageState extends State<SearchPage>
           controller: _tabController,
           tabs: <Widget>[
             Tab(
+              text: "Mating partner",
               icon: Icon(Icons.pets),
             ),
             Tab(
+              text: "Pet sitter",
               icon: Icon(Icons.accessibility),
             )
           ],
