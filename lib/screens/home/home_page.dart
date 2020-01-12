@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/screens/home/chat/chat_page.dart';
+import 'package:pet_app/screens/home/chat/chats_overview_page.dart';
 import 'package:pet_app/screens/home/profile/profile_page.dart';
 import 'package:pet_app/screens/home/search/pet/pet_search_page.dart';
 import 'package:pet_app/screens/home/search/pet_sitter/pet_sitter_search_page.dart';
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage>
           children: <Widget>[
             ProfilePage(),
             searchIndex == 0 ? PetSearchPage() : PetSitterSearchPage(),
-            ChatPage(recipientUid: "TESTING"),
+            ChatsOverviewPage(),
           ],
         ),
       ),
