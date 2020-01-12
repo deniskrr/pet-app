@@ -22,6 +22,7 @@ class AddEditPetForm extends StatefulWidget {
 
 class _AddEditPetFormState extends State<AddEditPetForm> {
   Pet petObject;
+  bool isInitialized = false;
 
   final StorageService _storageService = services.get<StorageService>();
   final AuthService _authService = services.get<AuthService>();
@@ -33,7 +34,8 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
 
-  void initFormFields() {
+  void initPetForm() {
+    petObject = ModalRoute.of(context).settings.arguments;
     this.nameController.text = petObject.name;
     this.typeController.text = petObject.type;
     this.biographyController.text = petObject.biography;
@@ -62,8 +64,10 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
 
   @override
   Widget build(BuildContext context) {
-    petObject = ModalRoute.of(context).settings.arguments;
-    initFormFields();
+    if(isInitialized == false){
+      initPetForm();
+      isInitialized = true;
+    }
 
     return Form(
       key: _formKey,
@@ -100,7 +104,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                   value: petObject.forPetSitting,
                   onChanged: (newVal) {
                     setState(() {
-                      petObject.forPetSitting = newVal; // entire form is influenced on this. I don't know why ?!
+                      petObject.forPetSitting = newVal;
                     });
                   },
                 )
@@ -114,7 +118,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                   value: petObject.forPetMating,
                   onChanged: (newVal) {
                     setState(() {
-                      petObject.forPetMating = newVal; // entire form is influenced on this. I don't know why ?!
+                      petObject.forPetMating = newVal;
                     });
                   },
                 )
@@ -125,11 +129,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    if (petObject.id.isEmpty) {
-                      addPet(petObject);
-                    } else {
-                      updatePet(petObject);
-                    }
+                    addOrEditPet(petObject);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please, make sure that the inputs are in the correct format!");
@@ -144,7 +144,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     );
   }
 
-  void addPet(Pet petObject) {
+  void addOrEditPet(Pet petObject) {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
     petObject.type = typeController.text;
@@ -152,21 +152,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     petObject.age = int.parse(ageController.text);
     _storageService.uploadPhoto(_image).then((pictureUrl) {
       petObject.pictureUrl = pictureUrl;
-      //widget.addPetHandler(petObject);
-    });
-    widget.petActionHandler(petObject);
-  }
-
-  void updatePet(Pet petObject) {
-    petObject.name = nameController.text;
-    petObject.type = typeController.text;
-    petObject.biography = biographyController.text;
-    petObject.age = int.parse(ageController.text);
-
-
-    _storageService.uploadPhoto(_image).then((pictureUrl) {
-      petObject.pictureUrl = pictureUrl;
-      //widget.addPetHandler(petObject);
+      //widget.petActionHandler(petObject);
     });
     widget.petActionHandler(petObject);
   }

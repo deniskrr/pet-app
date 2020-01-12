@@ -3,12 +3,11 @@ import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_form.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
-import 'package:pet_app/screens/pets/pet-profile/pet_profile.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 
 class AddEditPetPage extends StatefulWidget {
-  static final routeName = '/add-pet';
+  static final routeName = '/add-edit-pet';
 
   @override
   _AddEditPetPageState createState() => _AddEditPetPageState();
@@ -21,7 +20,7 @@ class _AddEditPetPageState extends State<AddEditPetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Add Pet"),
+          title: Text("Pet Form"),
         ),
         body: Center(
             child: SingleChildScrollView(
@@ -33,22 +32,13 @@ class _AddEditPetPageState extends State<AddEditPetPage> {
                 AddEditPetForm(
                   petActionHandler: (Pet petObject) async {
                     if (petObject.id.isEmpty) {
-                      await _petsService.addPet(petObject).then((_) =>
-
-                          // needs to be changed. Routing doesn't work fine
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              MyPetsPage.routeName,
-                              ModalRoute.withName(HomePage.routeName)));
+                      _petsService.addPet(petObject).then((_) =>
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil(MyPetsPage.routeName, ModalRoute.withName(HomePage.routeName)));
                     } else {
-                      await _petsService.updatePet(petObject).then(
-                          (updatedPet) =>
-
-                              // needs to be changed. Routing doesn't work fine
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => new PetProfile(
-                                          displayedPet: updatedPet))));
+                      _petsService
+                          .updatePet(petObject)
+                          .then((_) => Navigator.of(context).pop());
                     }
                   },
                 ),
