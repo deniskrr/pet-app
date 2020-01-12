@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_ui/firestore_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/chat_message.dart';
 import 'package:pet_app/widgets/chat_message_widget.dart';
@@ -14,35 +15,19 @@ class ChatMessageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: StreamBuilder(
-        stream: messageStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            Timer(
-              Duration(milliseconds: 1),
-                  () =>
-                  _scrollController.animateTo(
-                    _scrollController.position.minScrollExtent,
-                    curve: Curves.easeOut,
-                    duration: Duration(milliseconds: 100),
-                  ),
-            );
-
-            return ListView.builder(
-              reverse: true,
-              shrinkWrap: true,
-              controller: _scrollController,
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (_, index) {
-                return ChatMessageWidget(
-                  chatMessage:
-                  ChatMessage.fromJson(snapshot.data.documents[index].data),
-                );
-              },
-            );
-          }
-          return Center(
-            child: Text("Start a conversation"),
+      child: FirestoreAnimatedList(
+        reverse: true,
+        query: messageStream,
+        itemBuilder: (context, snapshot, animation, index) {
+          final chatMessage = ChatMessage.fromJson(snapshot.data);
+          return ScaleTransition(
+            alignment: chatMessage.sentByMe
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            scale: animation,
+            child: ChatMessageWidget(
+              chatMessage: chatMessage,
+            ),
           );
         },
       ),
