@@ -19,7 +19,7 @@ class _PetSearchPageState extends State<PetSearchPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _petsService.getPetsForOwnerId(_authService.currentUserUid),
+      future: _petsService.getMatingPetsForOwnerId(_authService.currentUserUid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Pet> pets = snapshot.data;
@@ -29,7 +29,7 @@ class _PetSearchPageState extends State<PetSearchPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButton<Pet>(
-                  hint: Text("Mating companion for:"),
+                  hint: Text("Mating partner for:"),
                   items: pets
                       .map(
                         (Pet pet) =>

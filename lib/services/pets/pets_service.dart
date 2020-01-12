@@ -9,5 +9,9 @@ abstract class PetsService {
 
   Future<List<Pet>> getPetsForOwnerId(String ownerId);
 
+  Future<List<Pet>> getMatingPetsForOwnerId(String ownerId);
+
+  Future<List<Pet>> getPetSittablePetsForOwnerId(String ownerId);
+
   Future<List<Pet>> getMatingCompanionsForType(String type);
 }
