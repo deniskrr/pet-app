@@ -35,6 +35,7 @@ class _ChatMessageInputFieldState extends State<ChatMessageInputField> {
           onPressed: () {
             final message = messageController.text;
             if (message.isNotEmpty) {
+              messageController.clear();
               widget.sendMessageFunction(widget.recipientUid, message);
             }
           },

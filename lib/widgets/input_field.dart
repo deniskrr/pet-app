@@ -9,6 +9,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autocorrect: false,
       controller: controller,
       decoration: InputDecoration(
           hintText: hintText,
