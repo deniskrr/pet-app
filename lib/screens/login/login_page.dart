@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
+import 'package:pet_app/helpers/error_messages.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/login/login_form.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
                         .pushReplacementNamed(HomePage.routeName))
                     .catchError((error, stackTrace) {
                       AppDialogs.showAlertDialog(context, "Login failed",
-                        "Incorrect email or password!");
+                        ErrorMessages.getErrorMessage(error));
                 });
               }
             ),
