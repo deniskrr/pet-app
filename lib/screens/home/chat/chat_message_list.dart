@@ -16,9 +16,11 @@ class ChatMessageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: FirestoreAnimatedList(
+        controller: _scrollController,
         reverse: true,
         query: messageStream,
         itemBuilder: (context, snapshot, animation, index) {
+          _scrollController.jumpTo(_scrollController.position.minScrollExtent);
           final chatMessage = ChatMessage.fromJson(snapshot.data);
           return ScaleTransition(
             alignment: chatMessage.sentByMe
