@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/model/service.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/screens/home/search/service/service_search_results.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
@@ -20,7 +19,7 @@ class _ServiceSearchPageState extends State<ServiceSearchPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _petsService
-          .getPetSittablePetsForOwnerId(_authService.currentUserUid),
+          .getPetsForOwnerId(_authService.currentUserUid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Pet> pets = snapshot.data;

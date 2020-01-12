@@ -10,7 +10,6 @@ import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
 import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
-//import 'package:pet_app/widgets/labeled_checkbox.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
 class AddServiceForm extends StatefulWidget {
@@ -112,7 +111,7 @@ class _AddServiceFormState extends State<AddServiceForm> {
     );
   }
 
-  void addService(Service serviceObject) {
+  void addService(Service serviceObject) async {
     serviceObject.ownerId = _authService.currentUserUid;
     serviceObject.name = nameController.text;
     serviceObject.category = categoryController.text;
@@ -120,15 +119,11 @@ class _AddServiceFormState extends State<AddServiceForm> {
     serviceObject.address = addressController.text;
     serviceObject.petType = petTypeController.text;
 
-    widget.addServiceHandler(serviceObject);
-
-    if (_image != null) {
-      _storageService.uploadPhoto(_image).then((pictureUrl) {
+    if (_image != null)
+      await _storageService.uploadPhoto(_image).then((pictureUrl) {
         serviceObject.pictureUrl = pictureUrl;
-
-        _serviceService
-            .updateService(serviceObject);
       });
-    }
+
+    widget.addServiceHandler(serviceObject);
   }
 }

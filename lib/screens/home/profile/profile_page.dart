@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
-import 'package:pet_app/model/service.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
+import 'package:pet_app/screens/home/profile/service_provider_profile_widget.dart';
 import 'package:pet_app/screens/pets/add-pet/add_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
-import 'package:pet_app/screens/services/add-service/add_service_page.dart';
-import 'package:pet_app/screens/services/my-services/my_services_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
@@ -77,25 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.of(context).pushNamed(MyPetsPage.routeName);
                     },
                   ),
-                  SizedBox(
-                    height: (currentUser.isServiceProvider == true)? 10: 0,
-                  ),
-                  (currentUser.isServiceProvider == true)? RaisedButton(
-                    child: Text("Add Service"),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(AddServicePage.routeName,
-                          arguments: Service.empty());
-                    },
-                  ): SizedBox(),
-                  SizedBox(
-                    height: (currentUser.isServiceProvider == true)? 10: 0,
-                  ),
-                  (currentUser.isServiceProvider == true)? RaisedButton(
-                    child: Text("My Services"),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(MyServicesPage.routeName);
-                    },
-                  ): SizedBox(),
+                  if (currentUser.isServiceProvider)
+                    ServiceProviderWidget(),
                   SizedBox(
                     height: 10,
                   ),

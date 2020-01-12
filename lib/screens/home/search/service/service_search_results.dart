@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/service.dart';
-import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/widgets/service_list_view.dart';
