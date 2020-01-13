@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
+import 'package:pet_app/screens/home/profile/service_provider_profile_widget.dart';
 import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
@@ -41,24 +42,34 @@ class _ProfilePageState extends State<ProfilePage> {
                     imageGetter: null,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
                     currentUser.username,
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   RaisedButton(
-                    child: Text("Edit info"),
+                    child: Text("Edit Info"),
                     onPressed: () =>
                         Navigator.of(context).pushNamed(
                             EditProfilePage.routeName,
                             arguments: currentUser),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    child: Text("Add Pet"),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
+                          arguments: Pet.empty());
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   RaisedButton(
                     child: Text("My Pets"),
@@ -66,18 +77,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.of(context).pushNamed(MyPetsPage.routeName);
                     },
                   ),
+                  if (currentUser.isServiceProvider)
+                    ServiceProviderWidget(),
                   SizedBox(
-                    height: 20,
-                  ),
-                  RaisedButton(
-                    child: Text("Add pet"),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
-                          arguments: Pet.empty());
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   RaisedButton(
                     child: Text("Log out"),

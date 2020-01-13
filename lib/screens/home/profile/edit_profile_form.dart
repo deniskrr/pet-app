@@ -69,6 +69,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 });
               },
             ),
+            LabeledCheckbox(
+              label: "Do you provide services for pets?",
+              value: currentUser.isServiceProvider,
+              valueHandler: (newValue) {
+                setState(() {
+                  currentUser.isServiceProvider = newValue;
+                });
+              },
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: RaisedButton(
