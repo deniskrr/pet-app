@@ -11,6 +11,8 @@ import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
+import 'package:pet_app/model/pet_type.dart';
+
 
 class AddEditPetForm extends StatefulWidget {
   final Function(Pet) petActionHandler;
@@ -39,7 +41,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
     this.nameController.text = petObject.name;
-    this.typeController.text = petObject.type;
+    this.typeController.text = petObject.petType;
     this.biographyController.text = petObject.biography;
     this.ageController.text = petObject.age.toString();
   }
@@ -71,25 +73,37 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
       isInitialized = true;
     }
 
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: <Widget>[
-            ProfilePicture(
-                image: _image,
-                pictureUrl: petObject.pictureUrl,
-                placeholderImageUri: "assets/blank_pet_profile.png",
-                imageGetter: getImage),
-            InputField(
-              controller: nameController,
-              hintText: "Name",
-            ),
-            InputField(
-              controller: typeController,
-              hintText: "Type e.g. 'Dog'",
-            ),
+    var classType;
+        return Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: <Widget>[
+                ProfilePicture(
+                    image: _image,
+                    pictureUrl: petObject.pictureUrl,
+                    placeholderImageUri: "assets/blank_pet_profile.png",
+                    imageGetter: getImage),
+                InputField(
+                  controller: nameController,
+                  hintText: "Name",
+                ),
+                     
+                   DropdownButton<PetType>(
+                    value: classType,
+                onChanged: (PetType newValue) {
+                  setState(() {
+                    var classType = newValue;
+                  });
+                },
+                items: PetType.values.map((PetType classType) {
+                  return DropdownMenuItem<PetType>(
+                    value: classType,
+                    child: Text(classType.toString()));
+                }).toList()
+            )
+            ,
             InputField(
               controller: biographyController,
               hintText: "Biography",
@@ -149,7 +163,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
-    petObject.type = typeController.text;
+    petObject.petType = typeController.text;
     petObject.biography = biographyController.text;
     petObject.age = int.parse(ageController.text);
 
