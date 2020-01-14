@@ -10,6 +10,7 @@ import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
+import 'package:pet_app/widgets/drop_down_list.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 import 'package:pet_app/model/pet_type.dart';
 
@@ -37,6 +38,8 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   final typeController = TextEditingController();
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
+  final drop_down = DropDownList();
+  
 
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
@@ -89,20 +92,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                   controller: nameController,
                   hintText: "Name",
                 ),
-                     
-                   DropdownButton<PetType>(
-                    value: classType,
-                onChanged: (PetType newValue) {
-                  setState(() {
-                    var classType = newValue;
-                  });
-                },
-                items: PetType.values.map((PetType classType) {
-                  return DropdownMenuItem<PetType>(
-                    value: classType,
-                    child: Text(classType.toString()));
-                }).toList()
-            )
+              drop_down
             ,
             InputField(
               controller: biographyController,
@@ -163,7 +153,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
-    petObject.petType = typeController.text;
+    petObject.petType = drop_down.type;
     petObject.biography = biographyController.text;
     petObject.age = int.parse(ageController.text);
 
