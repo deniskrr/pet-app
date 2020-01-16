@@ -34,6 +34,7 @@ dependencies:
   firestore_ui: ^1.7.2
   intro_slider: ^2.2.8
   rflutter_alert: ^1.0.3
+  spring_button: ^1.0.0
 
 dev_dependencies:
   flutter_test:

@@ -266,6 +266,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.5"
+  spring_button:
+    dependency: "direct main"
+    description:
+      name: spring_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.13"
   stack_trace:
     dependency: transitive
     description:
