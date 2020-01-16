@@ -19,9 +19,49 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
+  ColorScheme lightScheme = new ColorScheme.light(
+      primary: Color(0xFFFCAA7B),
+      primaryVariant: Color(0xFFF27730),
+      onPrimary: Color(0xFFFFFCF9),
+      secondary: Color(0xFFABD3D2),
+      onSecondary: Color(0xFFFFFCF9),
+      surface: Color(0xFFFFFCF9),
+      onSurface: Color(0xFF5E5E5E),
+      background: Color(0xFFF5F0EB),
+      onBackground: Color(0xFF5E5E5E),
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        brightness: Brightness.light,
+        primaryColor: Color(0xFFFCAA7B),
+        primaryColorLight: Color(0xFFFCBA94),
+        primaryColorDark: Color(0xFFF27730),
+        primaryColorBrightness: Brightness.dark,
+        accentColor: Color(0xFFF27730),
+        accentColorBrightness: Brightness.dark,
+        backgroundColor: Color(0xFFF5F0EB),
+        scaffoldBackgroundColor: Color(0xFFF5F0EB),
+        buttonColor: Color(0xFFB9E5E4),
+        dialogBackgroundColor: Color(0xFFFFFCF9),
+        disabledColor: Color(0xFFCECECC),
+        errorColor: Color(0xFFFF5242),
+
+        // Define the default font family.
+        fontFamily: 'Georgia',
+
+        // Define the default TextTheme. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: TextTheme(
+          headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+      ),
       title: 'Pet App',
       initialRoute: SplashPage.routeName,
       routes: {
@@ -38,6 +78,7 @@ class MyApp extends StatelessWidget {
         IntroPage.routeName: (context) => IntroPage(),
         PetProfile.routeName: (context) => PetProfile()
       },
+
     );
   }
 }

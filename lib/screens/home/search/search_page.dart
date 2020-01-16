@@ -28,15 +28,21 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Center(
+          child: Text("everything you need",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontFamily: "helvetica"),
+          ),
+        ),
         bottom: TabBar(
           controller: _tabController,
           tabs: <Widget>[
             Tab(
-              text: "Mating partner",
+              text: "Mate",
               icon: Icon(Icons.pets),
             ),
             Tab(
-              text: "Pet sitter",
+              text: "Pet Sitter",
               icon: Icon(Icons.accessibility_new),
             ),
             Tab(
