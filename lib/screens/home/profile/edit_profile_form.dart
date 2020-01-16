@@ -44,6 +44,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   @override
   Widget build(BuildContext context) {
     User currentUser = ModalRoute.of(context).settings.arguments;
+    biographyController.text = currentUser.bio;
 
     return Form(
       key: _formKey,
@@ -56,9 +57,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 pictureUrl: currentUser.pictureUrl,
                 placeholderImageUri: "assets/blank_profile.png",
                 imageGetter: getImage),
+            SizedBox(
+              height: 50,
+            ),
             InputField(
               controller: biographyController,
               hintText: "About me",
+            ),
+            SizedBox(
+              height: 30,
             ),
             LabeledCheckbox(
               label: "Are you a petsitter?",
@@ -77,6 +84,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   currentUser.isServiceProvider = newValue;
                 });
               },
+            ),
+            SizedBox(
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
