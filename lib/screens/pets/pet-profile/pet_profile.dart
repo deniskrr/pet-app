@@ -38,33 +38,28 @@ class PetProfile extends StatelessWidget {
                         bottom: 0,
                         child: Container(
                           width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-                                child: Text(
+                          child: Card(
+                            color: Color(0x86FCBA94),
+                            child: ListTile(
+                              title: Text(
                                   displayedPet.type,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300,
                                       fontSize: 22),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 20, 20),
-                                child: Text(
+                              subtitle: Text(
                                   displayedPet.age.toString() + ' years old',
-                                  textAlign: TextAlign.end,
+//                                  textAlign: TextAlign.end,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w300),
                                 ),
-                              ),
-                            ],
+                                ),
+                            ),
                           ),
-                        )),
+                        ),
                   ],
                 ),
                 Container(
@@ -84,6 +79,7 @@ class PetProfile extends StatelessWidget {
                     ],
                   ),
                 )
+
               ],
             )));
   }

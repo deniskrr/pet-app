@@ -58,7 +58,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 imageGetter: getImage),
             InputField(
               controller: biographyController,
-              hintText: "Biography",
+              hintText: "About me",
             ),
             LabeledCheckbox(
               label: "Are you a petsitter?",
@@ -86,7 +86,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     updateInfo(currentUser, _image, biographyController.text);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
-                        "Please, make sure that the inputs are in the correct format!");
+                        "Please make sure that the inputs are in the correct format!");
                 },
                 child: Text('Save'),
               ),
