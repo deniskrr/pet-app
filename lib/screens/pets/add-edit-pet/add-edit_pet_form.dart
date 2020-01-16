@@ -92,7 +92,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
             ),
             InputField(
               controller: biographyController,
-              hintText: "Biography",
+              hintText: "About",
             ),
             InputField(
               controller: ageController,
@@ -134,7 +134,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                     addOrEditPet(petObject);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
-                        "Please, make sure that the inputs are in the correct format!");
+                        "Please make sure that the inputs are in the correct format!");
                 },
                 child:
                     petObject.id.isEmpty ? Text('Add Pet') : Text('Update Pet'),

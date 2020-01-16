@@ -29,69 +29,63 @@ class PetProfile extends StatelessWidget {
               : actionsForVisitor(),
         ),
         body: SafeArea(
-            child: Container(
-          child: Column(
-            children: <Widget>[
-              Stack(
-                children: <Widget>[
-                  displayPetPicture(context),
-                  backgroundAlignForImage(Colors.brown, Alignment.topCenter,
-                      Alignment.bottomCenter, 100, 1),
-                  backgroundAlignForImage(Colors.brown, Alignment.bottomCenter,
-                      Alignment.topCenter, 300, 8),
-                  Positioned(
-                      bottom: 0,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
-                              child: Text(
-                                displayedPet.type,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 22),
+            child: ListView(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    displayPetPicture(context),
+                    Positioned(
+                        bottom: 0,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                                child: Text(
+                                  displayedPet.type,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 22),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 20, 10),
-                              child: Text(
-                                displayedPet.age.toString() + ' years',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 20, 20),
+                                child: Text(
+                                  displayedPet.age.toString() + ' years old',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )),
-                ],
-              ),
-              Expanded(
-                child: Container(
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
+                Container(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(5.0),
                       ),
                       displayPetBiography(),
+//                      displayDivider(),
                       displayPetSittingStatus(),
                       displayPetMatingStatus(context),
-                      currentUserId != displayedPet.ownerId
-                          ? buttonsForVisitor(context)
-                          : buttonsForOwner(context)
+//                      currentUserId != displayedPet.ownerId
+//                          ? buttonsForVisitor(context)
+//                          : buttonsForOwner(context)
                     ],
                   ),
-                ),
-              )
-            ],
-          ),
-        )));
+                )
+              ],
+            )));
   }
 
   actionsForVisitor() {
@@ -99,12 +93,12 @@ class PetProfile extends StatelessWidget {
       if (displayedPet.forPetSitting)
         IconButton(
             padding: EdgeInsets.all(20),
-            icon: Icon(Icons.accessibility, color: Colors.amberAccent),
+            icon: Icon(Icons.accessibility),
             onPressed: () {}),
       if (displayedPet.forPetMating)
         IconButton(
           padding: EdgeInsets.all(20),
-          icon: Icon(Icons.pets, color: Colors.green),
+          icon: Icon(Icons.pets),
           onPressed: () {},
         ),
       Padding(
@@ -118,7 +112,7 @@ class PetProfile extends StatelessWidget {
     return <Widget>[
       IconButton(
         padding: EdgeInsets.all(20),
-        icon: Icon(Icons.edit, color: Colors.white),
+        icon: Icon(Icons.edit),
         onPressed: () {
           Navigator.of(context)
               .pushNamed(AddEditPetPage.routeName, arguments: displayedPet);
@@ -126,7 +120,7 @@ class PetProfile extends StatelessWidget {
       ),
       IconButton(
           padding: EdgeInsets.all(20),
-          icon: Icon(Icons.delete, color: Colors.white),
+          icon: Icon(Icons.delete),
           onPressed: () {
             showDialog(
                 context: context,
@@ -147,13 +141,14 @@ class PetProfile extends StatelessWidget {
             padding: EdgeInsets.all(10),
             color: Theme.of(context).buttonColor,
             child: Text(
-              "Pet-sitting",
+              "Pet-sit",
             ),
           ),
         if (displayedPet.forPetMating)
           FlatButton(
             onPressed: () => {},
             padding: EdgeInsets.all(10),
+            color: Theme.of(context).buttonColor,
             child: Text(
               "Mating",
             ),
@@ -175,7 +170,7 @@ class PetProfile extends StatelessWidget {
           color: Theme.of(context).buttonColor,
           child: Text(
             "Edit",
-            style: TextStyle(color: Colors.white),
+//            style: TextStyle(color: Colors.white),
           ),
         ),
         FlatButton(
@@ -190,7 +185,7 @@ class PetProfile extends StatelessWidget {
           color: Theme.of(context).buttonColor,
           child: Text(
             "Delete",
-            style: TextStyle(color: Colors.white),
+//            style: TextStyle(color: Colors.white),
           ),
         )
       ],
@@ -231,10 +226,13 @@ class PetProfile extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'About: ' + displayedPet.biography,
-          style: TextStyle(fontSize: 18),
-          textAlign: TextAlign.start,
+        child: ListTile(
+//          title: Text("Bio"),
+          title: Text(
+            displayedPet.biography,
+            style: TextStyle(fontSize: 18, color: Colors.black54),
+            textAlign: TextAlign.start,
+          ),
         ),
       ),
     );
@@ -245,17 +243,20 @@ class PetProfile extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(
-          "Pet-sitting status: " +
-              (displayedPet.forPetSitting
-                  ? "I'm looking for a pet sitter!"
-                  : "I have a pet-sitter for now."),
-          style: TextStyle(
-              color: (displayedPet.forPetSitting
-                  ? Colors.amberAccent
-                  : Colors.black38),
-              fontSize: 18),
-          textAlign: TextAlign.start,
+        child: ListTile(
+          leading: Icon(Icons.accessibility_new, color: (displayedPet.forPetSitting ? Colors.black54 : Colors.black26),),
+          title: Text(
+            "" +
+                (displayedPet.forPetSitting
+                    ? "I'm looking for a pet sitter!"
+                    : "Not looking for pet sitter"),
+            style: TextStyle(
+                color: (displayedPet.forPetSitting
+                    ? Colors.black54
+                    : Colors.black26),
+            ),
+            textAlign: TextAlign.start,
+          ),
         ),
       ),
     );
@@ -266,15 +267,18 @@ class PetProfile extends StatelessWidget {
       alignment: Alignment.bottomLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(
-          "Mating status: " +
-              (displayedPet.forPetMating
-                  ? "I'm looking for a mating partner!"
-                  : "I'm fine now."),
-          style: TextStyle(
-              color: (displayedPet.forPetMating ? Theme.of(context).accentColor : Colors.black38),
-              fontSize: 18),
-          textAlign: TextAlign.start,
+        child: ListTile(
+          leading: Icon(Icons.pets, color: (displayedPet.forPetMating ? Colors.black54 : Colors.black26),),
+          title: Text(
+            "" +
+                (displayedPet.forPetMating
+                    ? "I'm looking for a mating partner!"
+                    : "Not looking for mating partner."),
+            style: TextStyle(
+                color: (displayedPet.forPetMating ? Colors.black54 : Colors.black26),
+                ),
+            textAlign: TextAlign.start,
+          ),
         ),
       ),
     );
@@ -287,7 +291,7 @@ class PetProfile extends StatelessWidget {
             : NetworkImage(displayedPet.pictureUrl),
         height: 300,
         width: MediaQuery.of(context).size.width,
-        placeholder: AssetImage('assets/blank_pet_profile.jpg'));
+        placeholder: AssetImage('assets/blank_pet_profile.png'));
   }
 
   petOwnerProfilePicture() {
@@ -325,7 +329,7 @@ class PetProfile extends StatelessWidget {
   AlertDialog confirmDeleteDialog(BuildContext context) {
     return AlertDialog(
       content: Text(
-        'Are you sure you want to get it out?',
+        'Are you sure you want to remove this pet?',
       ),
       actions: <Widget>[
         FlatButton(
@@ -341,4 +345,44 @@ class PetProfile extends StatelessWidget {
       ],
     );
   }
+
+  displayDivider() {
+    return Divider(
+      color: Colors.black26,
+    );
+  }
+}
+
+
+Map<int, Color> getSwatch(Color color) {
+  final hslColor = HSLColor.fromColor(color);
+  final lightness = hslColor.lightness;
+
+  /// if [500] is the default color, there are at LEAST five
+  /// steps below [500]. (i.e. 400, 300, 200, 100, 50.) A
+  /// divisor of 5 would mean [50] is a lightness of 1.0 or
+  /// a color of #ffffff. A value of six would be near white
+  /// but not quite.
+  final lowDivisor = 6;
+
+  /// if [500] is the default color, there are at LEAST four
+  /// steps above [500]. A divisor of 4 would mean [900] is
+  /// a lightness of 0.0 or color of #000000
+  final highDivisor = 5;
+
+  final lowStep = (1.0 - lightness) / lowDivisor;
+  final highStep = lightness / highDivisor;
+
+  return {
+    50: (hslColor.withLightness(lightness + (lowStep * 5))).toColor(),
+    100: (hslColor.withLightness(lightness + (lowStep * 4))).toColor(),
+    200: (hslColor.withLightness(lightness + (lowStep * 3))).toColor(),
+    300: (hslColor.withLightness(lightness + (lowStep * 2))).toColor(),
+    400: (hslColor.withLightness(lightness + lowStep)).toColor(),
+    500: (hslColor.withLightness(lightness)).toColor(),
+    600: (hslColor.withLightness(lightness - highStep)).toColor(),
+    700: (hslColor.withLightness(lightness - (highStep * 2))).toColor(),
+    800: (hslColor.withLightness(lightness - (highStep * 3))).toColor(),
+    900: (hslColor.withLightness(lightness - (highStep * 4))).toColor(),
+  };
 }
