@@ -28,11 +28,8 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text("everything you need",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: "helvetica"),
-          ),
+        title: Text("Search away!",
+//          style: TextStyle(fontFamily: "helvetica"),
         ),
         bottom: TabBar(
           controller: _tabController,

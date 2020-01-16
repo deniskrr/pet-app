@@ -30,7 +30,6 @@ class PetProfile extends StatelessWidget {
         ),
         body: SafeArea(
             child: Container(
-          color: Colors.black.withOpacity(0.9),
           child: Column(
             children: <Widget>[
               Stack(
@@ -52,7 +51,6 @@ class PetProfile extends StatelessWidget {
                               child: Text(
                                 displayedPet.type,
                                 style: TextStyle(
-                                    color: Colors.white,
                                     fontWeight: FontWeight.w300,
                                     fontSize: 22),
                               ),
@@ -76,12 +74,6 @@ class PetProfile extends StatelessWidget {
               Expanded(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      offset: Offset(2, 5),
-                    )
-                  ]),
                   child: Column(
                     children: <Widget>[
                       Padding(
@@ -89,9 +81,9 @@ class PetProfile extends StatelessWidget {
                       ),
                       displayPetBiography(),
                       displayPetSittingStatus(),
-                      displayPetMatingStatus(),
+                      displayPetMatingStatus(context),
                       currentUserId != displayedPet.ownerId
-                          ? buttonsForVisitor()
+                          ? buttonsForVisitor(context)
                           : buttonsForOwner(context)
                     ],
                   ),
@@ -145,7 +137,7 @@ class PetProfile extends StatelessWidget {
     ];
   }
 
-  Row buttonsForVisitor() {
+  Row buttonsForVisitor(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -153,20 +145,17 @@ class PetProfile extends StatelessWidget {
           FlatButton(
             onPressed: () => {},
             padding: EdgeInsets.all(10),
-            color: Colors.brown,
+            color: Theme.of(context).buttonColor,
             child: Text(
               "Pet-sitting",
-              style: TextStyle(color: Colors.amberAccent),
             ),
           ),
         if (displayedPet.forPetMating)
           FlatButton(
             onPressed: () => {},
             padding: EdgeInsets.all(10),
-            color: Colors.brown,
             child: Text(
               "Mating",
-              style: TextStyle(color: Colors.green),
             ),
           )
       ],
@@ -183,7 +172,7 @@ class PetProfile extends StatelessWidget {
                 .pushNamed(AddEditPetPage.routeName, arguments: displayedPet)
           },
           padding: EdgeInsets.all(10),
-          color: Colors.brown,
+          color: Theme.of(context).buttonColor,
           child: Text(
             "Edit",
             style: TextStyle(color: Colors.white),
@@ -198,7 +187,7 @@ class PetProfile extends StatelessWidget {
                 })
           },
           padding: EdgeInsets.all(10),
-          color: Colors.brown,
+          color: Theme.of(context).buttonColor,
           child: Text(
             "Delete",
             style: TextStyle(color: Colors.white),
@@ -243,8 +232,8 @@ class PetProfile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          'Biography: ' + displayedPet.biography,
-          style: TextStyle(color: Colors.brown, fontSize: 18),
+          'About: ' + displayedPet.biography,
+          style: TextStyle(fontSize: 18),
           textAlign: TextAlign.start,
         ),
       ),
@@ -264,7 +253,7 @@ class PetProfile extends StatelessWidget {
           style: TextStyle(
               color: (displayedPet.forPetSitting
                   ? Colors.amberAccent
-                  : Colors.white),
+                  : Colors.black38),
               fontSize: 18),
           textAlign: TextAlign.start,
         ),
@@ -272,7 +261,7 @@ class PetProfile extends StatelessWidget {
     );
   }
 
-  Align displayPetMatingStatus() {
+  Align displayPetMatingStatus(context) {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Padding(
@@ -283,7 +272,7 @@ class PetProfile extends StatelessWidget {
                   ? "I'm looking for a mating partner!"
                   : "I'm fine now."),
           style: TextStyle(
-              color: (displayedPet.forPetMating ? Colors.green : Colors.white),
+              color: (displayedPet.forPetMating ? Theme.of(context).accentColor : Colors.black38),
               fontSize: 18),
           textAlign: TextAlign.start,
         ),
