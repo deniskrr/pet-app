@@ -151,13 +151,17 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     petObject.name = nameController.text;
     petObject.type = typeController.text;
     petObject.biography = biographyController.text;
-    petObject.age = int.parse(ageController.text);
+
+    try {
+      petObject.age = int.parse(ageController.text);
+    } catch (error) {
+      AppDialogs.showAlertDialog(context, "Invalid input", "The age must be a number!");
+      return;
+    }
 
     if (_image != null)
       await _storageService.uploadPhoto(_image).then((pictureUrl) {
         petObject.pictureUrl = pictureUrl;
       });
-
-    widget.petActionHandler(petObject);
   }
 }
