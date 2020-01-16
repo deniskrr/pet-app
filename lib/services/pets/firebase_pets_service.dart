@@ -9,7 +9,9 @@ class FirebasePetsService extends PetsService {
 
   @override
   Future<Pet> addPet(Pet newPet) async {
-    await _firestore.collection("pets").add(newPet.toJson());
+    await _firestore
+        .collection("pets")
+        .add(newPet.toJson());
     return newPet;
   }
 
@@ -20,6 +22,15 @@ class FirebasePetsService extends PetsService {
         .document(editedPet.id)
         .updateData(editedPet.toJson());
     return editedPet;
+  }
+
+  @override
+  Future<String> deletePet(String petId) async {
+    await _firestore
+        .collection("pets")
+        .document(petId)
+        .delete();
+    return petId;
   }
 
   @override

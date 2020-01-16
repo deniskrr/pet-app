@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/screens/home/search/pet/pet_search_page.dart';
 import 'package:pet_app/screens/home/search/pet_sitter/pet_sitter_search_page.dart';
+import 'package:pet_app/screens/home/search/service/service_search_page.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _SearchPageState extends State<SearchPage>
 
   @override
   void initState() {
-    _tabController = new TabController(vsync: this, length: 2);
+    _tabController = new TabController(vsync: this, length: 3);
     super.initState();
   }
 
@@ -36,7 +37,11 @@ class _SearchPageState extends State<SearchPage>
             ),
             Tab(
               text: "Pet sitter",
-              icon: Icon(Icons.accessibility),
+              icon: Icon(Icons.accessibility_new),
+            ),
+            Tab(
+              text: "Pet Services",
+              icon: Icon(Icons.assistant),
             )
           ],
         ),
@@ -46,6 +51,7 @@ class _SearchPageState extends State<SearchPage>
         children: <Widget>[
           PetSearchPage(),
           PetSitterSearchPage(),
+          ServiceSearchPage()
         ],
       ),
     );
