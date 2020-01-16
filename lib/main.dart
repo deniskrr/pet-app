@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
         accentColorBrightness: Brightness.dark,
         backgroundColor: Color(0xFFF5F0EB),
         scaffoldBackgroundColor: Color(0xFFF5F0EB),
-        buttonColor: Color(0xFFB9E5E4),
         dialogBackgroundColor: Color(0xFFFFFCF9),
         disabledColor: Color(0xFFCECECC),
         errorColor: Color(0xFFFF5242),
@@ -61,6 +60,19 @@ class MyApp extends StatelessWidget {
           title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
           body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
+
+        buttonTheme: ButtonThemeData(
+          buttonColor: Color(0xFFB9E5E4),
+          shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(6.0),
+            side: BorderSide(color: Color(0xFFB9E5F8))
+          ),
+          textTheme: ButtonTextTheme.normal,
+          minWidth: 150.0,
+          padding: EdgeInsets.all(15.0),
+          alignedDropdown: true,
+        )
+
       ),
       title: 'Pet App',
       initialRoute: SplashPage.routeName,
