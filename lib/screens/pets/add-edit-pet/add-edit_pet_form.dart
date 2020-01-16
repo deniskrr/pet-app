@@ -163,5 +163,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
       await _storageService.uploadPhoto(_image).then((pictureUrl) {
         petObject.pictureUrl = pictureUrl;
       });
+
+    widget.petActionHandler(petObject);
   }
 }
