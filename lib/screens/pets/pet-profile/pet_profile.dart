@@ -50,7 +50,7 @@ class PetProfile extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
                               child: Text(
-                                displayedPet.type,
+                                displayedPet.petType,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,

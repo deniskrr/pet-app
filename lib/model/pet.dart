@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pet_app/model/pet_type.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 
 class Pet extends Equatable {
   String id;
   String ownerId;
   String name;
-  String type;
+  PetType type;
   String biography;
   String pictureUrl;
   int age;
@@ -46,7 +48,7 @@ class Pet extends Equatable {
       : id = "",
         ownerId = "",
         name = "",
-        type = "",
+        type = PetType.NotDefined,
         biography = "",
         pictureUrl = "",
         age = 0,
@@ -56,7 +58,7 @@ class Pet extends Equatable {
   Map<String, dynamic> toJson() => {
     'ownerId': ownerId,
     'name': name,
-    'type': type,
+    'type': petType,
     'age': age,
     'picture_url': pictureUrl,
     'biography': biography,
@@ -67,7 +69,7 @@ class Pet extends Equatable {
   Pet.fromJson(Map<String, dynamic> json)
       : ownerId = json['ownerId'],
         name = json['name'],
-        type = json['type'],
+        type = EnumToString.fromString(PetType.values,json['type']),
         age = json['age'],
         pictureUrl = json['picture_url'],
         biography = json['biography'],
@@ -78,7 +80,7 @@ class Pet extends Equatable {
       : id = snapshot.documentID,
         ownerId = snapshot.data['ownerId'],
         name = snapshot.data['name'],
-        type = snapshot.data['type'],
+        type =  EnumToString.fromString(PetType.values,snapshot.data['type']),
         age = snapshot.data['age'],
         pictureUrl = snapshot.data['picture_url'],
         biography = snapshot.data['biography'],
@@ -87,4 +89,12 @@ class Pet extends Equatable {
 
   @override
   List<Object> get props => [id];
+
+  String get petType {
+    return EnumToString.parse(type);
+  }
+
+  set petType(String typeVal) {
+    type = EnumToString.fromString(PetType.values, typeVal);
+  }
 }

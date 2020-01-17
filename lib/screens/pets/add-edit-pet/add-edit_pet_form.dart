@@ -6,9 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
-import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
+import 'package:pet_app/widgets/drop_down_list.dart';
 import 'package:pet_app/widgets/input_field.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
@@ -26,7 +26,6 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   bool isInitialized = false;
 
   final StorageService _storageService = services.get<StorageService>();
-  final PetsService _petsService = services.get<PetsService>();
   final AuthService _authService = services.get<AuthService>();
 
   File _image;
@@ -35,11 +34,12 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   final typeController = TextEditingController();
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
+  final dropDownList = DropDownList();
 
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
     this.nameController.text = petObject.name;
-    this.typeController.text = petObject.type;
+    this.typeController.text = petObject.petType;
     this.biographyController.text = petObject.biography;
     this.ageController.text = petObject.age.toString();
   }
@@ -66,7 +66,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
 
   @override
   Widget build(BuildContext context) {
-    if(isInitialized == false){
+    if (isInitialized == false) {
       initPetForm();
       isInitialized = true;
     }
@@ -86,10 +86,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
               controller: nameController,
               hintText: "Name",
             ),
-            InputField(
-              controller: typeController,
-              hintText: "Type e.g. 'Dog'",
-            ),
+            dropDownList,
             InputField(
               controller: biographyController,
               hintText: "Biography",
@@ -149,7 +146,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
-    petObject.type = typeController.text;
+    petObject.petType = dropDownList.type;
     petObject.biography = biographyController.text;
 
     try {
