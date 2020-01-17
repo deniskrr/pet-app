@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/model/user.dart';
+import 'package:pet_app/services/chat/chat_service.dart';
+import 'package:pet_app/services/services.dart';
+
+import 'chat_list_view.dart';
 
 class ChatsOverviewPage extends StatefulWidget {
   @override
@@ -6,11 +11,35 @@ class ChatsOverviewPage extends StatefulWidget {
 }
 
 class _ChatsOverviewPageState extends State<ChatsOverviewPage> {
+  ChatService _chatService = services.get<ChatService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Chats overview"),
+      appBar: AppBar(
+        title: Text("My Pets"),
+      ),
+      body: FutureBuilder(
+        future: _chatService.getChattedUsers(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<Future<User>> users = snapshot.data;
+            List<User> u;
+            Future.wait(users)
+                .then((List<User> values) => u=values);
+            return Flex(
+              direction: Axis.vertical,
+              children: [
+                ChatListView(
+                  userList: u,
+                ),
+              ],
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
