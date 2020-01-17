@@ -23,6 +23,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   File _image;
   final _formKey = GlobalKey<FormState>();
   final biographyController = TextEditingController();
+  final locationController = TextEditingController();
 
   Future getImage() async {
     final imageSource = await AppDialogs.chooseImageSource(context);
@@ -38,6 +39,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   @override
   void dispose() {
     biographyController.dispose();
+    locationController.dispose();
     super.dispose();
   }
 
@@ -45,6 +47,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   Widget build(BuildContext context) {
     User currentUser = ModalRoute.of(context).settings.arguments;
     biographyController.text = currentUser.bio;
+    locationController.text = currentUser.location;
 
     return Form(
       key: _formKey,
@@ -63,6 +66,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
             InputField(
               controller: biographyController,
               hintText: "About me",
+            ),
+            InputField(
+              controller: locationController,
+              hintText: "Location",
             ),
             SizedBox(
               height: 30,
@@ -93,7 +100,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    updateInfo(currentUser, _image, biographyController.text);
+                    updateInfo(currentUser, _image, biographyController.text, locationController.text);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please make sure that the inputs are in the correct format!");
@@ -107,8 +114,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
     );
   }
 
-  void updateInfo(User user, File picture, String bio) {
+  void updateInfo(User user, File picture, String bio, String location) {
     user.bio = bio;
+    user.location = location;
     if (_image != null) {
       _storageService.uploadPhoto(_image).then((pictureUrl) {
         user.pictureUrl = pictureUrl;

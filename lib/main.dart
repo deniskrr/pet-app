@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
-        HomePage.routeName: (context) => HomePage(),
+        HomePage.routeName: (context) => IntroPage(),
         EditProfilePage.routeName: (context) => EditProfilePage(),
         AddEditPetPage.routeName: (context) => AddEditPetPage(),
         MyPetsPage.routeName: (context) => MyPetsPage(),

@@ -24,17 +24,16 @@ class _IntroPageState extends State<IntroPage> {
       new Slide(
         title: "PET APP",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Color(0xFFFCAA7B),
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
+            fontFamily: 'NanumGothic'),
         description:
-        "WELCOME TO PET APP",
+        "Welcome to pet app!",
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Color(0xFFF27730),
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
+          fontFamily: 'Georgia',),
         pathImage: "assets/intro_images/pet_friends.png",
       ),
     );
@@ -42,17 +41,16 @@ class _IntroPageState extends State<IntroPage> {
       new Slide(
         title: "PETS HOME ALONE?",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Color(0xFFFCAA7B),
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
+            fontFamily: 'NanumGothic'),
         description:
         "Now it's easy to find a pet sitter that can help",
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Color(0xFFF27730),
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
+            fontFamily: 'Georgia',),
         pathImage: "assets/intro_images/pet_sitter.png",
       ),
     );
@@ -60,17 +58,16 @@ class _IntroPageState extends State<IntroPage> {
       new Slide(
         title: "BREEDING",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Color(0xFFFCAA7B),
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
+            fontFamily: 'NanumGothic'),
         description:
-        "Choose the perfect breeder for your pet",
+        "Choose the perfect mate for your pet",
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Color(0xFFF27730),
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
+          fontFamily: 'Georgia',),
         pathImage: "assets/intro_images/dog_breeding.png",
       ),
     );
@@ -78,17 +75,16 @@ class _IntroPageState extends State<IntroPage> {
       new Slide(
         title: "CHAT",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Color(0xFFFCAA7B),
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
+            fontFamily: 'NanumGothic'),
         description:
         "Connect with pet owners and pet sitters",
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Color(0xFFF27730),
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
+          fontFamily: 'Georgia',),
         pathImage: "assets/intro_images/chat.png",
       ),
     );
@@ -106,7 +102,7 @@ class _IntroPageState extends State<IntroPage> {
   Widget renderNextBtn() {
     return Icon(
       Icons.navigate_next,
-      color: Color(0xffffcc5c),
+      color: Color(0xFF3EB7B5),
       size: 35.0,
     );
   }
@@ -114,14 +110,14 @@ class _IntroPageState extends State<IntroPage> {
   Widget renderDoneBtn() {
     return Icon(
       Icons.done,
-      color: Color(0xffffcc5c),
+      color: Color(0xFF3EB7B5),
     );
   }
 
   Widget renderSkipBtn() {
     return Icon(
       Icons.skip_next,
-      color: Color(0xffffcc5c),
+      color: Color(0xFF3EB7B5),
     );
   }
 
@@ -180,8 +176,8 @@ class _IntroPageState extends State<IntroPage> {
 
       // Skip button
       renderSkipBtn: this.renderSkipBtn(),
-      colorSkipBtn: Color(0x33ffcc5c),
-      highlightColorSkipBtn: Color(0xffffcc5c),
+      colorSkipBtn: Color(0xFFB9E5E4),
+      highlightColorSkipBtn: Color(0xFF3EB7B5),
 
       // Next button
       renderNextBtn: this.renderNextBtn(),
@@ -189,17 +185,17 @@ class _IntroPageState extends State<IntroPage> {
       // Done button
       renderDoneBtn: this.renderDoneBtn(),
       onDonePress: this.onDonePress,
-      colorDoneBtn: Color(0x33ffcc5c),
-      highlightColorDoneBtn: Color(0xffffcc5c),
+      colorDoneBtn: Color(0xFFB9E5E4),
+      highlightColorDoneBtn: Color(0xFF3EB7B5),
 
       // Dot indicator
-      colorDot: Color(0xffffcc5c),
+      colorDot: Color(0xFFB9E5E4),
       sizeDot: 13.0,
       typeDotAnimation: dotSliderAnimation.SIZE_TRANSITION,
 
       // Tabs
       listCustomTabs: this.renderListCustomTabs(),
-      backgroundColorAllSlides: Colors.white,
+      backgroundColorAllSlides: Color(0xFFFFF7EF),
       refFuncGoToTab: (refFunc) {
         this.goToTab = refFunc;
       },

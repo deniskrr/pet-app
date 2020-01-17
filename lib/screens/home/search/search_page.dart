@@ -11,6 +11,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class _SearchPageState extends State<SearchPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Center(
           child: Text("Search away!",

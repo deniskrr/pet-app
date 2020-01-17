@@ -22,9 +22,9 @@ class MatingSearchResults extends StatelessWidget {
             petList: pets,
           );
         }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
+          return Center(
+            child: CircularProgressIndicator(),
+          );
       },
     );
   }
