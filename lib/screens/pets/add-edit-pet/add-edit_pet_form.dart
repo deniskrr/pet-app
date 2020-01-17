@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
 import 'package:pet_app/model/pet.dart';
+import 'package:pet_app/model/pet_type.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
@@ -35,13 +36,9 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   final nameController = TextEditingController();
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
-<<<<<<< HEAD
   static String petType;
   final Function(String) typeController = (String newType){petType = newType;};
 
-=======
-  final dropDownList = DropDownList();
->>>>>>> 0be6157667a938f0964440290c9a0a696f65c273
 
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
@@ -80,7 +77,6 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
       isInitialized = true;
     }
 
-<<<<<<< HEAD
     var classType;
         return Form(
           key: _formKey,
@@ -102,24 +98,6 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                 hintText: petType,
               )
             ,
-=======
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: <Widget>[
-            ProfilePicture(
-                image: _image,
-                pictureUrl: petObject.pictureUrl,
-                placeholderImageUri: "assets/blank_pet_profile.png",
-                imageGetter: getImage),
-            InputField(
-              controller: nameController,
-              hintText: "Name",
-            ),
-            dropDownList,
->>>>>>> 0be6157667a938f0964440290c9a0a696f65c273
             InputField(
               controller: biographyController,
               hintText: "Biography",
@@ -179,11 +157,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
-<<<<<<< HEAD
     petObject.petType = petType;
-=======
-    petObject.petType = dropDownList.type;
->>>>>>> 0be6157667a938f0964440290c9a0a696f65c273
     petObject.biography = biographyController.text;
 
     try {
