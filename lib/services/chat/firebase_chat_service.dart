@@ -50,22 +50,11 @@ class FirebaseChatService extends ChatService {
   @override
   Future<List<User>> getChattedUsers() async {
     UserService _userService = services.get<UserService>();
-    final snapshot = await _firestore
-        .collection("users")
-        .document(_authService.currentUserUid)
-        .get();
-    if (snapshot != null) {
-      List<String> stringList = List.from(snapshot.data['conversations']);
-
-      List<User> users=List();
-
-      for (var i=0; i<stringList.length; i++) {
-        users.add(await _userService.getUser(stringList[i]));
-      }
-
-      return users;
+    User currentUser=await _userService.getUser(_authService.currentUserUid);
+    List<User> users=List();
+    for (var i=0; i<currentUser.conversations.length; i++) {
+      users.add(await _userService.getUser(currentUser.conversations[i]));
     }
-
-    return List();
+    return users;
   }
 }
