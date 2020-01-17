@@ -48,11 +48,11 @@ class Service {
 
   Service.fromDocumentSnapshot(DocumentSnapshot snapshot)
       : id = snapshot.documentID,
-        ownerId = snapshot.data['ownerId'],
+        ownerId = snapshot.data['owner_id'],
         name = snapshot.data['name'],
         description = snapshot.data['description'],
         address = snapshot.data['address'],
         pictureUrl = snapshot.data['picture_url'],
         category = snapshot.data['category'],
-        petType = snapshot.data['petType'];
+        petType = snapshot.data['pet_type'];
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
 import 'package:pet_app/screens/home/profile/service_provider_profile_widget.dart';
-import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
@@ -62,23 +60,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 10,
                   ),
                   RaisedButton(
-                    child: Text("Add Pet"),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
-                          arguments: Pet.empty());
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  RaisedButton(
                     child: Text("My Pets"),
                     onPressed: () {
                       Navigator.of(context).pushNamed(MyPetsPage.routeName);
                     },
                   ),
-                  if (currentUser.isServiceProvider)
-                    ServiceProviderWidget(),
+                  if (currentUser.isServiceProvider) ServiceProviderWidget(),
                   SizedBox(
                     height: 10,
                   ),
@@ -86,8 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Text("Log out"),
                     onPressed: () {
                       _authService.signOut();
-                      Navigator.of(context).pushReplacementNamed(
-                          LoginPage.routeName);
+                      Navigator.of(context)
+                          .pushReplacementNamed(LoginPage.routeName);
                     },
                   )
                 ],
