@@ -20,18 +20,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
-  ColorScheme lightScheme = new ColorScheme.light(
-      primary: Color(0xFFFCAA7B),
-      primaryVariant: Color(0xFFF27730),
-      onPrimary: Color(0xFFFFFCF9),
-      secondary: Color(0xFFABD3D2),
-      onSecondary: Color(0xFFFFFCF9),
-      surface: Color(0xFFFFFCF9),
-      onSurface: Color(0xFF5E5E5E),
-      background: Color(0xFFF5F0EB),
-      onBackground: Color(0xFF5E5E5E),
-  );
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,7 +32,7 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.dark,
         accentColor: Color(0xFFF27730),
         accentColorBrightness: Brightness.dark,
-        backgroundColor: Color(0xFFF5F0EB),
+        backgroundColor: Color(0xFFFFF7EF),
         scaffoldBackgroundColor: Color(0xFFFFF7EF),
         dialogBackgroundColor: Color(0xFFFFFCF9),
         disabledColor: Color(0xFFCECECC),

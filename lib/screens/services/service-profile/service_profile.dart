@@ -35,10 +35,6 @@ class ServiceProfile extends StatelessWidget {
                   Stack(
                     children: <Widget>[
                       displayPetPicture(context),
-                      backgroundAlignForImage(Colors.blueGrey, Alignment.topCenter,
-                          Alignment.bottomCenter, 100, 1),
-                      backgroundAlignForImage(Colors.blueGrey, Alignment.bottomCenter,
-                          Alignment.topCenter, 300, 8),
                       Positioned(
                           bottom: 0,
                           child: Container(
@@ -61,37 +57,26 @@ class ServiceProfile extends StatelessWidget {
                           )),
                     ],
                   ),
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                        )
-                      ]),
-                      child: Text(
-                        "Address: " + displayedService.address,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20),
-                      )
-                  ),
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                        )
-                      ]),
-                      child: Text(
+                  ListTile(
+                      title: Text(
                           displayedService.description,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 20
                           ),
                       ),
-                    )
+                    ),
+                  ListTile(
+                    leading: Icon(Icons.location_on),
+                      title: Text(
+                        "Address: " + displayedService.address,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 18),
+                      )
+                  )
                 ],
               ),
             )
