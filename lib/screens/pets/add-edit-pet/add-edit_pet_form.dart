@@ -6,14 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
-import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
-import 'package:pet_app/widgets/input_field.dart';
 import 'package:pet_app/widgets/drop_down_list.dart';
+import 'package:pet_app/widgets/input_field.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
-import 'package:pet_app/model/pet_type.dart';
-
 
 class AddEditPetForm extends StatefulWidget {
   final Function(Pet) petActionHandler;
@@ -29,7 +26,6 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   bool isInitialized = false;
 
   final StorageService _storageService = services.get<StorageService>();
-  final PetsService _petsService = services.get<PetsService>();
   final AuthService _authService = services.get<AuthService>();
 
   File _image;
@@ -38,8 +34,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   final typeController = TextEditingController();
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
-  final drop_down = DropDownList();
-  
+  final dropDownList = DropDownList();
 
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
@@ -71,29 +66,27 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
 
   @override
   Widget build(BuildContext context) {
-    if(isInitialized == false){
+    if (isInitialized == false) {
       initPetForm();
       isInitialized = true;
     }
 
-    var classType;
-        return Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              children: <Widget>[
-                ProfilePicture(
-                    image: _image,
-                    pictureUrl: petObject.pictureUrl,
-                    placeholderImageUri: "assets/blank_pet_profile.png",
-                    imageGetter: getImage),
-                InputField(
-                  controller: nameController,
-                  hintText: "Name",
-                ),
-              drop_down
-            ,
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: <Widget>[
+            ProfilePicture(
+                image: _image,
+                pictureUrl: petObject.pictureUrl,
+                placeholderImageUri: "assets/blank_pet_profile.png",
+                imageGetter: getImage),
+            InputField(
+              controller: nameController,
+              hintText: "Name",
+            ),
+            dropDownList,
             InputField(
               controller: biographyController,
               hintText: "Biography",
@@ -153,7 +146,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
-    petObject.petType = drop_down.type;
+    petObject.petType = dropDownList.type;
     petObject.biography = biographyController.text;
     petObject.age = int.parse(ageController.text);
 
