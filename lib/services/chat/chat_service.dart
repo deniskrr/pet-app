@@ -6,5 +6,5 @@ abstract class ChatService {
 
   Stream<QuerySnapshot> getChatStream(String uid);
 
-  Future<List<Future<User>>> getChattedUsers();
+  Future<List<User>> getChattedUsers();
 }

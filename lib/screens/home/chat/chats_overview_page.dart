@@ -23,15 +23,12 @@ class _ChatsOverviewPageState extends State<ChatsOverviewPage> {
         future: _chatService.getChattedUsers(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Future<User>> users = snapshot.data;
-            List<User> u;
-            Future.wait(users)
-                .then((List<User> values) => u=values);
+            List<User> users = snapshot.data;
             return Flex(
               direction: Axis.vertical,
               children: [
                 ChatListView(
-                  userList: u,
+                  userList: users,
                 ),
               ],
             );

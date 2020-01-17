@@ -25,9 +25,8 @@ class ChatTile extends StatelessWidget {
         ],
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ChatPage(recipientUid: user.uid,);
-        }));
+        Navigator.of(context)
+            .pushNamed(ChatPage.routeName, arguments: user.uid);
       },
     );
   }

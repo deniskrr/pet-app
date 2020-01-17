@@ -48,7 +48,7 @@ class FirebaseChatService extends ChatService {
   }
 
   @override
-  Future<List<Future<User>>> getChattedUsers() async {
+  Future<List<User>> getChattedUsers() async {
     UserService _userService = services.get<UserService>();
     final snapshot = await _firestore
         .collection("users")
@@ -56,19 +56,16 @@ class FirebaseChatService extends ChatService {
         .get();
     if (snapshot != null) {
       List<String> stringList = List.from(snapshot.data['conversations']);
-      List<Future<User>> users =
-          stringList.map((uid) => _userService.getUser(uid)).toList();
 
-      Future<User> a = _userService.getUser(_authService.currentUserUid);
-      User b;
-      a.then((User v)=>b=v);
+      List<User> users=List();
 
-      List<User> u;
-      Future.wait(users).then((List<User> values) => u = values);
+      for (var i=0; i<stringList.length; i++) {
+        users.add(await _userService.getUser(stringList[i]));
+      }
 
-      return stringList.map((uid) => _userService.getUser(uid)).toList();
+      return users;
     }
 
-    return null;
+    return List();
   }
 }
