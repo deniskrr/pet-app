@@ -1,3 +1,5 @@
+import 'dart:core';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -35,18 +37,21 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   File _image;
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final typeController = TextEditingController();
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
-  final drop_down = DropDownList();
-  
+  static String petType;
+  final Function(String) typeController = (String newType){petType = newType;};
+
 
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
     this.nameController.text = petObject.name;
-    this.typeController.text = petObject.petType;
     this.biographyController.text = petObject.biography;
     this.ageController.text = petObject.age.toString();
+    petType = "Animal type";
+    if(petObject.type != PetType.NotDefined){
+      petType = petObject.petType;
+    }
   }
 
   Future getImage() async {
@@ -63,7 +68,6 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   @override
   void dispose() {
     nameController.dispose();
-    typeController.dispose();
     biographyController.dispose();
     ageController.dispose();
     super.dispose();
@@ -92,7 +96,10 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                   controller: nameController,
                   hintText: "Name",
                 ),
-              drop_down
+              DropDownList(
+                onValueSelected: typeController,
+                hintText: petType,
+              )
             ,
             InputField(
               controller: biographyController,
@@ -153,7 +160,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   void addOrEditPet(Pet petObject) async {
     petObject.ownerId = _authService.currentUserUid;
     petObject.name = nameController.text;
-    petObject.petType = drop_down.type;
+    petObject.petType = petType;
     petObject.biography = biographyController.text;
     petObject.age = int.parse(ageController.text);
 

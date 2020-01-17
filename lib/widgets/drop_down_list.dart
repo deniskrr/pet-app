@@ -3,9 +3,12 @@
   import 'package:enum_to_string/enum_to_string.dart';
 
   class DropDownList extends StatefulWidget {
-     String type;
-
-
+     final String hintText;
+     final Function(String) onValueSelected;
+    
+     const DropDownList({Key key, this.onValueSelected, this.hintText}) : super(key: key);
+     
+      
     @override
     _DropDownList createState() {
       return _DropDownList();
@@ -13,7 +16,7 @@
   }
   
   class _DropDownList extends State<DropDownList> {
-  
+    String currentType;
     @override
     Widget build(BuildContext context) {
       return Center(
@@ -25,11 +28,12 @@
               }).toList(),
           onChanged: (String value) {
             setState(() {
-              widget.type = value;
+              currentType = value;
+              widget.onValueSelected(currentType);
             });
           },
-          hint: Text('Pet type'),
-          value: widget.type,
+          hint: Text(widget.hintText),
+          value: currentType,
         ),
       );
     }
