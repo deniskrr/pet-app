@@ -38,7 +38,7 @@ class ChatTile extends StatelessWidget {
       ),
       onTap: () {
         Navigator.of(context)
-            .pushNamed(ChatPage.routeName, arguments: user.uid);
+            .pushNamed(ChatPage.routeName, arguments: user);
       },
     );
   }
