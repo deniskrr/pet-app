@@ -35,7 +35,9 @@ class ChatMessageWidget extends StatelessWidget {
                 vertical: 10,
               ),
               decoration: BoxDecoration(
-                  color: chatMessage.sentByMe ? Colors.green : Colors.grey,
+                  color: chatMessage.sentByMe ?
+                  Theme.of(context).primaryColor :
+                  Colors.black26,
                   borderRadius: BorderRadius.circular(15)),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
