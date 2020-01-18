@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_app/widgets/input_field.dart';
 
 class RegisterForm extends StatefulWidget {
   final Function(String, String, String) registerHandler;
@@ -34,39 +35,23 @@ class _RegisterFormState extends State<RegisterForm> {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: <Widget>[
-            TextFormField(
+            InputField(
               controller: emailController,
-              decoration: InputDecoration(
-                hintText: "E-mail",
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              ),
+              hintText: "E-mail",
             ),
-            TextFormField(
+            InputField(
               controller: usernameController,
-              decoration: InputDecoration(
-                hintText: "Username",
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              ),
+              hintText: "Username",
             ),
-            TextFormField(
+            InputField(
               controller: passwordController,
-              decoration: InputDecoration(
-                hintText: "Password",
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              ),
-              obscureText: true,
+              hintText: "Password",
+              isObscure: true,
             ),
-            TextFormField(
+            InputField(
               controller: confirmPasswordController,
-              decoration: InputDecoration(
-                hintText: "Confirm password",
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              ),
-              obscureText: true,
+              hintText: "Confirm Password",
+              isObscure: true,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
