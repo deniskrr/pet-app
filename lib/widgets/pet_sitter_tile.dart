@@ -22,7 +22,9 @@ class PetSitterTile extends StatelessWidget {
         ),
         title: Text(petSitter.username),
         subtitle: Text(petSitter.bio),
-        trailing: Icon(Icons.chat),
+        trailing: Icon(Icons.chat,
+          color: Theme.of(context).primaryColorLight,
+        ),
         onTap: () {
           Navigator.of(context).pushNamed(
               PetSitterProfilePage.routeName,

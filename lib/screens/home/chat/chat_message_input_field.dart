@@ -31,7 +31,8 @@ class _ChatMessageInputFieldState extends State<ChatMessageInputField> {
           ),
         ),
         IconButton(
-          icon: Icon(Icons.send),
+          icon: Icon(Icons.send,
+          color: Theme.of(context).accentColor,),
           onPressed: () {
             final message = messageController.text;
             if (message.isNotEmpty) {
