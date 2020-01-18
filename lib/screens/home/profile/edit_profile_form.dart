@@ -46,8 +46,13 @@ class _EditProfileFormState extends State<EditProfileForm> {
   @override
   Widget build(BuildContext context) {
     User currentUser = ModalRoute.of(context).settings.arguments;
-    biographyController.text = currentUser.bio;
-    locationController.text = currentUser.location;
+
+    if (currentUser.bio.isNotEmpty) {
+      biographyController.text = currentUser.bio;
+    }
+
+    if (currentUser.location.isNotEmpty )
+      locationController.text = currentUser.location;
 
     return Form(
       key: _formKey,
