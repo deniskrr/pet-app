@@ -15,7 +15,7 @@ class ChatTile extends StatelessWidget {
     return ListTile(
       leading: user.pictureUrl.isEmpty
           ? Image.asset(
-              "assets/blank_chat_profile.png",
+              "assets/blank_profile.png",
             )
           : Image.network(
               user.pictureUrl,

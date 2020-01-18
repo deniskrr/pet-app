@@ -14,7 +14,7 @@ class ServicesSearchResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _serviceService.getServicesForPetType(forPet.type),
+      future: _serviceService.getServicesForPetType(forPet.petType),
       // ignore: missing_return
       builder: (context, snapshot) {
         if (snapshot.hasData) {

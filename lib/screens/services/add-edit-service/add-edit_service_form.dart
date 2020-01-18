@@ -71,7 +71,7 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
             ProfilePicture(
                 image: _image,
                 pictureUrl: service.pictureUrl,
-                placeholderImageUri: "assets/blank_profile.png",
+                placeholderImageUri: "assets/blank_services.png",
                 imageGetter: getImage),
             InputField(
               controller: nameController,

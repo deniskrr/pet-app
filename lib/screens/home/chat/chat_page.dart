@@ -5,7 +5,7 @@ import 'package:pet_app/services/chat/chat_service.dart';
 import 'package:pet_app/services/services.dart';
 
 class ChatPage extends StatefulWidget {
-  String c;
+
   static final String routeName = '/chat';
 
   //ChatPage({Key key, @required this.recipientUid}) : super(key: key);

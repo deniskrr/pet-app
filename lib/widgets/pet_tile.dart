@@ -18,7 +18,7 @@ class PetTile extends StatelessWidget {
               pet.pictureUrl,
             ),
       title: Text(pet.name),
-      subtitle: Text(pet.type),
+      subtitle: Text(pet.petType),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
