@@ -4,6 +4,7 @@ import 'package:pet_app/model/user.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
+import 'package:pet_app/widgets/no_match_search.dart';
 import 'package:pet_app/widgets/pet_sitter_list_view.dart';
 
 class PetSitterSearchResults extends StatelessWidget {
@@ -21,9 +22,12 @@ class PetSitterSearchResults extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<User> petSitters = snapshot.data;
-          return PetSitterListView(
-            petSitters: petSitters,
-          );
+          if (petSitters.isNotEmpty)
+            return PetSitterListView(
+              petSitters: petSitters,
+            );
+          else
+            return NoMatchSearch();
         }
         return Center(
           child: CircularProgressIndicator(),

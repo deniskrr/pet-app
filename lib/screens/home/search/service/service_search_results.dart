@@ -20,12 +20,15 @@ class ServicesSearchResults extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Service> services = snapshot.data;
-          return ServiceListView(
-            serviceList: services,
-          );
+          if (services.isNotEmpty)
+            return ServiceListView(
+              serviceList: services,
+            );
+          else
+            return NoMatchSearch();
         }
         return Center(
-          child: NoMatchSearch(),
+          child: CircularProgressIndicator(),
         );
       },
     );
