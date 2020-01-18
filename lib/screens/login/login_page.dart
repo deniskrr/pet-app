@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFFCBA94),
+//              color: Color(0xFFF4EDE2),
               borderRadius: const BorderRadius.all(const Radius.circular(20)),
             ),
             margin: const EdgeInsets.all(20),

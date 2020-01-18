@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFFCBA94),
+//              color: Color(0xFFF4EDE9),
               borderRadius: const BorderRadius.all(const Radius.circular(20)),
             ),
             margin: const EdgeInsets.all(20),
