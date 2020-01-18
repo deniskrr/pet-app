@@ -21,7 +21,8 @@ class ChatMessageWidget extends StatelessWidget {
               flex: 1,
               child: Container(),
             ), // make the message half the size of the row
-          Expanded(
+          Flexible(
+            fit: FlexFit.loose,
             flex: 1,
             child: Container(
               margin: EdgeInsets.fromLTRB(
