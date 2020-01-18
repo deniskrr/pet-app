@@ -16,6 +16,9 @@ class _ChatsOverviewPageState extends State<ChatsOverviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("All Chats"),
+      ),
       body: FutureBuilder(
         future: _chatService.getChattedUsers(),
         builder: (context, snapshot) {

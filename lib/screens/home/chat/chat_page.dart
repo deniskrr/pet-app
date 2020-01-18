@@ -19,23 +19,30 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     String recipientUid = ModalRoute.of(context).settings.arguments;
-    return new SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Chat"),
+      ),
+      body: SafeArea(
         minimum: const EdgeInsets.all(18.0),
         left: false,
         right: false,
         bottom: false,
         child: Scaffold(
-            body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            ChatMessageList(
-              messageStream: _chatService.getChatStream(recipientUid),
-            ),
-            ChatMessageInputField(
-              recipientUid: recipientUid,
-              sendMessageFunction: _chatService.sendMessage,
-            )
-          ],
-        )));
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              ChatMessageList(
+                messageStream: _chatService.getChatStream(recipientUid),
+              ),
+              ChatMessageInputField(
+                recipientUid: recipientUid,
+                sendMessageFunction: _chatService.sendMessage,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

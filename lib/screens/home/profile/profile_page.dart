@@ -24,6 +24,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My Profile"),
+      ),
       body: FutureBuilder(
         future: _userService.getUser(_authService.currentUserUid),
         builder: (context, snapshot) {
