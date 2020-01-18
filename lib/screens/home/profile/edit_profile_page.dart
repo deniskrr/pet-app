@@ -26,6 +26,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 FlatButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text("Cancel"),
+                ),
+                SizedBox(
+                  height: 20,
                 )
               ],
             ),
