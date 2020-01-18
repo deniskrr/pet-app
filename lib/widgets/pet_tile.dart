@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/screens/pets/pet-profile/pet_profile.dart';
+import 'package:pet_app/widgets/image_tile.dart';
 
 class PetTile extends StatelessWidget {
   final Pet pet;
@@ -10,13 +11,10 @@ class PetTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: pet.pictureUrl.isEmpty
-          ? Image.asset(
-              "assets/blank_pet_profile.png",
-            )
-          : Image.network(
-              pet.pictureUrl,
-            ),
+      leading: ImageTile(
+        imageUrl: pet.pictureUrl,
+        placeHolder: AssetImage("assets/blank_pet_profile.png"),
+      ),
       title: Text(pet.name),
       subtitle: Text(pet.petType),
       trailing: Row(

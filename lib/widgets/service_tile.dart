@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
 import 'package:pet_app/screens/services/service-profile/service_profile.dart';
+import 'package:pet_app/widgets/image_tile.dart';
 
 class ServiceTile extends StatelessWidget {
   final Service service;
@@ -10,12 +11,9 @@ class ServiceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: service.pictureUrl.isEmpty
-          ? Image.asset(
-        "assets/blank_services.png",
-      )
-          : Image.network(
-        service.pictureUrl,
+      leading: ImageTile(
+        imageUrl: service.pictureUrl,
+        placeHolder: AssetImage("assets/blank_services.png"),
       ),
       title: Text(service.name),
       subtitle: Text(service.category),
