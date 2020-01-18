@@ -11,16 +11,16 @@ class ServiceProviderWidget extends StatelessWidget {
       builder: (context) {
         return Column(
           children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            RaisedButton(
-              child: Text("Add Service"),
-              onPressed: () {
-                Navigator.of(context).pushNamed(AddEditServicePage.routeName,
-                    arguments: Service.empty());
-              },
-            ),
+//            SizedBox(
+//              height: 20,
+//            ),
+//            RaisedButton(
+//              child: Text("Add Service"),
+//              onPressed: () {
+//                Navigator.of(context).pushNamed(AddEditServicePage.routeName,
+//                    arguments: Service.empty());
+//              },
+//            ),
             SizedBox(
               height: 20,
             ),

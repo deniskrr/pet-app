@@ -20,7 +20,7 @@ class _AddEditPetPageState extends State<AddEditPetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Pet Info"),
+          title: Text("Pet Profile"),
         ),
         body: Center(
             child: SingleChildScrollView(
