@@ -7,16 +7,17 @@ class User {
   String location;
   bool isPetSitter;
   bool isServiceProvider;
+  List<String> conversations;
 
   User(this.email, this.username, this.uid)
       : pictureUrl = "",
         bio = "",
         location = "",
         isPetSitter = false,
-        isServiceProvider = false;
+        isServiceProvider = false,
+        conversations = List();
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         'email': email,
         'username': username,
         'uid': uid,
@@ -24,7 +25,8 @@ class User {
         'bio': bio,
         'location': location,
         'pet_sitter': isPetSitter,
-        'service_provider': isServiceProvider
+        'service_provider': isServiceProvider,
+        'conversations': conversations
       };
 
   User.fromJson(Map<String, dynamic> json)
@@ -35,5 +37,6 @@ class User {
         bio = json['bio'],
         location = json['location'],
         isPetSitter = json['pet_sitter'],
-        isServiceProvider = json['service_provider'];
+        isServiceProvider = json['service_provider'],
+        conversations = List.from(json['conversations']);
 }
