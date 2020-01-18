@@ -30,10 +30,8 @@ class _SearchPageState extends State<SearchPage>
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Center(
-          child: Text("Search away!",
+        title: Text("Search",
 //          style: TextStyle(fontFamily: "helvetica"),
-          ),
         ),
         bottom: TabBar(
           controller: _tabController,

@@ -20,7 +20,7 @@ class _ChatPageState extends State<ChatPage> {
     User correspondent = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        title: Text(correspondent.username),
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(18.0),
