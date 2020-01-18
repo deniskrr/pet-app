@@ -19,6 +19,9 @@ class ServiceTile extends StatelessWidget {
       ),
       title: Text(service.name),
       subtitle: Text(service.category),
+      trailing: Icon(Icons.chat,
+        color: Theme.of(context).primaryColorLight,
+      ),
       onTap: () {
         Navigator.of(context)
             .pushNamed(ServiceProfile.routeName, arguments: service);
