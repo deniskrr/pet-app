@@ -24,11 +24,21 @@ class FirebaseChatService extends ChatService {
       sentByMe: false,
     );
 
+    //add current user to other's conversation
     User toUser=await _userService.getUser(toUid);
     if(!toUser.conversations.contains(_authService.currentUserUid)){
       toUser.conversations.add(_authService.currentUserUid);
     }
     _userService.updateUser(toUser);
+
+    //add other user to current one's conversation
+    User currentUser = await _userService.getUser(
+        _authService.currentUserUid);
+    if (!currentUser.conversations.contains(
+        toUid)) {
+      currentUser.conversations.add(toUid);
+    }
+    _userService.updateUser(currentUser);
 
     await _firestore
         .collection("chats")
@@ -64,6 +74,8 @@ class FirebaseChatService extends ChatService {
     return users;
   }
 
+
+
   @override
   Future<String> getFirstMessage(String recipientUid) async {
     final querySnapshot = await _firestore
@@ -93,4 +105,5 @@ class FirebaseChatService extends ChatService {
     }
     return null;
   }
+
 }

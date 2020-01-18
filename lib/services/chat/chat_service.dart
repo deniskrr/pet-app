@@ -8,4 +8,5 @@ abstract class ChatService {
 
   Future<List<User>> getChattedUsers();
   Future<String> getFirstMessage(String recipientUid);
+
 }
