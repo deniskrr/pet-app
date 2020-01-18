@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  enum_to_string:
+    dependency: "direct main"
+    description:
+      name: enum_to_string
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.8"
   equatable:
     dependency: "direct main"
     description:
@@ -266,13 +273,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.5"
-  spring_button:
-    dependency: "direct main"
-    description:
-      name: spring_button
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.13"
   stack_trace:
     dependency: transitive
     description:

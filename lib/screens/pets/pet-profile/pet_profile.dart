@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
@@ -42,7 +43,7 @@ class PetProfile extends StatelessWidget {
                             color: Color(0x86FCBA94),
                             child: ListTile(
                               title: Text(
-                                  displayedPet.type,
+                                  EnumToString.parse(displayedPet.type),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300,

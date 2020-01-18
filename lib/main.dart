@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
+import 'package:pet_app/screens/home/search/pet_sitter/pet_sitter_profile_page.dart';
 import 'package:pet_app/screens/home/splash_page.dart';
 import 'package:pet_app/screens/intro/intro_page.dart';
 import 'package:pet_app/screens/login/login_page.dart';
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
-        HomePage.routeName: (context) => IntroPage(),
+        HomePage.routeName: (context) => HomePage(),
         EditProfilePage.routeName: (context) => EditProfilePage(),
         AddEditPetPage.routeName: (context) => AddEditPetPage(),
         MyPetsPage.routeName: (context) => MyPetsPage(),
@@ -76,7 +77,9 @@ class MyApp extends StatelessWidget {
         ServiceProfile.routeName: (context) => ServiceProfile(),
         SplashPage.routeName: (context) => SplashPage(),
         IntroPage.routeName: (context) => IntroPage(),
+        PetSitterProfilePage.routeName: (context) => PetSitterProfilePage(),
         PetProfile.routeName: (context) => PetProfile()
+
       },
 
     );

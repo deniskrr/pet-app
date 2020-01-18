@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/screens/home/search/pet_sitter/pet_sitter_profile_page.dart';
 
 class PetSitterTile extends StatelessWidget {
   final User petSitter;
@@ -19,6 +20,12 @@ class PetSitterTile extends StatelessWidget {
       title: Text(petSitter.username),
       subtitle: Text(petSitter.bio),
       trailing: Icon(Icons.chat),
+      onTap:(){
+        Navigator.of(context).pushNamed(
+          PetSitterProfilePage.routeName,
+          arguments: petSitter
+        );
+      }
     );
   }
 }
