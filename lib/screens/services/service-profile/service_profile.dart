@@ -1,10 +1,11 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/home_page.dart';
-import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/screens/services/add-edit-service/add-edit_service_page.dart';
+import 'package:pet_app/screens/services/my-services/my_services_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/services/services_service.dart';
@@ -43,7 +44,7 @@ class ServiceProfile extends StatelessWidget {
                               color: Color(0x86FCBA94),
                               child: ListTile(
                                 title: Text(
-                                  displayedService.category,
+                                  EnumToString.parse(displayedService.category),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300,
@@ -185,13 +186,13 @@ class ServiceProfile extends StatelessWidget {
     final ServicesService servicesService = services.get<ServicesService>();
     await servicesService.deleteService(serviceId);
     Navigator.pushNamedAndRemoveUntil(
-        context, MyPetsPage.routeName, ModalRoute.withName(HomePage.routeName));
+        context, MyServicesPage.routeName, ModalRoute.withName(HomePage.routeName));
   }
 
   AlertDialog confirmDeleteDialog(BuildContext context) {
     return AlertDialog(
       content: Text(
-        'Are you sure you want to get it out?',
+        'Are you sure you want to remove this service?',
       ),
       actions: <Widget>[
         FlatButton(

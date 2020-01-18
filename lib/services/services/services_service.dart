@@ -11,5 +11,5 @@ abstract class ServicesService {
 
   Future<List<Service>> getServicesForCategory(String category);
 
-  Future<List<Service>> getServicesForPetType(String petType);
+  Future<List<Service>> getServicesForSearch(String petType, String category);
 }

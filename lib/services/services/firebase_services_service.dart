@@ -61,11 +61,20 @@ class FirebaseServicesService extends ServicesService {
   }
 
   @override
-  Future<List<Service>> getServicesForPetType(String petType) async {
-    final querySnapshot = await _firestore
+  Future<List<Service>> getServicesForSearch(String petType, String category) async {
+    var querySnapshot;
+
+    if (category == "")
+      querySnapshot = await _firestore
         .collection("services")
         .where("pet_type", isEqualTo: petType)
         .getDocuments();
+    else
+      querySnapshot = await _firestore
+          .collection("services")
+          .where("pet_type", isEqualTo: petType)
+          .where("category", isEqualTo: category)
+          .getDocuments();
 
     final currentUserId = services
         .get<AuthService>()
