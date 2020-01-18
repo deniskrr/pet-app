@@ -39,13 +39,10 @@ class _AddEditServicePageState extends State<AddEditServicePage> {
                       .then((_) => Navigator.of(context).pop());
                 }
               },
+
             ),
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("Cancel"),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
