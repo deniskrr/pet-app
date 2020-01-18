@@ -33,7 +33,10 @@ class ChatTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(Icons.chat),
+          Icon(Icons.chat,
+              color: Theme.of(context).primaryColorLight
+//              color: Color(0xFFB9E5E4)
+          ),
         ],
       ),
       onTap: () {

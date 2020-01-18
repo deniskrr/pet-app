@@ -47,7 +47,7 @@ class ChatMessageWidget extends StatelessWidget {
                   if (!chatMessage.sentByMe)
                     Text(
                       correspondentName,
-                      style: TextStyle(color: Colors.black45),
+                      style: TextStyle(color: Theme.of(context).backgroundColor),
                     ),
                   Text(
                     chatMessage.message,
