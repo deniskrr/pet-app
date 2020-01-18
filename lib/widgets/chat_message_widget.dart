@@ -21,7 +21,8 @@ class ChatMessageWidget extends StatelessWidget {
               flex: 1,
               child: Container(),
             ), // make the message half the size of the row
-          Expanded(
+          Flexible(
+            fit: FlexFit.loose,
             flex: 1,
             child: Container(
               margin: EdgeInsets.fromLTRB(
@@ -35,9 +36,9 @@ class ChatMessageWidget extends StatelessWidget {
                 vertical: 10,
               ),
               decoration: BoxDecoration(
-                  color: chatMessage.sentByMe ?
-                  Theme.of(context).primaryColor :
-                  Colors.black26,
+                  color: chatMessage.sentByMe
+                      ? Theme.of(context).primaryColor
+                      : Colors.black26,
                   borderRadius: BorderRadius.circular(15)),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -47,7 +48,6 @@ class ChatMessageWidget extends StatelessWidget {
                     Text(
                       correspondentName,
                       style: TextStyle(color: Theme.of(context).backgroundColor),
-//                      style: TextStyle(color: Color(0xFFB4F7C0)),
                     ),
                   Text(
                     chatMessage.message,
