@@ -41,9 +41,8 @@ class _AddEditServicePageState extends State<AddEditServicePage> {
               },
 
             ),
-          ),
         ],
-      ),
+      ),),
     );
   }
 }

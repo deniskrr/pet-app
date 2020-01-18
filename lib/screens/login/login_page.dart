@@ -20,47 +20,51 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          new Container(
-            height: 170.0,
-            width: 170.0,
-            margin: const EdgeInsets.all(30),
-            decoration: new BoxDecoration(
-              image: DecorationImage(
-                image: new AssetImage('assets/logo.png'),
-                fit: BoxFit.fill,
+        body: ListView(
+          children: <Widget>[
+            Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              new Container(
+                height: 170.0,
+                width: 170.0,
+                margin: const EdgeInsets.all(30),
+                decoration: new BoxDecoration(
+                  image: DecorationImage(
+                    image: new AssetImage('assets/logo.png'),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.rectangle,
+                ),
               ),
-              shape: BoxShape.rectangle,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
+              Container(
+                decoration: BoxDecoration(
 //              color: Color(0xFFF4EDE2),
-              borderRadius: const BorderRadius.all(const Radius.circular(20)),
-            ),
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                LoginForm(loginHandler: (email, password) async {
-                  _authService
-                      .signIn(email, password)
-                      .then((value) => Navigator.of(context)
-                          .pushReplacementNamed(HomePage.routeName))
-                      .catchError((error, stackTrace) {
-                    AppDialogs.showAlertDialog(context, "Login failed",
-                        ErrorMessages.getErrorMessage(error));
-                  });
-                }),
-                GestureDetector(
-                  onTap: () =>
-                      Navigator.of(context).pushReplacementNamed("/register"),
-                  child: Text("Don't have an account?"),
-                )
-              ],
-            ),
-          ),
-        ])));
+                  borderRadius: const BorderRadius.all(const Radius.circular(20)),
+                ),
+                margin: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    LoginForm(loginHandler: (email, password) async {
+                      _authService
+                          .signIn(email, password)
+                          .then((value) => Navigator.of(context)
+                              .pushReplacementNamed(HomePage.routeName))
+                          .catchError((error, stackTrace) {
+                        AppDialogs.showAlertDialog(context, "Login failed",
+                            ErrorMessages.getErrorMessage(error));
+                      });
+                    }),
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.of(context).pushReplacementNamed("/register"),
+                      child: Text("Don't have an account?"),
+                    )
+                  ],
+                ),
+              ),
+            ])),
+          ],
+        ));
   }
 }
