@@ -98,10 +98,10 @@ class PetProfile extends StatelessWidget {
           icon: Icon(Icons.pets),
           onPressed: () {},
         ),
-      Padding(
-          padding: const EdgeInsets.all(7),
-          child: Container(
-              alignment: Alignment.center, child: petOwnerProfilePicture()))
+//      Padding(
+//          padding: const EdgeInsets.all(7),
+//          child: Container(
+//              alignment: Alignment.center, child: petOwnerProfilePicture()))
     ];
   }
 
