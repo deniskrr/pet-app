@@ -144,7 +144,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                   if (_formKey.currentState.validate()) {
                     addOrEditPet(petObject);
                   } else
-                    AppDialogs.showAlertDialog(context, "Operation failed",
+                    AppDialogs.showAlertDialog(context, "Oops!",
                         "Please make sure that the inputs are in the correct format!");
                 },
                 child:

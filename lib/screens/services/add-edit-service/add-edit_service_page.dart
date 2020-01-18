@@ -21,23 +21,27 @@ class _AddEditServicePageState extends State<AddEditServicePage> {
         title: Text("Add Service"),
       ),
       resizeToAvoidBottomPadding: false,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            AddEditServiceForm(
-              addServiceHandler: (Service newService) async {
-                _servicesService
-                    .addService(newService)
-                    .then((value) => Navigator.of(context).pop());
-              },
+      body: ListView(
+        children: <Widget>[
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                AddEditServiceForm(
+                  addServiceHandler: (Service newService) async {
+                    _servicesService
+                        .addService(newService)
+                        .then((value) => Navigator.of(context).pop());
+                  },
+                ),
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("Cancel"),
+                )
+              ],
             ),
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("Cancel"),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
