@@ -68,7 +68,7 @@ class PetSitterProfilePage extends StatelessWidget {
               height: 20,
             ),
             RaisedButton(
-              onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName, arguments: petSitter.uid),
+              onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName, arguments: petSitter),
               child: Text("Chat"),
             ),
             SizedBox(

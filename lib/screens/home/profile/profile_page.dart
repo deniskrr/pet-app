@@ -24,6 +24,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My Account"),
+      ),
       body: FutureBuilder(
         future: _userService.getUser(_authService.currentUserUid),
         builder: (context, snapshot) {
@@ -44,31 +47,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Text(
                     currentUser.username,
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24,
+                      color: Colors.black87,
+                    ),
                   ),
                   SizedBox(
-                    height: 60,
-                  ),
-                  SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   RaisedButton(
-                    child: Text("Edit Info"),
+                    child: Text("Edit Profile"),
                     onPressed: () =>
                         Navigator.of(context).pushNamed(
                             EditProfilePage.routeName,
                             arguments: currentUser),
                   ),
-//                  SizedBox(
-//                    height: 10,
-//                  ),
-//                  RaisedButton(
-//                    child: Text("Add Pet"),
-//                    onPressed: () {
-//                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
-//                          arguments: Pet.empty());
-//                    },
-//                  ),
                   SizedBox(
                     height: 20,
                   ),

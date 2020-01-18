@@ -17,14 +17,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       resizeToAvoidBottomPadding: false,
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
           children: <Widget>[
-            EditProfileForm(),
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("Cancel"),
-            )
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                EditProfileForm(),
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("Cancel"),
+                )
+              ],
+            ),
+
           ],
         ),
       ),
