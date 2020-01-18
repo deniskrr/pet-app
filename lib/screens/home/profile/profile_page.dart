@@ -33,55 +33,64 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             final User currentUser = snapshot.data;
             return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: ListView(
                 children: <Widget>[
-                  ProfilePicture(
-                    image: null,
-                    pictureUrl: currentUser.pictureUrl,
-                    placeholderImageUri: "assets/blank_profile.png",
-                    imageGetter: null
+                  Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ProfilePicture(
+                        image: null,
+                        pictureUrl: currentUser.pictureUrl,
+                        placeholderImageUri: "assets/blank_profile.png",
+                        imageGetter: null
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        currentUser.username,
+                        style: TextStyle(fontSize: 24,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      RaisedButton(
+                        child: Text("Edit Profile"),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(
+                                EditProfilePage.routeName,
+                                arguments: currentUser),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      RaisedButton(
+                        child: Text("My Pets"),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(MyPetsPage.routeName);
+                        },
+                      ),
+                      if (currentUser.isServiceProvider) ServiceProviderWidget(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      RaisedButton(
+                        child: Text("Log out"),
+                        onPressed: () {
+                          _authService.signOut();
+                          Navigator.of(context)
+                              .pushReplacementNamed(LoginPage.routeName);
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    currentUser.username,
-                    style: TextStyle(fontSize: 24,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  RaisedButton(
-                    child: Text("Edit Profile"),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(
-                            EditProfilePage.routeName,
-                            arguments: currentUser),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  RaisedButton(
-                    child: Text("My Pets"),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(MyPetsPage.routeName);
-                    },
-                  ),
-                  if (currentUser.isServiceProvider) ServiceProviderWidget(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  RaisedButton(
-                    child: Text("Log out"),
-                    onPressed: () {
-                      _authService.signOut();
-                      Navigator.of(context)
-                          .pushReplacementNamed(LoginPage.routeName);
-                    },
-                  )
                 ],
               ),
             );
