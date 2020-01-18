@@ -12,8 +12,8 @@ class EmptyListContainer extends StatelessWidget {
               child: Padding(
                   padding: EdgeInsets.all(4.0),
                   child: Text(
-                    "Your list is empty now!",
-                    style: TextStyle(fontSize: 16),
+                    "Your list is empty!",
+                    style: TextStyle(fontSize: 17),
                   ))),
           SizedBox(
             height: 10,
