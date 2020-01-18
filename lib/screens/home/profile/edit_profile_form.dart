@@ -9,7 +9,6 @@ import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
 import 'package:pet_app/services/user/user_service.dart';
 import 'package:pet_app/widgets/input_field.dart';
-import 'package:pet_app/widgets/labeled_checkbox.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
 class EditProfileForm extends StatefulWidget {
@@ -18,8 +17,12 @@ class EditProfileForm extends StatefulWidget {
 }
 
 class _EditProfileFormState extends State<EditProfileForm> {
+  User currentUser;
+  bool isInitialized = false;
+
   final StorageService _storageService = services.get<StorageService>();
   final UserService _userService = services.get<UserService>();
+
   File _image;
   final _formKey = GlobalKey<FormState>();
   final biographyController = TextEditingController();
@@ -36,6 +39,12 @@ class _EditProfileFormState extends State<EditProfileForm> {
     }
   }
 
+  void initProfileForm() {
+    currentUser = ModalRoute.of(context).settings.arguments;
+    this.biographyController.text = currentUser.bio;
+    this.locationController.text = currentUser.location;
+  }
+
   @override
   void dispose() {
     biographyController.dispose();
@@ -45,14 +54,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    User currentUser = ModalRoute.of(context).settings.arguments;
-
-    if (currentUser.bio.isNotEmpty) {
-      biographyController.text = currentUser.bio;
+    if (isInitialized == false) {
+      initProfileForm();
+      isInitialized = true;
     }
-
-    if (currentUser.location.isNotEmpty )
-      locationController.text = currentUser.location;
 
     return Form(
       key: _formKey,
@@ -79,23 +84,33 @@ class _EditProfileFormState extends State<EditProfileForm> {
             SizedBox(
               height: 30,
             ),
-            LabeledCheckbox(
-              label: "Are you a petsitter?",
-              value: currentUser.isPetSitter,
-              valueHandler: (newValue) {
-                setState(() {
-                  currentUser.isPetSitter = newValue;
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Available for petsitting'),
+                  Checkbox(
+                    value: currentUser.isPetSitter,
+                    onChanged: (newVal){
+                      setState(() {
+                        currentUser.isPetSitter = newVal;
+                  });
+                  },
+                  )
+                ],
             ),
-            LabeledCheckbox(
-              label: "Do you provide services for pets?",
-              value: currentUser.isServiceProvider,
-              valueHandler: (newValue) {
-                setState(() {
-                  currentUser.isServiceProvider = newValue;
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Provide services for pets'),
+                Checkbox(
+                  value: currentUser.isServiceProvider,
+                  onChanged: (newVal) {
+                    setState(() {
+                      currentUser.isServiceProvider = newVal;
+                    });
+                  },
+                )
+              ]
             ),
             SizedBox(
               height: 20,
