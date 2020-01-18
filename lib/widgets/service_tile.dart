@@ -16,7 +16,7 @@ class ServiceTile extends StatelessWidget {
         placeHolder: AssetImage("assets/blank_services.png"),
       ),
       title: Text(service.name),
-      subtitle: Text(service.category),
+      subtitle: Text(service.serviceCategory),
       trailing: Icon(Icons.chat,
         color: Theme.of(context).primaryColorLight,
       ),

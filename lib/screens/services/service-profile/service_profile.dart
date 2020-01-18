@@ -1,8 +1,8 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/screens/home/chat/chat_page.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/services/add-edit-service/add-edit_service_page.dart';
 import 'package:pet_app/screens/services/my-services/my_services_page.dart';
@@ -27,7 +27,7 @@ class ServiceProfile extends StatelessWidget {
           title: Text(displayedService.name),
           actions: currentUserId == displayedService.ownerId
               ? actionsForOwner(context)
-              : actionsForVisitor(),
+              : actionsForVisitor(context),
         ),
         body: SafeArea(
             child: Container(
@@ -82,16 +82,18 @@ class ServiceProfile extends StatelessWidget {
     );
   }
 
-  actionsForVisitor() {
+  actionsForVisitor(BuildContext context) {
     return <Widget>[
       IconButton(
         padding: EdgeInsets.all(20),
         icon: Icon(Icons.chat, color: Colors.white),
-        onPressed: () {
-          // chat with owner of pet service
-        },
+        onPressed: () => startChat(context),
       )
     ];
+  }
+
+  startChat(BuildContext context) async {
+    Navigator.of(context).pushNamed(ChatPage.routeName, arguments: await services.get<UserService>().getUser(displayedService.ownerId));
   }
 
   actionsForOwner(BuildContext context) {
