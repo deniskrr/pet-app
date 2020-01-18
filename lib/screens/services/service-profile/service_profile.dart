@@ -35,63 +35,45 @@ class ServiceProfile extends StatelessWidget {
                   Stack(
                     children: <Widget>[
                       displayPetPicture(context),
-                      backgroundAlignForImage(Colors.blueGrey, Alignment.topCenter,
-                          Alignment.bottomCenter, 100, 1),
-                      backgroundAlignForImage(Colors.blueGrey, Alignment.bottomCenter,
-                          Alignment.topCenter, 300, 8),
                       Positioned(
                           bottom: 0,
                           child: Container(
                             width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
-                                  child: Text(
-                                    displayedService.category,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 22),
-                                  ),
+                            child: Card(
+                              color: Color(0x86FCBA94),
+                              child: ListTile(
+                                title: Text(
+                                  displayedService.category,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 22),
                                 ),
-                              ],
+                              ),
                             ),
                           )),
                     ],
                   ),
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                        )
-                      ]),
-                      child: Text(
-                        "Address: " + displayedService.address,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20),
-                      )
-                  ),
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueGrey,
-                        )
-                      ]),
-                      child: Text(
+                  ListTile(
+                      title: Text(
                           displayedService.description,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 20
                           ),
                       ),
-                    )
+                    ),
+                  ListTile(
+                    leading: Icon(Icons.location_on),
+                      title: Text(
+                        "Address: " + displayedService.address,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 18),
+                      )
+                  )
                 ],
               ),
             )
@@ -166,11 +148,11 @@ class ServiceProfile extends StatelessWidget {
   FadeInImage displayPetPicture(BuildContext context) {
     return FadeInImage(
         image: displayedService.pictureUrl.isEmpty
-            ? AssetImage("assets/blank_pet_profile.png")
+            ? AssetImage("assets/blank_services.png")
             : NetworkImage(displayedService.pictureUrl),
         height: 300,
         width: MediaQuery.of(context).size.width,
-        placeholder: AssetImage('assets/blank_pet_profile.jpg'));
+        placeholder: AssetImage('assets/blank_services.png'));
   }
 
   petOwnerProfilePicture() {

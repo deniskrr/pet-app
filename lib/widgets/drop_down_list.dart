@@ -1,3 +1,4 @@
+
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet_type.dart';
@@ -26,6 +27,7 @@ import 'package:pet_app/model/pet_type.dart';
                   value: EnumToString.parse(classType),
                   child: Text(EnumToString.parse(classType)));
               }).toList(),
+          isExpanded: true,
           onChanged: (String value) {
             setState(() {
               currentType = value;

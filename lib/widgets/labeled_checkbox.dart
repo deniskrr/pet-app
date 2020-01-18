@@ -15,7 +15,7 @@ class LabeledCheckbox extends StatelessWidget {
       children: <Widget>[
         Text(
           label,
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16.0),
         ),
         Checkbox(
           value: value,

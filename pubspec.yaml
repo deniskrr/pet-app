@@ -35,6 +35,7 @@ dependencies:
   intro_slider: ^2.2.8
   rflutter_alert: ^1.0.3
   enum_to_string: ^1.0.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -56,6 +57,13 @@ flutter:
     - assets/
     - assets/intro_images/
 
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+    - family: NanumGothic
+      fonts:
+        - asset: assets/fonts/NanumGothic-Regular.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

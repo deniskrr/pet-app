@@ -37,17 +37,20 @@ class _ProfilePageState extends State<ProfilePage> {
                     image: null,
                     pictureUrl: currentUser.pictureUrl,
                     placeholderImageUri: "assets/blank_profile.png",
-                    imageGetter: null,
+                    imageGetter: null
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Text(
                     currentUser.username,
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 60,
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   RaisedButton(
                     child: Text("Edit Info"),
@@ -56,8 +59,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             EditProfilePage.routeName,
                             arguments: currentUser),
                   ),
+//                  SizedBox(
+//                    height: 10,
+//                  ),
+//                  RaisedButton(
+//                    child: Text("Add Pet"),
+//                    onPressed: () {
+//                      Navigator.of(context).pushNamed(AddEditPetPage.routeName,
+//                          arguments: Pet.empty());
+//                    },
+//                  ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   RaisedButton(
                     child: Text("My Pets"),
@@ -67,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   if (currentUser.isServiceProvider) ServiceProviderWidget(),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   RaisedButton(
                     child: Text("Log out"),

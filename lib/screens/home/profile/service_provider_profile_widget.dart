@@ -12,7 +12,7 @@ class ServiceProviderWidget extends StatelessWidget {
         return Column(
           children: <Widget>[
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             RaisedButton(
               child: Text("Add Service"),
@@ -22,7 +22,7 @@ class ServiceProviderWidget extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             RaisedButton(
               child: Text("My Services"),
