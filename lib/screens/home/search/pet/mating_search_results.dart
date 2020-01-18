@@ -13,7 +13,7 @@ class MatingSearchResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _petsService.getMatingCompanionsForType(forPet.type),
+      future: _petsService.getMatingCompanionsForType(forPet.petType),
       // ignore: missing_return
       builder: (context, snapshot) {
         if (snapshot.hasData) {
