@@ -67,7 +67,7 @@ class _ServiceSearchPageState extends State<ServiceSearchPage> {
                   height: 16,
                 ),
                 if (_selectedPet != null)
-                  ServicesSearchResults(forPet: _selectedPet, forCategory: _selectedCategory)
+                  ServicesSearchResults(forPet: _selectedPet, forCategory: _selectedCategory),
               ],
             ),
           );

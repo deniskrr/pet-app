@@ -1,4 +1,3 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/service.dart';
 import 'package:pet_app/screens/services/service-profile/service_profile.dart';
@@ -19,7 +18,7 @@ class ServiceTile extends StatelessWidget {
         service.pictureUrl,
       ),
       title: Text(service.name),
-      subtitle: Text(EnumToString.parse(service.category)),
+      subtitle: Text(service.serviceCategory),
       onTap: () {
         Navigator.of(context)
             .pushNamed(ServiceProfile.routeName, arguments: service);

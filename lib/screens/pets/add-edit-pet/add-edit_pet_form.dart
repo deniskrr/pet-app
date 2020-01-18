@@ -99,6 +99,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
             DropDownList(
               onValueSelected: typeController,
               hintText: petType,
+              givenEnumClass: "PetType",
             ),
             InputField(
               controller: biographyController,

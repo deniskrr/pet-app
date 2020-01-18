@@ -44,7 +44,7 @@ class ServiceProfile extends StatelessWidget {
                               color: Color(0x86FCBA94),
                               child: ListTile(
                                 title: Text(
-                                  EnumToString.parse(displayedService.category),
+                                  displayedService.serviceCategory,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300,

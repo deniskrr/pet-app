@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/service.dart';
@@ -16,8 +17,7 @@ class ServicesSearchResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _serviceService.getServicesForSearch(forPet.petType, forCategory.toString()),
-      // ignore: missing_return
+      future: _serviceService.getServicesForSearch(forPet.petType, EnumToString.parse(forCategory)),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Service> services = snapshot.data;

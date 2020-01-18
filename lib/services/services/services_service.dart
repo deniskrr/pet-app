@@ -9,7 +9,5 @@ abstract class ServicesService {
 
   Future<List<Service>> getServicesForOwnerId(String ownerId);
 
-  Future<List<Service>> getServicesForCategory(String category);
-
   Future<List<Service>> getServicesForSearch(String petType, String category);
 }

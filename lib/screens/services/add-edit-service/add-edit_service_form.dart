@@ -113,6 +113,7 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
             DropDownList(
               onValueSelected: typeController,
               hintText: petType,
+              givenEnumClass: "PetType",
             ),
             SizedBox(
               height: 10,
@@ -120,6 +121,7 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
             DropDownList(
               onValueSelected: categoryController,
               hintText: serviceCategory,
+              givenEnumClass: "ServiceCategory",
             ),
             InputField(
               controller: descriptionController,

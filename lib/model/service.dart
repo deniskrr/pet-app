@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pet_app/model/pet_type.dart';
 import 'package:pet_app/model/service_category.dart';
 
@@ -16,7 +17,8 @@ class Service extends Equatable {
 
   Service(this.id, this.name, this.ownerId, this.category, this.petType)
       : pictureUrl = "",
-        description = "";
+        description = "",
+        address = "";
 
   Service.empty()
       : id = "",
@@ -28,6 +30,24 @@ class Service extends Equatable {
         address = "",
         petType = PetType.NotDefined;
 
+  Service.keyVal({@required this.id,
+    @required this.ownerId,
+    @required this.name,
+    @required this.petType,
+    @required this.category})
+      : description = "",
+        address = "",
+        pictureUrl = "";
+
+  Service.keyValComplete({@required this.id,
+    @required this.ownerId,
+    @required this.name,
+    @required this.description,
+    @required this.pictureUrl,
+    @required this.address,
+    @required this.category,
+    @required this.petType});
+
   Map<String, dynamic> toJson() =>
       {
         'address': address,
@@ -35,9 +55,9 @@ class Service extends Equatable {
         'id': id,
         'picture_url': pictureUrl,
         'description': description,
-        'category': category,
+        'category': serviceCategory,
         'owner_id': ownerId,
-        'pet_type': petType
+        'pet_type': servicePetType
       };
 
   Service.fromJson(Map<String, dynamic> json)
