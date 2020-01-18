@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EmptyListContainer extends StatelessWidget {
-  const EmptyListContainer({Key key}) : super(key: key);
+class EmptyChatOverview extends StatelessWidget {
+  const EmptyChatOverview({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class EmptyListContainer extends StatelessWidget {
               child: Padding(
                   padding: EdgeInsets.all(4.0),
                   child: Text(
-                    "Your list is empty!",
+                    "You haven't talked to anyone yet!",
                     style: TextStyle(fontSize: 17),
                   ))),
           SizedBox(
@@ -20,12 +20,13 @@ class EmptyListContainer extends StatelessWidget {
           ),
           Align(
               child: Padding(
-            padding: EdgeInsets.all(4.0),
-            child: Text(
-              "Click + button to add new items!",
-              style: TextStyle(fontSize: 16),
-            ),
-          ))
+                padding: EdgeInsets.all(4.0),
+                child: Text(
+                  "Connect with pet sitters or pet service owners by searching for them on the search page",
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ))
         ]);
   }
 }
