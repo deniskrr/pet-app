@@ -5,7 +5,6 @@ import 'package:pet_app/services/chat/chat_service.dart';
 import 'package:pet_app/services/services.dart';
 
 class ChatPage extends StatefulWidget {
-
   static final String routeName = '/chat';
 
   //ChatPage({Key key, @required this.recipientUid}) : super(key: key);
@@ -19,12 +18,14 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    String recipientUid = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-    return new Scaffold(
-        body: Column(
+    String recipientUid = ModalRoute.of(context).settings.arguments;
+    return new SafeArea(
+        minimum: const EdgeInsets.all(18.0),
+        left: false,
+        right: false,
+        bottom: false,
+        child: Scaffold(
+            body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             ChatMessageList(
@@ -35,6 +36,6 @@ class _ChatPageState extends State<ChatPage> {
               sendMessageFunction: _chatService.sendMessage,
             )
           ],
-        ));
+        )));
   }
 }
