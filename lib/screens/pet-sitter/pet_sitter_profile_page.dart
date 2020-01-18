@@ -22,19 +22,50 @@ class PetSitterProfilePage extends StatelessWidget {
           children: <Widget>[
             Column(children: <Widget>[
               ProfilePicture(
+                image: null,
                 pictureUrl: petSitter.pictureUrl,
-              ),
-              SizedBox(
-                height: 50,
+                placeholderImageUri: "assets/blank_profile.png",
               ),
               Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(petSitter.bio),
-              ),
-              SizedBox(
-                height: 50,
-              ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(petSitter.username,
+                        style: TextStyle(fontSize: 16)),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                          title: Text(
+                        petSitter.bio,
+                        style: TextStyle(fontSize: 17),
+                        textAlign: TextAlign.start,
+                      )),
+                    ),
+                  )),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ListTile(
+                        leading: Icon(Icons.accessibility_new),
+                        title: Text("I am available for pet sitting!"),
+                      ))),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ListTile(
+                        leading: Icon(Icons.chat),
+                        title: Text("Write me a message!"),
+                      )))
             ]),
+            SizedBox(
+              height: 20,
+            ),
             RaisedButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text("Chat"),
