@@ -22,12 +22,11 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFFCBA94),
         body: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
           new Container(
-            height: 170.0,
-            width: 170.0,
+            height: 140.0,
+            width: 140.0,
             margin: const EdgeInsets.all(30),
             decoration: new BoxDecoration(
               image: DecorationImage(
@@ -39,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFFCAA7B),
+//              color: Color(0xFFF4EDE9),
               borderRadius: const BorderRadius.all(const Radius.circular(20)),
             ),
             margin: const EdgeInsets.all(20),

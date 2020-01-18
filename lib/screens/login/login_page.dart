@@ -20,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFFCBA94),
         body: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
           new Container(
@@ -37,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFFFCAA7B),
+//              color: Color(0xFFF4EDE2),
               borderRadius: const BorderRadius.all(const Radius.circular(20)),
             ),
             margin: const EdgeInsets.all(20),
