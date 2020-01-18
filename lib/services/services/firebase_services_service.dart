@@ -44,11 +44,18 @@ class FirebaseServicesService extends ServicesService {
   }
 
   @override
-  Future<List<Service>> getServicesForCategory(String category) async {
+  Future<List<Service>> getServicesForSearch(String petType, String category) async {
+    if (category == null)
+      return getServicesForPetType(petType);
+    else
+      return getServicesForPetTypeAndCategory(petType, category);
+  }
+
+  Future<List<Service>> getServicesForPetType(String petType) async {
     final querySnapshot = await _firestore
-        .collection("services")
-        .where("category", isEqualTo: category)
-        .getDocuments();
+          .collection("services")
+          .where("pet_type", isEqualTo: petType)
+          .getDocuments();
 
     final currentUserId = services
         .get<AuthService>()
@@ -60,11 +67,11 @@ class FirebaseServicesService extends ServicesService {
         .toList();
   }
 
-  @override
-  Future<List<Service>> getServicesForPetType(String petType) async {
+  Future<List<Service>> getServicesForPetTypeAndCategory(String petType, String category) async {
     final querySnapshot = await _firestore
         .collection("services")
         .where("pet_type", isEqualTo: petType)
+        .where("category", isEqualTo: category)
         .getDocuments();
 
     final currentUserId = services

@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_app/helpers/app_dialogs.dart';
+import 'package:pet_app/model/pet_type.dart';
 import 'package:pet_app/model/service.dart';
+import 'package:pet_app/model/service_category.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/storage/storage_service.dart';
-import 'package:pet_app/services/services/services_service.dart';
+import 'package:pet_app/widgets/drop_down_list.dart';
 import 'package:pet_app/widgets/input_field.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
@@ -22,6 +24,9 @@ class AddEditServiceForm extends StatefulWidget {
 }
 
 class _AddServiceFormState extends State<AddEditServiceForm> {
+  Service serviceObject;
+  bool isInitialized = false;
+
   final StorageService _storageService = services.get<StorageService>();
   final AuthService _authService = services.get<AuthService>();
 
@@ -29,10 +34,37 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
 
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final categoryController = TextEditingController();
   final descriptionController = TextEditingController();
   final addressController = TextEditingController();
-  final petTypeController = TextEditingController();
+
+  static String petType;
+  static String serviceCategory;
+
+  final Function(String) typeController = (String newType) {
+    petType = newType;
+  };
+
+  final Function(String) categoryController = (String newCategory) {
+    serviceCategory = newCategory;
+  };
+
+  void initServiceForm() {
+    serviceObject = ModalRoute.of(context).settings.arguments;
+    this.nameController.text = serviceObject.name;
+    this.descriptionController.text = serviceObject.description;
+    this.addressController.text = serviceObject.address;
+
+    petType = "Animal Type";
+    serviceCategory = "Service Category";
+
+    if (serviceObject.petType != PetType.NotDefined) {
+      petType = serviceObject.servicePetType;
+    }
+
+    if (serviceObject.category != ServiceCategory.NotDefined) {
+      serviceCategory = serviceObject.serviceCategory;
+    }
+  }
 
   Future getImage() async {
     final imageSource = await AppDialogs.chooseImageSource(context);
@@ -48,19 +80,17 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
   @override
   void dispose() {
     nameController.dispose();
-    categoryController.dispose();
     descriptionController.dispose();
     addressController.dispose();
-    petTypeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Service service = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    if (isInitialized == false) {
+      initServiceForm();
+      isInitialized = true;
+    }
 
     return Form(
       key: _formKey,
@@ -70,16 +100,28 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
           children: <Widget>[
             ProfilePicture(
                 image: _image,
-                pictureUrl: service.pictureUrl,
+                pictureUrl: serviceObject.pictureUrl,
                 placeholderImageUri: "assets/blank_services.png",
                 imageGetter: getImage),
             InputField(
               controller: nameController,
               hintText: "Name",
             ),
-            InputField(
-              controller: categoryController,
-              hintText: "Category e.g. 'Saloon', 'Clinic'",
+            SizedBox(
+              height: 10,
+            ),
+            DropDownList(
+              onValueSelected: typeController,
+              hintText: petType,
+              givenEnumClass: "PetType",
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            DropDownList(
+              onValueSelected: categoryController,
+              hintText: serviceCategory,
+              givenEnumClass: "ServiceCategory",
             ),
             InputField(
               controller: descriptionController,
@@ -89,16 +131,12 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
               controller: addressController,
               hintText: "Address",
             ),
-            InputField(
-              controller: petTypeController,
-              hintText: "Animal Type e.g. 'Dog'",
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    addService(service);
+                    addService(serviceObject);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please, make sure that the inputs are in the correct format!");
@@ -115,10 +153,10 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
   void addService(Service serviceObject) async {
     serviceObject.ownerId = _authService.currentUserUid;
     serviceObject.name = nameController.text;
-    serviceObject.category = categoryController.text;
     serviceObject.description = descriptionController.text;
     serviceObject.address = addressController.text;
-    serviceObject.petType = petTypeController.text;
+    serviceObject.servicePetType = petType;
+    serviceObject.serviceCategory = serviceCategory;
 
     if (_image != null)
       await _storageService.uploadPhoto(_image).then((pictureUrl) {
