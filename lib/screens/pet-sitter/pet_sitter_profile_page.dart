@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/screens/home/chat/chat_page.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
 class PetSitterProfilePage extends StatelessWidget {
@@ -67,7 +68,7 @@ class PetSitterProfilePage extends StatelessWidget {
               height: 20,
             ),
             RaisedButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName, arguments: petSitter.uid),
               child: Text("Chat"),
             ),
             SizedBox(

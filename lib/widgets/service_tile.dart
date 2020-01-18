@@ -12,7 +12,7 @@ class ServiceTile extends StatelessWidget {
     return ListTile(
       leading: service.pictureUrl.isEmpty
           ? Image.asset(
-        "assets/blank_pet_profile.png",
+        "assets/blank_services.png",
       )
           : Image.network(
         service.pictureUrl,

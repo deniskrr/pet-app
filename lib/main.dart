@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/screens/home/chat/chat_page.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/home/profile/edit_profile_page.dart';
 import 'package:pet_app/screens/home/splash_page.dart';
@@ -78,8 +79,8 @@ class MyApp extends StatelessWidget {
         SplashPage.routeName: (context) => SplashPage(),
         IntroPage.routeName: (context) => IntroPage(),
         PetSitterProfilePage.routeName: (context) => PetSitterProfilePage(),
-        PetProfile.routeName: (context) => PetProfile()
-
+        PetProfile.routeName: (context) => PetProfile(),
+        ChatPage.routeName: (context) => ChatPage()
       },
 
     );
