@@ -37,8 +37,9 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
   final biographyController = TextEditingController();
   final ageController = TextEditingController();
   static String petType;
-  final Function(String) typeController = (String newType){petType = newType;};
-
+  final Function(String) typeController = (String newType) {
+    petType = newType;
+  };
 
   void initPetForm() {
     petObject = ModalRoute.of(context).settings.arguments;
@@ -46,7 +47,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     this.biographyController.text = petObject.biography;
     this.ageController.text = petObject.age.toString();
     petType = "Animal type";
-    if(petObject.type != PetType.NotDefined){
+    if (petObject.type != PetType.NotDefined) {
       petType = petObject.petType;
     }
   }
@@ -77,30 +78,31 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
       isInitialized = true;
     }
 
-    var classType;
-        return Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              children: <Widget>[
-                ProfilePicture(
-                    image: _image,
-                    pictureUrl: petObject.pictureUrl,
-                    placeholderImageUri: "assets/blank_pet_profile.png",
-                    imageGetter: getImage),
-                InputField(
-                  controller: nameController,
-                  hintText: "Name",
-                ),
-              DropDownList(
-                onValueSelected: typeController,
-                hintText: petType,
-              )
-            ,
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: <Widget>[
+            ProfilePicture(
+                image: _image,
+                pictureUrl: petObject.pictureUrl,
+                placeholderImageUri: "assets/blank_pet_profile.png",
+                imageGetter: getImage),
+            InputField(
+              controller: nameController,
+              hintText: "Name",
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            DropDownList(
+              onValueSelected: typeController,
+              hintText: petType,
+            ),
             InputField(
               controller: biographyController,
-              hintText: "Biography",
+              hintText: "About",
             ),
             InputField(
               controller: ageController,
@@ -142,7 +144,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
                     addOrEditPet(petObject);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
-                        "Please, make sure that the inputs are in the correct format!");
+                        "Please make sure that the inputs are in the correct format!");
                 },
                 child:
                     petObject.id.isEmpty ? Text('Add Pet') : Text('Update Pet'),
@@ -163,7 +165,8 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
     try {
       petObject.age = int.parse(ageController.text);
     } catch (error) {
-      AppDialogs.showAlertDialog(context, "Invalid input", "The age must be a number!");
+      AppDialogs.showAlertDialog(
+          context, "Invalid input", "The age must be a number!");
       return;
     }
 
