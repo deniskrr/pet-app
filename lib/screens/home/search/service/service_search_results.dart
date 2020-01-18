@@ -5,6 +5,7 @@ import 'package:pet_app/model/service.dart';
 import 'package:pet_app/model/service_category.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/services/services_service.dart';
+import 'package:pet_app/widgets/no_match_search.dart';
 import 'package:pet_app/widgets/service_list_view.dart';
 
 class ServicesSearchResults extends StatelessWidget {
@@ -21,9 +22,12 @@ class ServicesSearchResults extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Service> services = snapshot.data;
-          return ServiceListView(
-            serviceList: services,
-          );
+          if (services.isNotEmpty)
+            return ServiceListView(
+              serviceList: services,
+            );
+          else
+            return NoMatchSearch();
         }
         return Center(
           child: CircularProgressIndicator(),

@@ -20,11 +20,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: ListView(
           children: <Widget>[
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 EditProfileForm(),
                 FlatButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text("Cancel"),
+                ),
+                SizedBox(
+                  height: 20,
                 )
               ],
             ),

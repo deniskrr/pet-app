@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/pet-sitter/pet_sitter_profile_page.dart';
+import 'package:pet_app/widgets/image_tile.dart';
 
 class PetSitterTile extends StatelessWidget {
   final User petSitter;
@@ -13,23 +12,20 @@ class PetSitterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: petSitter.pictureUrl.isEmpty
-            ? Image.asset(
-          "assets/blank_profile.png",
-        )
-            : Image.network(
-          petSitter.pictureUrl,
+        leading: ImageTile(
+          imageUrl: petSitter.pictureUrl,
+          placeHolder: AssetImage("assets/blank_profile.png"),
         ),
         title: Text(petSitter.username),
         subtitle: Text(petSitter.bio),
-        trailing: Icon(Icons.chat),
+        trailing: Icon(
+          Icons.chat,
+          color: Theme.of(context).primaryColorLight,
+        ),
         onTap: () {
-          Navigator.of(context).pushNamed(
-              PetSitterProfilePage.routeName,
-              arguments: petSitter
-          );
-        }
-    );
+          Navigator.of(context)
+              .pushNamed(PetSitterProfilePage.routeName, arguments: petSitter);
+        });
   }
 }
 

@@ -108,6 +108,7 @@ class _AddEditPetFormState extends State<AddEditPetForm> {
             InputField(
               controller: ageController,
               hintText: "Age",
+                keyboardType: TextInputType.number
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
