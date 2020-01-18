@@ -24,6 +24,9 @@ class _ChatPageState extends State<ChatPage> {
         .settings
         .arguments;
     return new Scaffold(
+      appBar: AppBar(
+        title: Text("Chat"),
+      ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
