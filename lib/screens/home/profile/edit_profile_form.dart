@@ -55,6 +55,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: <Widget>[
+            SizedBox(
+              height: 30,
+            ),
             ProfilePicture(
                 image: _image,
                 pictureUrl: currentUser.pictureUrl,
@@ -92,15 +95,13 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 });
               },
             ),
-            SizedBox(
-              height: 20,
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    updateInfo(currentUser, _image, biographyController.text, locationController.text);
+                    updateInfo(currentUser, _image, biographyController.text,
+                        locationController.text);
                   } else
                     AppDialogs.showAlertDialog(context, "Operation failed",
                         "Please make sure that the inputs are in the correct format!");
