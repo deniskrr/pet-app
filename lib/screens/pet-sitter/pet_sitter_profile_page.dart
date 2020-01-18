@@ -15,6 +15,7 @@ class PetSitterProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pet sitter'),
+        actions: actions(context)
       ),
       resizeToAvoidBottomPadding: false,
       body: Center(
@@ -67,20 +68,34 @@ class PetSitterProfilePage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            RaisedButton(
-              onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName, arguments: petSitter),
-              child: Text("Chat"),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("Cancel"),
-            )
+//            RaisedButton(
+//              onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName, arguments: petSitter),
+//              child: Text("Chat"),
+//            ),
+//            SizedBox(
+//              height: 10,
+//            ),
+//            FlatButton(
+//              onPressed: () => Navigator.of(context).pop(),
+//              child: Text("Cancel"),
+//            )
           ],
         ),
       ),
     );
+  }
+
+
+  actions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        padding: EdgeInsets.all(20),
+        icon: Icon(Icons.chat),
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamed(ChatPage.routeName, arguments: petSitter);
+        },
+      ),
+      ];
   }
 }
