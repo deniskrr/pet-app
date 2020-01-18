@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/chat/chat_page.dart';
+import 'package:pet_app/services/chat/chat_service.dart';
+import 'package:pet_app/services/services.dart';
 
 class ChatTile extends StatelessWidget {
   final User user;
@@ -9,19 +11,29 @@ class ChatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ChatService _chatService = services.get<ChatService>();
     return ListTile(
       leading: user.pictureUrl.isEmpty
           ? Image.asset(
-        "assets/blank_chat_profile.png",
-      )
+              "assets/blank_chat_profile.png",
+            )
           : Image.network(
-        user.pictureUrl,
-      ),
+              user.pictureUrl,
+            ),
       title: Text(user.username),
+      subtitle: FutureBuilder(
+        future: _chatService.getFirstMessage(user.uid),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text(snapshot.data);
+          }
+          return Text("");
+        },
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-           Icon(Icons.chat),
+          Icon(Icons.chat),
         ],
       ),
       onTap: () {

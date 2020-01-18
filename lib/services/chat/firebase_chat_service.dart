@@ -50,11 +50,41 @@ class FirebaseChatService extends ChatService {
   @override
   Future<List<User>> getChattedUsers() async {
     UserService _userService = services.get<UserService>();
-    User currentUser=await _userService.getUser(_authService.currentUserUid);
-    List<User> users=List();
-    for (var i=0; i<currentUser.conversations.length; i++) {
+    User currentUser = await _userService.getUser(_authService.currentUserUid);
+    List<User> users = List();
+    for (var i = 0; i < currentUser.conversations.length; i++) {
       users.add(await _userService.getUser(currentUser.conversations[i]));
     }
     return users;
+  }
+
+  @override
+  Future<String> getFirstMessage(String recipientUid) async {
+    final querySnapshot = await _firestore
+        .collection("chats")
+        .document(_authService.currentUserUid)
+        .collection(recipientUid)
+        .orderBy("date_sent", descending: true)
+        .getDocuments();
+
+    List<ChatMessage> messages = querySnapshot.documents
+        .map((document) => ChatMessage.fromDocumentSnapshot(document))
+        .toList();
+
+    String toReturn = "";
+    if (messages.length > 0) {
+      if (messages[0].sentByMe)
+        toReturn = "You: ";
+      else
+        toReturn = "Other: ";
+
+      if (messages[0].message.length > 20)
+        toReturn += messages[0].message.substring(0, 20) + "...";
+      else
+        toReturn += messages[0].message;
+
+      return toReturn;
+    }
+    return null;
   }
 }
