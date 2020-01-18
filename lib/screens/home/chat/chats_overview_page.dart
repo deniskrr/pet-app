@@ -17,7 +17,7 @@ class _ChatsOverviewPageState extends State<ChatsOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Pets"),
+        title: Text("Messages"),
       ),
       body: FutureBuilder(
         future: _chatService.getChattedUsers(),

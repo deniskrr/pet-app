@@ -11,7 +11,7 @@ import 'package:pet_app/services/user/user_service.dart';
 class FirebaseChatService extends ChatService {
   final Firestore _firestore = Firestore.instance;
   final AuthService _authService = services.get<AuthService>();
-
+  final UserService _userService = services.get<UserService>();
   @override
   void sendMessage(String toUid, String message) async {
     ChatMessage myChatMessage = ChatMessage(
@@ -23,6 +23,12 @@ class FirebaseChatService extends ChatService {
       message: message,
       sentByMe: false,
     );
+
+    User toUser=await _userService.getUser(toUid);
+    if(!toUser.conversations.contains(_authService.currentUserUid)){
+      toUser.conversations.add(_authService.currentUserUid);
+    }
+    _userService.updateUser(toUser);
 
     await _firestore
         .collection("chats")
@@ -49,7 +55,7 @@ class FirebaseChatService extends ChatService {
 
   @override
   Future<List<User>> getChattedUsers() async {
-    UserService _userService = services.get<UserService>();
+
     User currentUser = await _userService.getUser(_authService.currentUserUid);
     List<User> users = List();
     for (var i = 0; i < currentUser.conversations.length; i++) {
