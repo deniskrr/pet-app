@@ -3,6 +3,7 @@ import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/services/services_service.dart';
+import 'package:pet_app/widgets/no_match_search.dart';
 import 'package:pet_app/widgets/service_list_view.dart';
 
 class ServicesSearchResults extends StatelessWidget {
@@ -24,7 +25,7 @@ class ServicesSearchResults extends StatelessWidget {
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: NoMatchSearch(),
         );
       },
     );
