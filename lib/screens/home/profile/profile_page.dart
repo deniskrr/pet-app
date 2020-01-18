@@ -50,10 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
-                    height: 60,
-                  ),
-                  SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   RaisedButton(
                     child: Text("Edit Info"),

@@ -20,6 +20,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: ListView(
           children: <Widget>[
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 EditProfileForm(),
                 FlatButton(
