@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
           primaryColorBrightness: Brightness.dark,
           accentColor: Color(0xFFF27730),
           accentColorBrightness: Brightness.dark,
-          backgroundColor: Color(0xFFFFF7EF),
-          scaffoldBackgroundColor: Color(0xFFFFF7EF),
-          dialogBackgroundColor: Color(0xFFFFFCF9),
+          backgroundColor: Color(0xFFF4EDE6),
+          scaffoldBackgroundColor: Color(0xFFF4EBE1),
+          dialogBackgroundColor: Color(0xFFF4EBE1),
           disabledColor: Color(0xFFCECECC),
           errorColor: Color(0xFFFF5242),
 
