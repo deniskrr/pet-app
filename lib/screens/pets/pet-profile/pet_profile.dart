@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/pet.dart';
 import 'package:pet_app/model/user.dart';
+import 'package:pet_app/screens/home/chat/chat_page.dart';
 import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/pets/add-edit-pet/add-edit_pet_page.dart';
 import 'package:pet_app/screens/pets/my_pets/my_pets_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
+import 'package:pet_app/services/chat/chat_service.dart';
 import 'package:pet_app/services/pets/pets_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/user/user_service.dart';
@@ -14,6 +16,8 @@ import 'package:pet_app/services/user/user_service.dart';
 class PetProfile extends StatelessWidget {
   static final String routeName = '/pet-profile';
   Pet displayedPet;
+  final _chatService = services.get<ChatService>();
+  final _userService = services.get<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class PetProfile extends StatelessWidget {
           title: Text(displayedPet.name),
           actions: currentUserId == displayedPet.ownerId
               ? actionsForOwner(context)
-              : actionsForVisitor(),
+              : actionsForVisitor(context),
         ),
         body: SafeArea(
             child: ListView(
@@ -74,6 +78,9 @@ class PetProfile extends StatelessWidget {
 //                      displayDivider(),
                       displayPetSittingStatus(),
                       displayPetMatingStatus(context),
+//                      currentUserId != displayedPet.ownerId
+//                          ? buttonsForVisitor(context)
+//                          : buttonsForOwner(context)
                     ],
                   ),
                 )
@@ -82,18 +89,30 @@ class PetProfile extends StatelessWidget {
             )));
   }
 
-  actionsForVisitor() {
+  actionsForVisitor(BuildContext context)  {
     return <Widget>[
       if (displayedPet.forPetSitting)
         IconButton(
             padding: EdgeInsets.all(20),
             icon: Icon(Icons.accessibility),
-            onPressed: () {}),
+            onPressed: () async {
+
+              User owner = await _userService.getUser(displayedPet.ownerId);
+              _chatService.sendMessage(displayedPet.ownerId, "Hi, ${owner.username}! I'd like to pet sit ${displayedPet.name}.");
+              Navigator.of(context)
+                  .pushNamed(ChatPage.routeName, arguments: owner);
+            }),
       if (displayedPet.forPetMating)
         IconButton(
           padding: EdgeInsets.all(20),
           icon: Icon(Icons.pets),
-          onPressed: () {},
+          onPressed: () async {
+            User owner = await _userService.getUser(displayedPet.ownerId);
+            _chatService.sendMessage(displayedPet.ownerId, "Hi, ${owner.username}! I have a potential mate for ${displayedPet.name}.");
+            Navigator.of(context)
+                .pushNamed(ChatPage.routeName, arguments: owner);
+
+          },
         ),
 //      Padding(
 //          padding: const EdgeInsets.all(7),
@@ -123,6 +142,67 @@ class PetProfile extends StatelessWidget {
                 });
           }),
     ];
+  }
+
+  Row buttonsForVisitor(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        if (displayedPet.forPetSitting)
+          FlatButton(
+            onPressed: () => {},
+            padding: EdgeInsets.all(10),
+            color: Theme.of(context).buttonColor,
+            child: Text(
+              "Pet-sit",
+            ),
+          ),
+        if (displayedPet.forPetMating)
+          FlatButton(
+            onPressed: () => {},
+            padding: EdgeInsets.all(10),
+            color: Theme.of(context).buttonColor,
+            child: Text(
+              "Mating",
+            ),
+          )
+      ],
+    );
+  }
+
+  Row buttonsForOwner(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        FlatButton(
+          onPressed: () => {
+            Navigator.of(context)
+                .pushNamed(AddEditPetPage.routeName, arguments: displayedPet)
+          },
+          padding: EdgeInsets.all(10),
+          color: Theme.of(context).buttonColor,
+          child: Text(
+            "Edit",
+//            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        FlatButton(
+          onPressed: () => {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return confirmDeleteDialog(context);
+                })
+          },
+          padding: EdgeInsets.all(10),
+          color: Theme.of(context).buttonColor,
+          child: Text(
+            "Delete",
+//            style: TextStyle(color: Colors.white),
+          ),
+        )
+      ],
+    );
   }
 
   Align displayPetBiography() {

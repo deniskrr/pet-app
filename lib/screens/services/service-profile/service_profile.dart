@@ -7,6 +7,7 @@ import 'package:pet_app/screens/home/home_page.dart';
 import 'package:pet_app/screens/services/add-edit-service/add-edit_service_page.dart';
 import 'package:pet_app/screens/services/my-services/my_services_page.dart';
 import 'package:pet_app/services/auth/auth_service.dart';
+import 'package:pet_app/services/chat/chat_service.dart';
 import 'package:pet_app/services/services.dart';
 import 'package:pet_app/services/services/services_service.dart';
 import 'package:pet_app/services/user/user_service.dart';
@@ -14,6 +15,8 @@ import 'package:pet_app/services/user/user_service.dart';
 class ServiceProfile extends StatelessWidget {
   static final String routeName = '/service-profile';
   Service displayedService;
+  final _chatService = services.get<ChatService>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +96,9 @@ class ServiceProfile extends StatelessWidget {
   }
 
   startChat(BuildContext context) async {
-    Navigator.of(context).pushNamed(ChatPage.routeName, arguments: await services.get<UserService>().getUser(displayedService.ownerId));
+    final serviceOwner = await services.get<UserService>().getUser(displayedService.ownerId);
+    _chatService.sendMessage(serviceOwner.uid, "Hi, ${serviceOwner.username}! I'm interested in ${displayedService.name}.");
+    Navigator.of(context).pushNamed(ChatPage.routeName, arguments: serviceOwner);
   }
 
   actionsForOwner(BuildContext context) {
