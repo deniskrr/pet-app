@@ -15,7 +15,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: AppBar(
         title: Text("Edit info"),
       ),
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       body: Center(
         child: ListView(
           children: <Widget>[

@@ -22,27 +22,32 @@ class _AddEditServicePageState extends State<AddEditServicePage> {
       appBar: AppBar(
         title: Text("Add Service"),
       ),
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            AddEditServiceForm(
-              addServiceHandler: (Service serviceObject) async {
-                if (serviceObject.id.isEmpty) {
-                  _servicesService.addService(serviceObject).then((_) =>
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil(MyServicesPage.routeName, ModalRoute.withName(HomePage.routeName)));
-                } else {
-                  _servicesService
-                      .updateService(serviceObject)
-                      .then((_) => Navigator.of(context).pop());
-                }
-              },
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                AddEditServiceForm(
+                  addServiceHandler: (Service serviceObject) async {
+                    if (serviceObject.id.isEmpty) {
+                      _servicesService.addService(serviceObject).then((_) =>
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil(MyServicesPage.routeName, ModalRoute.withName(HomePage.routeName)));
+                    } else {
+                      _servicesService
+                          .updateService(serviceObject)
+                          .then((_) => Navigator.of(context).pop());
+                    }
+                  },
 
-            ),
-        ],
-      ),),
+                ),
+            ],
+      ),
+          ),
+        ),),
     );
   }
 }
