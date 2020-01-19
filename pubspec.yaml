@@ -35,6 +35,7 @@ dependencies:
   intro_slider: ^2.2.8
   rflutter_alert: ^1.0.3
   enum_to_string: ^1.0.8
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

@@ -77,7 +77,7 @@ class FirebaseChatService extends ChatService {
 
 
   @override
-  Future<String> getFirstMessage(String recipientUid) async {
+  Future<ChatMessage> getFirstMessage(String recipientUid) async {
     final querySnapshot = await _firestore
         .collection("chats")
         .document(_authService.currentUserUid)
@@ -89,21 +89,7 @@ class FirebaseChatService extends ChatService {
         .map((document) => ChatMessage.fromDocumentSnapshot(document))
         .toList();
 
-    String toReturn = "";
-    if (messages.length > 0) {
-      if (messages[0].sentByMe)
-        toReturn = "You: ";
-      else
-        toReturn = "Other: ";
-
-      if (messages[0].message.length > 20)
-        toReturn += messages[0].message.substring(0, 20) + "...";
-      else
-        toReturn += messages[0].message;
-
-      return toReturn;
-    }
-    return null;
+    return messages[0];
   }
 
 }
