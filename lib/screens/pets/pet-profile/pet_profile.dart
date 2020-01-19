@@ -74,9 +74,6 @@ class PetProfile extends StatelessWidget {
 //                      displayDivider(),
                       displayPetSittingStatus(),
                       displayPetMatingStatus(context),
-//                      currentUserId != displayedPet.ownerId
-//                          ? buttonsForVisitor(context)
-//                          : buttonsForOwner(context)
                     ],
                   ),
                 )
@@ -126,96 +123,6 @@ class PetProfile extends StatelessWidget {
                 });
           }),
     ];
-  }
-
-  Row buttonsForVisitor(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        if (displayedPet.forPetSitting)
-          FlatButton(
-            onPressed: () => {},
-            padding: EdgeInsets.all(10),
-            color: Theme.of(context).buttonColor,
-            child: Text(
-              "Pet-sit",
-            ),
-          ),
-        if (displayedPet.forPetMating)
-          FlatButton(
-            onPressed: () => {},
-            padding: EdgeInsets.all(10),
-            color: Theme.of(context).buttonColor,
-            child: Text(
-              "Mating",
-            ),
-          )
-      ],
-    );
-  }
-
-  Row buttonsForOwner(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        FlatButton(
-          onPressed: () => {
-            Navigator.of(context)
-                .pushNamed(AddEditPetPage.routeName, arguments: displayedPet)
-          },
-          padding: EdgeInsets.all(10),
-          color: Theme.of(context).buttonColor,
-          child: Text(
-            "Edit",
-//            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        FlatButton(
-          onPressed: () => {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return confirmDeleteDialog(context);
-                })
-          },
-          padding: EdgeInsets.all(10),
-          color: Theme.of(context).buttonColor,
-          child: Text(
-            "Delete",
-//            style: TextStyle(color: Colors.white),
-          ),
-        )
-      ],
-    );
-  }
-
-  backgroundAlignForImage(MaterialColor color, Alignment beginAlign,
-      Alignment endAlign, double height, double topPadding) {
-    return Align(
-      alignment: beginAlign,
-      child: Container(
-          height: height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: beginAlign,
-              end: endAlign,
-              colors: [
-                color.withOpacity(0.8),
-                color.withOpacity(0.7),
-                color.withOpacity(0.6),
-                color.withOpacity(0.5),
-                color.withOpacity(0.4),
-                color.withOpacity(0.3),
-                color.withOpacity(0.2),
-                color.withOpacity(0.1),
-                color.withOpacity(0.05),
-                color.withOpacity(0.025),
-              ],
-            ),
-          ),
-          child: Padding(
-              padding: EdgeInsets.only(top: topPadding), child: Container())),
-    );
   }
 
   Align displayPetBiography() {
