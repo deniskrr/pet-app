@@ -14,7 +14,7 @@ class PetSitterProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pet sitter'),
+        title: Text(petSitter.username),
         actions: actions(context)
       ),
       resizeToAvoidBottomPadding: false,

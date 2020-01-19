@@ -90,7 +90,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Available for petsitting'),
+                  Text("I want to pet sit"),
                   Checkbox(
                     value: currentUser.isPetSitter,
                     onChanged: (newVal){
@@ -104,7 +104,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('Provide services for pets'),
+                Text('I provide services for pets'),
                 Checkbox(
                   value: currentUser.isServiceProvider,
                   onChanged: (newVal) {
