@@ -17,57 +17,85 @@ class PetSitterProfilePage extends StatelessWidget {
         title: Text(petSitter.username),
         actions: actions(context)
       ),
-      resizeToAvoidBottomPadding: false,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Column(children: <Widget>[
-              ProfilePicture(
-                image: null,
-                pictureUrl: petSitter.pictureUrl,
-                placeholderImageUri: "assets/blank_profile.png",
-              ),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(petSitter.username,
-                        style: TextStyle(fontSize: 16)),
-                  )),
-              Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+      resizeToAvoidBottomPadding: true,
+      body: ListView(
+        children: <Widget>[
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Column(children: <Widget>[
+            Stack(
+              children: <Widget>[
+                FadeInImage(
+                image: petSitter.pictureUrl.isEmpty
+                    ? AssetImage("assets/blank_profile.png")
+                      : NetworkImage(petSitter.pictureUrl),
+                height: 300,
+                width: MediaQuery.of(context).size.width,
+                placeholder: AssetImage('assets/blank_profile.png')),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      color: Color(0x86FCBA94),
                       child: ListTile(
-                          title: Text(
-                        petSitter.bio,
-                        style: TextStyle(fontSize: 17),
-                        textAlign: TextAlign.start,
-                      )),
+                        title: Text(
+                          petSitter.username,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 22),
+                        ),
+                        subtitle: Text(
+                          'Pet Sitter',
+//                                  textAlign: TextAlign.end,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
                     ),
-                  )),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: ListTile(
-                        leading: Icon(Icons.accessibility_new),
-                        title: Text("I am available for pet sitting!"),
-                      ))),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: ListTile(
-                        leading: Icon(Icons.chat),
-                        title: Text("Write me a message!"),
-                      )))
-            ]),
-            SizedBox(
-              height: 20,
+                  ),
+                ),
+              ],
             ),
+                  Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                              title: Text(
+                            petSitter.bio,
+                            style: TextStyle(fontSize: 17),
+                            textAlign: TextAlign.start,
+                          )),
+                        ),
+                      )),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: ListTile(
+                            leading: Icon(Icons.accessibility_new),
+                            title: Text("I am available for pet sitting!"),
+                          ))),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: ListTile(
+                            leading: Icon(Icons.chat),
+                            title: Text("Write me a message!"),
+                          )))
+                ]),
+                SizedBox(
+                  height: 20,
+                ),
 //            RaisedButton(
 //              onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName, arguments: petSitter),
 //              child: Text("Chat"),
@@ -79,8 +107,10 @@ class PetSitterProfilePage extends StatelessWidget {
 //              onPressed: () => Navigator.of(context).pop(),
 //              child: Text("Cancel"),
 //            )
-          ],
-        ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
