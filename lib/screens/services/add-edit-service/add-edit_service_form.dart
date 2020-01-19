@@ -138,10 +138,10 @@ class _AddServiceFormState extends State<AddEditServiceForm> {
                   if (_formKey.currentState.validate()) {
                     addService(serviceObject);
                   } else
-                    AppDialogs.showAlertDialog(context, "Operation failed",
-                        "Please, make sure that the inputs are in the correct format!");
+                    AppDialogs.showAlertDialog(context, "Oops!",
+                        "Please make sure that the inputs are in the correct format!");
                 },
-                child: Text('Add Service'),
+                child: serviceObject.id.isEmpty ? Text('Add Service') : Text('Update Service'),
               ),
             ),
           ],

@@ -9,7 +9,9 @@ class FirebaseServicesService extends ServicesService {
 
   @override
   Future<Service> addService(Service newService) async {
-    await _firestore.collection("services").add(newService.toJson());
+    await _firestore
+        .collection("services")
+        .add(newService.toJson());
     return newService;
   }
 
@@ -25,7 +27,7 @@ class FirebaseServicesService extends ServicesService {
   @override
   Future<String> deleteService(String serviceId) async {
     await _firestore
-        .collection("pets")
+        .collection("services")
         .document(serviceId)
         .delete();
     return serviceId;

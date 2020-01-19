@@ -24,7 +24,8 @@ import 'package:pet_app/model/service_category.dart';
       return Center(
         child: DropdownButton<String>(
           items:
-          (widget.givenEnumClass == "PetType")? PetType.values.map((PetType classType) {
+          (widget.givenEnumClass == "PetType")? PetType.values.where((type) => (type != PetType.NotDefined))
+              .map((PetType classType) {
                 return DropdownMenuItem<String>(
                   value: EnumToString.parse(classType),
                   child: Text(EnumToString.parse(classType)));
