@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_app/model/user.dart';
 import 'package:pet_app/screens/home/chat/chat_page.dart';
+import 'package:pet_app/services/chat/chat_service.dart';
+import 'package:pet_app/services/services.dart';
 import 'package:pet_app/widgets/profile_picture.dart';
 
 class PetSitterProfilePage extends StatelessWidget {
   static final routeName = '/pet-sitter-profile';
   User petSitter;
+  final _chatService = services.get<ChatService>();
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +125,7 @@ class PetSitterProfilePage extends StatelessWidget {
         padding: EdgeInsets.all(20),
         icon: Icon(Icons.chat),
         onPressed: () {
+          _chatService.sendMessage(petSitter.uid, "Hi, ${petSitter.username}! I need a pet sitter. Are you interested?");
           Navigator.of(context)
               .pushNamed(ChatPage.routeName, arguments: petSitter);
         },
